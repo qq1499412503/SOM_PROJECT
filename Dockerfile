@@ -1,6 +1,7 @@
 FROM ubuntu
 # init system
 RUN apt-get update && apt-get -y upgrade && apt-get install -y nano openssh-server mongodb
+RUN apt-get install -y git
 
 #config sshd
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
@@ -17,5 +18,12 @@ ENV PATH /opt/conda/bin:$PATH
 # init package
 RUN conda install -y -c anaconda django
 RUN pip install djongo MiniSom
+RUN conda install -y -c conda-forge djangorestframework
+
+# git clone the project
+RUN https://qq1499412503:c5b225f3d0b50ab610eca2f4a6bc6812ca459f09@github.com/qq1499412503/SOM_PROJECT.git
+
+# untested --test when upload
+CMD service mongodb start && tail -F /var/log/mongodb/mongodb.log
 
 
