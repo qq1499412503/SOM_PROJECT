@@ -2,23 +2,12 @@ import math
 import numpy as np
 from minison import MiniSom
 
-winner_coordinates = np.array([som.winner(x) for x in data]).T
+#
+#
+# for centroid in som.get_weights():
+#     plt.scatter(centroid[:, 0], centroid[:, 1], marker='x',
+#                 s=0.8, linewidths=3, color='k', label='centroid')
 
-cluster_index = np.ravel_multi_index(winner_coordinates, (1,2))
-print(cluster_index)
-import matplotlib.pyplot as plt
-som.win_map(data,return_indices=True)
-# for a in range(8):
-#     print(som.winner(data[a]))
-
-for c in np.unique(cluster_index):
-    plt.scatter(data[cluster_index == c, 0],
-                data[cluster_index == c, 1], label='cluster='+str(c), alpha=.7)
-
-for centroid in som.get_weights():
-    plt.scatter(centroid[:, 0], centroid[:, 1], marker='x',
-                s=0.8, linewidths=3, color='k', label='centroid')
-plt.legend();
 
 
 class Som:
@@ -44,4 +33,17 @@ class Som:
 
     def process_map(self):
         coordinates = np.array([self.model_som.winner(x) for x in self.data]).T
-        cluster_index = np.ravel_multi_index(coordinates, (1, 2))
+        cluster_index = np.ravel_multi_index(coordinates, (self.x, self.y))
+        num_ind = 1
+        map = {}
+        node_list = []
+
+        for index in np.unique(cluster_index):
+            nodes = {'id': str(num_ind), 'label':str(index), 'x': self.data[cluster_index == c, 0], 'y': self.data[cluster_index == c, 1],
+                     'size': 2, 'color': '#17202A'}
+            num_ind += 1
+            node_list.append(nodes)
+
+        #nodes center point
+        map['nodes'] = node_list
+        return map

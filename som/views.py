@@ -13,8 +13,7 @@ def som_model(request):
         content = {'msg': 'yes'}
         return render(request, 'visualization0.1.html', content)
 
-def test(request):
-    return HttpResponse({'a':'a'})
+
 
 class sample_api(APIView):
     def get(self, request, *args, **kwargs):
