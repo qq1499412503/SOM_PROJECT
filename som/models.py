@@ -1,8 +1,22 @@
-from django.db import models
-
+from djongo import models
 
 # Create your models here.
-class DataInfo(models.Model):
-    name = models.ForeignKey('Data.name',on_delete=models.CASCADE)
-    description = models.ForeignKey('Data.info',on_delete=models.CASCADE)
+
+
+class Blog(models.Model):
+    column1= models.CharField(max_length=100)
+    col = models.TextField()
+    data = models.FileField()
+    weight =  models.TextField()
+    parameter = models.TextField()
+
+    class Meta:
+        abstract = True
+
+class Entry(models.Model):
+    data_review = models.EmbeddedField(
+        model_container=Blog,
+    )
+
+
 
