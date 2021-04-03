@@ -39,7 +39,7 @@ class Som:
         node_list = []
 
         for index in np.unique(cluster_index):
-            nodes = {'id': str(num_ind), 'label':str(index), 'x': self.data[cluster_index == c, 0], 'y': self.data[cluster_index == c, 1],
+            nodes = {'id': str(num_ind), 'label':str(index), 'x': self.data[cluster_index == index, 0], 'y': self.data[cluster_index == index, 1],
                      'size': 2, 'color': '#17202A'}
             num_ind += 1
             node_list.append(nodes)
