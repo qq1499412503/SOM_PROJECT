@@ -9,6 +9,8 @@ language: python # language
       -DJANGO=2.2 DB=mongodb
     install: # package
       - pip install -r requirements.txt
-
+    before_script: # => 6
+      - sleep 15
+      - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
     script: # => 7
       - python manage.py test
