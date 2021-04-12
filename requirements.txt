@@ -1,2 +1,5 @@
 numpy
 djongo
+MiniSom
+django
+djangorestframework
