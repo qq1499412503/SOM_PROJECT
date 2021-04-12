@@ -1,6 +1,8 @@
 import math
 import numpy as np
-from minison import MiniSom
+import pandas as pa
+import csv
+from minisom import MiniSom
 
 #
 #
@@ -9,24 +11,47 @@ from minison import MiniSom
 #                 s=0.8, linewidths=3, color='k', label='centroid')
 
 
+def load_data(url):
+    data = np.loadtxt(url, skiprows=1)
+    return data
+
+
+def print_attribute(url):
+    df = load_data(url)
+    return df.shape[1], df.shape[0]
+
 
 class Som:
 
     def __init__(self):
         self.data = None
         self.model_som = None
-        self.x = 1
-        self.y = 2
-
-
+        self.x = None
+        self.y = None
+        self.input_len = None
+        self.sigma = 0.3
+        self.lr = 0.5
+        self.neighborhood_function = 'gaussian'
+        self.topology = 'rectangular'
+        self.activation_distance = 'euclidean'
+        self.random_seed = None
 
     def read_data(self, raw_data):
         self.data = np.array(raw_data)
 
-    def model(self, x, y, sigma=0.3, learning_rate=0.5):
-        self.x = x
-        self.y = y
-        self.model_som = MiniSom(self.x, self.y, self.data.shape[1], sigma=sigma, learning_rate=learning_rate)
+    def load_length(self):
+        self.input_len = self.data.shape[1]
+
+    def model(self):
+        if self.random_seed is not None:
+            self.model_som = MiniSom(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma, learning_rate=self.lr,
+                                     neighborhood_function=self.neighborhood_function,topology=self.topology,
+                                     activation_distance=self.activation_distance,random_seed=self.random_seed)
+        else:
+            self.model_som = MiniSom(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma,
+                                     learning_rate=self.lr,
+                                     neighborhood_function=self.neighborhood_function, topology=self.topology,
+                                     activation_distance=self.activation_distance)
 
     def fit(self, epoch):
         self.model_som.train(self.data, epoch)
@@ -37,12 +62,18 @@ class Som:
         num_ind = 1
         map = {}
         node_list = []
-
+        print(np.unique(cluster_index))
         for index in np.unique(cluster_index):
-            nodes = {'id': str(num_ind), 'label':str(index), 'x': self.data[cluster_index == c, 0], 'y': self.data[cluster_index == c, 1],
-                     'size': 2, 'color': '#17202A'}
+            # print(index)
+            x = self.data[cluster_index == index, 0]
+            y = self.data[cluster_index == index, 1]
+            # print(len(x))
+            for sub_index in range(len(x)):
+                nodes = {'id': str(num_ind)+str(sub_index), 'label': str(index), 'x': round(float(x[sub_index]),2), 'y': round(float(y[sub_index]),2),
+                         'size': 2, 'color': '#17202A', 'class': str(num_ind)}
+                # print(nodes)
+                node_list.append(nodes)
             num_ind += 1
-            node_list.append(nodes)
 
         #nodes center point
         map['nodes'] = node_list
