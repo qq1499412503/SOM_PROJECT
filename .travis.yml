@@ -12,6 +12,5 @@ install: # package
 before_script: # => 6
 #   - sleep 15
 #   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  - service mongodb start
 script: # => 7
   - python manage.py test
