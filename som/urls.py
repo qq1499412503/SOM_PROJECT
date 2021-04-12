@@ -2,8 +2,6 @@ from . import views
 from django.urls import path
 from django.conf.urls import url, include
 
-#QueryUserInfo(View)
-
 app_name = 'som'
 urlpatterns = [
     url(r'^$', views.som_model, name='som_model'),
