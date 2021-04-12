@@ -3,12 +3,13 @@ python: # python version
   - "3.6"
   - "3.7"
   - "3.8"
-
+services: 
+  - mongodb
 env: # environment
   -DJANGO=2.2 DB=mongodb
 install: # package
   - pip install -r requirements.txt
-  - sudo apt-get install mongodb
+#   - sudo apt-get install mongodb
   - sudo service mongodb start
   - sudo service mongodb status
 before_script: # => 6
