@@ -21,7 +21,7 @@ RUN pip install djongo MiniSom
 RUN conda install -y -c conda-forge djangorestframework
 
 # git clone the project
-RUN https://qq1499412503:c5b225f3d0b50ab610eca2f4a6bc6812ca459f09@github.com/qq1499412503/SOM_PROJECT.git
+#RUN https://qq1499412503:c5b225f3d0b50ab610eca2f4a6bc6812ca459f09@github.com/qq1499412503/SOM_PROJECT.git
 
 # untested --test when upload
 CMD service mongodb start && tail -F /var/log/mongodb/mongodb.log
