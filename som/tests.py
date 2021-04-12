@@ -14,13 +14,13 @@ class SomTestCase(TestCase):
         # self.assertEqual(data,'yes')
 
 
-class ApiTestCase(TestCase):
-    def setUp(self):
-        self.code = 'api'
-
-    def test_sample_api_test_case(self):
-        url = '/som/user_query_info'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        # data = response.json()
-        # self.assertEqual(data['msg'], 'test')
+# class ApiTestCase(TestCase):
+#     def setUp(self):
+#         self.code = 'api'
+#
+#     def test_sample_api_test_case(self):
+#         url = '/som/user_query_info'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#         data = response.json()
+#         self.assertEqual(data['msg'], 'test')
