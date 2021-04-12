@@ -1,5 +1,5 @@
 numpy
 djongo
-minison
+MiniSom
 django
 djangorestframework
