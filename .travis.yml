@@ -10,8 +10,8 @@ env: # environment
 install: # package
   - pip install -r requirements.txt
 #   - sudo apt-get install mongodb
-  - sudo service mongodb start
-  - sudo service mongodb status
+  - sudo service mongod start
+  - sudo service mongod status
 before_script: # => 6
 #   - sleep 15
 #   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
