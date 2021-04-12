@@ -6,9 +6,10 @@ python: # python version
 # services: 
 #   - mongodb
 env: # environment
-  -DJANGO=2.2 
+
   matrix:
   - MONGODB=4.2.6
+  -DJANGO=2.2   
 install: # package
   - pip install -r requirements.txt
 #   - sudo apt-get install mongodb
