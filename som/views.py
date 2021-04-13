@@ -28,7 +28,7 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/som')
+            #return HttpResponseRedirect('/som')
         else:
             print(request.FILES)
             return HttpResponse('true')
@@ -38,6 +38,7 @@ def upload_file(request):
 
 
 def handle_uploaded_file(f):
+    print(f.chunks())
     with open('test1.txt', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
