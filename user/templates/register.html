@@ -1,0 +1,164 @@
+{% load static %}
+<html>
+  <head>
+    <title>Register</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="{% static 'css/raxure_rp_page.css' %}" type="text/css" rel="stylesheet"/>
+    <link href="{% static 'css/rstyle.css' %}" type="text/css" rel="stylesheet"/>
+    <link href="{% static 'css/rstyles.css' %}" type="text/css" rel="stylesheet"/>
+    <script src="{% static 'js/scripts/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/axQuery.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/globals.js' %}"></script>
+    <script src="{% static 'js/scripts/axutils.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/annotation.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/axQuery.std.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/doc.js' %}"></script>
+    <script src="{% static 'js/scripts/messagecenter.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/events.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/recording.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/action.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/expr.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/geometry.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/flyout.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/model.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/repeater.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/sto.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/utils.temp.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/variables.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/drag.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/move.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/visibility.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/style.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/adaptive.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/tree.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/init.temp.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/legacy.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/viewer.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/math.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/document.js' %}"></script>
+    <script src="{% static 'js/data.js' %}"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u0" class="ax_default box_1">
+        <div id="u0_div" class=""></div>
+        <div id="u0_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Group) -->
+      <div id="u1" class="ax_default" data-left="513" data-top="335" data-width="475" data-height="193">
+
+        <!-- Unnamed (Ellipse) -->
+        <div id="u2" class="ax_default box_1">
+          <img id="u2_img" class="img " src="/media/image/u1.svg"/>
+          <div id="u2_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+          </div>
+        </div>
+ 		<form id="register_form" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+        <!-- Unnamed (Rectangle) -->
+        <div id="u3" class="ax_default box_1">
+          <div id="u3_div" class=""></div>
+          <div id="u3_text" class="text " style="visibility: visible">
+            <input type="email" id="u3_register" name="email" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Email">
+              </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u4" class="ax_default box_1">
+          <img id="u4_img" class="img " src="/media/image/u3.svg"/>
+          <div id="u4_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Rectangle) -->
+        <div id="u5" class="ax_default box_1">
+          <div id="u5_div" class=""></div>
+          <div id="u5_text" class="text " style="visibility: visible">
+            <input type="password" id="u5_register" name="password" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Password">
+              </div>
+        </div>
+
+        <!-- Unnamed (Shape) -->
+        <div id="u6" class="ax_default box_1">
+          <img id="u6_img" class="img " src="/media/image/u6.svg"/>
+          <div id="u6_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Rectangle) -->
+        <div id="u7" class="ax_default box_1">
+          <div id="u7_div" class=""></div>
+          <div id="u7_text" class="text " style="visibility: visible">
+            <input type="text" id="u7_register" name="username" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Username">
+              </div>
+        </div>
+        <div style="top:310px;position:absolute;left:calc(50% - 50px);color:red;"> {{ msg }} </div>
+        <!-- Unnamed (Shape) -->
+        <div id="u8" class="ax_default icon">
+          <img id="u8_img" class="img " src="/media/image/u7.svg"/>
+          <div id="u8_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+          </div>
+        </div>
+		</form>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+         <div id="u9" class="ax_default button">
+        <div id="u9_div" class=""></div>
+        <div id="u9_text" class="text ">
+          <input type="submit" id="submit_register" form="register_form" hidden/>
+          <label for="submit_register">Register</label>
+        </div>
+      </div>
+      <!-- Unnamed (Rectangle) -->
+      <div id="u10" class="ax_default _paragraph">
+        <div id="u10_div" class=""></div>
+        <div id="u10_text" class="text ">
+          <p><span style="color:#63A103;">Register </span><span>your new accout</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u11" class="ax_default _paragraph">
+        <div id="u11_div" class=""></div>
+        <div id="u11_text" class="text ">
+          <p><span style="font-family:'ComicSansMS-Bold', 'Comic Sans MS Bold', 'Comic Sans MS', sans-serif;font-weight:700;color:#555555;">Already have an account?</span><span style="font-family:'ComicSansMS', 'Comic Sans MS', sans-serif;font-weight:400;color:#555555;"> </span><span style="font-family:'ComicSansMS', 'Comic Sans MS', sans-serif;font-weight:400;text-decoration:underline ;color:#63A103;">
+			  <a href="../login/">Login now!</a></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u12" class="ax_default icon">
+        <img id="u12_img" class="img " src="/media/image/u12.svg"/>
+        <div id="u12_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Ellipse) -->
+      <div id="u13" class="ax_default box_1">
+        <img id="u13_img" class="img " src="/media/image/u1.svg"/>
+        <div id="u13_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/scripts/axure/ios.js' %}"></script>
+  </body>
+</html>

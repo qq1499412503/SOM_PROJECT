@@ -1,16 +1,16 @@
-body {
-    font-family: 'Source Sans Pro', 'Trebuchet MS', Arial;
-    font-size: 14px;
-    color: #2c2c2c;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -webkit-font-feature-settings: "kern";
-    -moz-font-feature-settings: "kern";
-    -moz-font-feature-settings: "kern=1";
-    font-feature-settings: "kern" 1;
-    font-kerning: normal;
-    overflow: hidden;
-}
+﻿/*body {*/
+/*    font-family: 'Source Sans Pro', 'Trebuchet MS', Arial;*/
+/*    font-size: 14px;*/
+/*    color: #2c2c2c;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*    text-rendering: optimizeLegibility;*/
+/*    -webkit-font-feature-settings: "kern";*/
+/*    -moz-font-feature-settings: "kern";*/
+/*    -moz-font-feature-settings: "kern=1";*/
+/*    font-feature-settings: "kern" 1;*/
+/*    font-kerning: normal;*/
+/*    overflow: hidden;*/
+/*}*/
 
 a {
   cursor: pointer;
