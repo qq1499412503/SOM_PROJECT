@@ -24,18 +24,18 @@ def check_error_register(username, email, password):
             pass
     else:
         return {"code": "111", "msg": "username error or username existed"}
-    if email != '' and email is not None and email.includes('@') and email.includes('.'):
+    if email != '' and email is not None:
         try:
             user = User.objects.get(email=email)
-            return {"code": "222", "msg": "email existed"}
+            return {"code": "333", "msg": "email existed"}
         except User.DoesNotExist:
             pass
     else:
-        return {"code": "111", "msg": "email error or email existed"}
+        return {"code": "444", "msg": "email error or email existed"}
     if password != '' and password is not None and len(password) >= 8:
         pass
     else:
-        return {"code": "111", "msg": "password error"}
+        return {"code": "555", "msg": "password error"}
     return {"code": "200", "msg": "all correct"}
 
 
@@ -66,6 +66,6 @@ def register_view(request):
         if verify["code"] == "200":
             user = User.objects.create_user(username, email, password)
             user.save()
-            return render(request, 'visualization0.1.html')
+            return render(request, 'visualization0.1.html.bak')
         else:
             return render(request, 'register.html', verify)
