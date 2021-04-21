@@ -9,7 +9,7 @@ class dataframe(models.Model):
     file_name = models.CharField(max_length=200, default=str(datetime.datetime.now()))
     time = models.DateField(auto_now=True)
     data = models.FileField(upload_to='uploads/%Y/%m/%d/')
-    result = FileField(upload_to='uploads/%Y/%m/%d/')
+    result = models.FileField(upload_to='uploads/%Y/%m/%d/')
     publish = BooleanField(required=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='data_info')
 
