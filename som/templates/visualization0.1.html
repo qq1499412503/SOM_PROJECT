@@ -80,7 +80,9 @@
 
       <!-- Unnamed (Image) -->
       <div id="m5" class="ax_default image">
+        <a href="{% url 'user:profile'%}">
         <img id="m5_img" class="img " src="/media/image/u5.svg"/>
+          </a>
         <div id="m5_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
@@ -147,7 +149,9 @@
       <div id="m12" class="ax_default heading_3">
         <div id="m12_div" class=""></div>
         <div id="m12_text" class="text ">
-          <p><span>Username</span></p>
+          {% if user.is_authenticated %}
+          <p><span>Welcome, {{ user.get_username }}</span></p>
+        {% endif %}
         </div>
       </div>
 

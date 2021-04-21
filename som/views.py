@@ -15,7 +15,7 @@ import json
 class QueryUserInfo(APIView):
 
     def post(self, request):
-        print('keydict')
+        # print('keydict')
         for key in request.POST:
             keydict = eval(key)
             # print(keydict)
@@ -77,10 +77,13 @@ class QueryUserInfo(APIView):
         return super(QueryUserInfo, self).dispatch(*args, **kwargs)
 
 
+
+
+
 def som_model(request):
     if request.method == "GET":
         content = {'name': 'file not uploaded', "attribute": "no attribute detected", "size": "empty_size"}
-        return render(request, 'visualization0.1.html.bak', content)
+        return render(request, 'visualization0.1.html', content)
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -90,9 +93,9 @@ def som_model(request):
             content = {"name": f_name, "attribute": data_info[0], "size": data_info[1], "data_id": str(saved_data._id)}
             # request.session["data_id"] = str(saved_data._id)
 
-            return render(request, 'visualization0.1.html.bak', content)
+            return render(request, 'visualization0.1.html', content)
         else:
-            return render(request, 'visualization0.1.html.bak', {"upload_msg": "not valid file"})
+            return render(request, 'visualization0.1.html', {"upload_msg": "not valid file"})
     else:
         form = UploadFileForm()
     return render(request, 'upload.html', {'form': form})

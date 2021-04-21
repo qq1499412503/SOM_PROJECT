@@ -4,6 +4,12 @@ import pandas as pa
 import csv
 from minisom import MiniSom
 
+#
+#
+# for centroid in som.get_weights():
+#     plt.scatter(centroid[:, 0], centroid[:, 1], marker='x',
+#                 s=0.8, linewidths=3, color='k', label='centroid')
+
 
 def load_data(url):
     data = np.loadtxt(url, skiprows=1)

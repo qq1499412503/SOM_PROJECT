@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^som/', include('som.urls', namespace='som')),
     url(r'^user/', include('user.urls', namespace='user')),
+    url(r'^publish/', include('publish.urls', namespace='publish')),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT})
+
 ]
