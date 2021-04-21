@@ -10,7 +10,7 @@ class dataframe(models.Model):
     time = models.DateField(auto_now=True)
     data = models.FileField(upload_to='uploads/%Y/%m/%d/')
     result = models.FileField(upload_to='uploads/%Y/%m/%d/')
-    publish = BooleanField(required=False)
+    publish = models.CharField(default="false")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='data_info')
 
     class Meta:
