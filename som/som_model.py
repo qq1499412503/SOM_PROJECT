@@ -15,11 +15,9 @@ def load_data(url):
     data = np.loadtxt(url, skiprows=1)
     return data
 
-
 def print_attribute(url):
     df = load_data(url)
     return df.shape[1], df.shape[0]
-
 
 class Som:
 

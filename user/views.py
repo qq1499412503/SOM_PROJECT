@@ -24,7 +24,7 @@ def check_error_register(username, email, password):
             pass
     else:
         return {"code": "111", "msg": "username error or username existed"}
-    if email != '' and email is not None and email.includes('@') and email.includes('.'):
+    if email != '' and email is not None:
         try:
             user = User.objects.get(email=email)
             return {"code": "222", "msg": "email existed"}
@@ -69,3 +69,4 @@ def register_view(request):
             return render(request, 'visualization0.1.html')
         else:
             return render(request, 'register.html', verify)
+
