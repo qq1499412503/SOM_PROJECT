@@ -15,6 +15,7 @@ import json
 class QueryUserInfo(APIView):
 
     def post(self, request):
+        # print('keydict')
         for key in request.POST:
             keydict = eval(key)
             # print(keydict)
@@ -74,6 +75,9 @@ class QueryUserInfo(APIView):
     #@csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(QueryUserInfo, self).dispatch(*args, **kwargs)
+
+
+
 
 
 def som_model(request):

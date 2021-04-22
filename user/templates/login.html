@@ -4,7 +4,7 @@
     <title>Login</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <link href="{% static 'css/axure_rp_page.css' %}" type="text/css" rel="stylesheet"/>
+    <link href="{% static 'css/raxure_rp_page.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/rstyle.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"/>
     <script src="{% static 'js/scripts/jquery-3.2.1.min.js' %}"></script>
@@ -152,7 +152,7 @@
         <div id="u13_div" class=""></div>
         <div id="u13_text" class="text ">
           <p><span style="font-family:'ComicSansMS-Bold', 'Comic Sans MS Bold', 'Comic Sans MS', sans-serif;font-weight:700;color:#555555;">Don't have an account?</span><span style="font-family:'ComicSansMS', 'Comic Sans MS', sans-serif;font-weight:400;color:#555555;"> </span><span  style="font-family:'ComicSansMS', 'Comic Sans MS', sans-serif;font-weight:400;text-decoration:underline ;color:#63A103;">
-			   <a href="../register/">Register now! </a> </span></p>
+			   <a href="{% url 'user:register'%}">Register now! </a> </span></p>
         </div>
       </div>
     </div>

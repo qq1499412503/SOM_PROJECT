@@ -47,23 +47,23 @@
     <div id="base" class="">
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u0" class="ax_default box_1">
-        <div id="u0_div" class=""></div>
-        <div id="u0_text" class="text " style="display:none; visibility: hidden">
+      <div id="m0" class="ax_default box_1">
+        <div id="m0_div" class=""></div>
+        <div id="m0_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
       </div>
 
       <!-- Unnamed (Group) -->
-      <div id="u1" class="ax_default" data-left="0" data-top="0" data-width="1600" data-height="900">
+      <div id="m1" class="ax_default" data-left="0" data-top="0" data-width="1600" data-height="900">
 
         <!-- Unnamed (Group) -->
-        <div id="u2" class="ax_default" data-left="0" data-top="0" data-width="1600" data-height="900">
+        <div id="m2" class="ax_default" data-left="0" data-top="0" data-width="1600" data-height="900">
 
           <!-- Unnamed (Rectangle) -->
-          <div id="u3" class="ax_default box_1">
-            <div id="u3_div" class=""></div>
-            <div id="u3_text" class="text " style="display:none; visibility: hidden">
+          <div id="m3" class="ax_default box_1">
+            <div id="m3_div" class=""></div>
+            <div id="m3_text" class="text " style="display:none; visibility: hidden">
               <p></p>
             </div>
           </div>
@@ -71,25 +71,27 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u4" class="ax_default box_1">
-        <div id="u4_div" class=""></div>
-        <div id="u4_text" class="text " style="display:none; visibility: hidden">
+      <div id="m4" class="ax_default box_1">
+        <div id="m4_div" class=""></div>
+        <div id="m4_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
       </div>
 
       <!-- Unnamed (Image) -->
-      <div id="u5" class="ax_default image">
-        <img id="u5_img" class="img " src="/media/image/u5.svg"/>
-        <div id="u5_text" class="text " style="display:none; visibility: hidden">
+      <div id="m5" class="ax_default image">
+        <a href="{% url 'user:profile'%}">
+        <img id="m5_img" class="img " src="/media/image/u5.svg"/>
+          </a>
+        <div id="m5_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u6" class="ax_default heading_3">
-        <div id="u6_div" class=""></div>
-        <div id="u6_text" class="text ">
+      <div id="m6" class="ax_default heading_3">
+        <div id="m6_div" class=""></div>
+        <div id="m6_text" class="text ">
           <p><span>Parameters</span></p>
         </div>
       </div>
@@ -98,11 +100,11 @@
       <form id="upload_form" enctype="multipart/form-data" method="post">
           {% csrf_token %}
 <!--          {{ form.upload }}-->
-      <div id="u7" class="ax_default button">
-        <div id="u7_div" class=""></div>
-        <div id="u7_text" class="text ">
+      <div id="m7" class="ax_default button">
+        <div id="m7_div" class=""></div>
+        <div id="m7_text" class="text ">
 
-         <input type="file" name="data" id="upload" onchange="document.getElementById('u16_input').value=document.getElementById('upload').files[0].name" hidden/>
+         <input type="file" name="data" id="upload" onchange="document.getElementById('m16_input').value=document.getElementById('upload').files[0].name" hidden/>
          <label for="upload">Choose file</label>
 
         </div>
@@ -111,58 +113,60 @@
 
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u8" class="ax_default heading_3">
-        <div id="u8_div" class=""></div>
-        <div id="u8_text" class="text ">
+      <div id="m8" class="ax_default heading_3">
+        <div id="m8_div" class=""></div>
+        <div id="m8_text" class="text ">
           <p><span>Data</span></p>
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u9" class="ax_default button">
-        <div id="u9_div" class=""></div>
-        <div id="u9_text" class="text ">
+      <div id="m9" class="ax_default button">
+        <div id="m9_div" class=""></div>
+        <div id="m9_text" class="text ">
           <input value="train" name="train"  id="update_log_button" type="button" onclick="query('111')" hidden/>
           <label for="update_log_button">train</label>
         </div>
       </div>
 
       <!-- Unnamed (Shape) -->
-      <div id="u10" class="ax_default icon">
-        <img id="u10_img" class="img " src="/media/image/u10.svg"/>
-        <div id="u10_text" class="text " style="display:none; visibility: hidden">
+      <div id="m10" class="ax_default icon">
+        <img id="m10_img" class="img " src="/media/image/u10.svg"/>
+        <div id="m10_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u11" class="ax_default button">
-        <div id="u11_div" class=""></div>
-        <div id="u11_text" class="text ">
+      <div id="m11" class="ax_default button">
+        <div id="m11_div" class=""></div>
+        <div id="m11_text" class="text ">
           <p><span>Save</span></p>
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u12" class="ax_default heading_3">
-        <div id="u12_div" class=""></div>
-        <div id="u12_text" class="text ">
-          <p><span>Username</span></p>
+      <div id="m12" class="ax_default heading_3">
+        <div id="m12_div" class=""></div>
+        <div id="m12_text" class="text ">
+          {% if user.is_authenticated %}
+          <p><span>Welcome, {{ user.get_username }}</span></p>
+        {% endif %}
         </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u13" class="ax_default heading_1">
-        <div id="u13_div" class=""></div>
-        <div id="u13_text" class="text ">
+      <div id="m13" class="ax_default heading_1">
+        <div id="m13_div" class=""></div>
+        <div id="m13_text" class="text ">
           <p><span>Self-Organizing Map</span></p>
         </div>
       </div>
 
       <!-- Unnamed (Image) -->
-      <div id="u14" class="ax_default image">
-        <img id="u14_img" class="img " style="visibility: hidden" src="/media/image/loading.gif"/>
-        <div id="u14_text" class="text " style="display:none; visibility: hidden">
+      <div id="m14" class="ax_default image">
+        <img id="m14_img" class="img " style="visibility: hidden" src="/media/image/loading.gif"/>
+        <div id="m14_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
       </div>
@@ -170,55 +174,55 @@
 
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u15" class="ax_default button">
-        <div id="u15_div" class=""></div>
-        <div id="u15_text" class="text ">
+      <div id="m15" class="ax_default button">
+        <div id="m15_div" class=""></div>
+        <div id="m15_text" class="text ">
           <input type="submit" id="submit_upload" form="upload_form" hidden/>
           <label for="submit_upload">upload</label>
         </div>
       </div>
 
       <!-- Unnamed (Text Field) -->
-      <div id="u16" class="ax_default text_field ax_default_hidden" style="display:none; visibility: hidden">
-        <img id="u16_img" class="img " src="/media/image/u16.svg"/>
-        <input id="u16_input" type="text" class="u16_input"/>
+      <div id="m16" class="ax_default text_field">
+        <img id="m16_img" class="img " src="/media/image/u16.svg"/>
+        <input id="m16_input" type="text" class="m16_input"/>
       </div>
 
       <!-- Close Icon (Shape) -->
-      <div id="u17" class="ax_default icon ax_default_hidden" data-label="Close Icon" style="display:none; visibility: hidden">
-        <img id="u17_img" class="img " src="/media/image/close_icon_u17.svg"/>
-        <div id="u17_text" class="text " style="display:none; visibility: hidden">
+      <div id="m17" class="ax_default icon ax_default_hidden" data-label="Close Icon" style="display:none; visibility: hidden">
+        <img id="m17_img" class="img " src="/media/image/close_icon_u17.svg"/>
+        <div id="m17_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
       </div>
 
       <!-- Unnamed (Menu) -->
-      <div id="u18" class="ax_default ax_default_hidden" style="display:none; visibility: hidden">
-        <img id="u18_menu" class="img " src="/media/image/u18_menu.png" alt="u18_menu"/>
+      <div id="m18" class="ax_default ax_default_hidden" style="display:none; visibility: hidden">
+        <img id="m18_menu" class="img " src="/media/image/u18_menu.png" alt="u18_menu"/>
 
         <!-- Unnamed (Table) -->
-        <div id="u19" class="ax_default">
+        <div id="m19" class="ax_default">
 
           <!-- Unnamed (Menu Item) -->
-          <div id="u20" class="ax_default menu_item">
-            <img id="u20_img" class="img " src="/media/image/u20.png"/>
-            <div id="u20_text" class="text ">
+          <div id="m20" class="ax_default menu_item">
+            <img id="m20_img" class="img " src="/media/image/u20.png"/>
+            <div id="m20_text" class="text ">
               <p><span>Profile</span></p>
             </div>
           </div>
 
           <!-- Unnamed (Menu Item) -->
-          <div id="u21" class="ax_default menu_item">
-            <img id="u21_img" class="img " src="/media/image/u20.png"/>
-            <div id="u21_text" class="text ">
+          <div id="m21" class="ax_default menu_item">
+            <img id="m21_img" class="img " src="/media/image/u20.png"/>
+            <div id="m21_text" class="text ">
               <p><span>Log in</span></p>
             </div>
           </div>
 
           <!-- Unnamed (Menu Item) -->
-          <div id="u22" class="ax_default menu_item">
-            <img id="u22_img" class="img " src="/media/image/u22.png"/>
-            <div id="u22_text" class="text ">
+          <div id="m22" class="ax_default menu_item">
+            <img id="m22_img" class="img " src="/media/image/u22.png"/>
+            <div id="m22_text" class="text ">
               <p><span>Log out</span></p>
             </div>
           </div>
@@ -226,52 +230,52 @@
       </div>
 
       <!-- Unnamed (Table) -->
-      <div id="u23" class="ax_default">
+      <div id="m23" class="ax_default">
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u24" class="ax_default table_cell">
-          <img id="u24_img" class="img " src="/media/image/u24.png"/>
-          <div id="u24_text" class="text " style="font-weight: bold;">
+        <div id="m24" class="ax_default table_cell">
+          <img id="m24_img" class="img " src="/media/image/u24.png"/>
+          <div id="m24_text" class="text " style="font-weight: bold;">
             <p><span>name</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u25" class="ax_default table_cell">
-          <img id="u25_img" class="img " src="/media/image/u25.png"/>
-          <div id="u25_text" class="text ">
+        <div id="m25" class="ax_default table_cell">
+          <img id="m25_img" class="img " src="/media/image/u25.png"/>
+          <div id="m25_text" class="text ">
             <p><span>{{ name }}</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u26" class="ax_default table_cell">
-          <img id="u26_img" class="img " src="/media/image/u26.png"/>
-          <div id="u26_text" class="text " style="font-weight: bold;">
+        <div id="m26" class="ax_default table_cell">
+          <img id="m26_img" class="img " src="/media/image/u26.png"/>
+          <div id="m26_text" class="text " style="font-weight: bold;">
             <p><span>attribute</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u27" class="ax_default table_cell">
-          <img id="u27_img" class="img " src="/media/image/u27.png"/>
-          <div id="u27_text" class="text ">
+        <div id="m27" class="ax_default table_cell">
+          <img id="m27_img" class="img " src="/media/image/u27.png"/>
+          <div id="m27_text" class="text ">
             <p><span>{{ attribute }}</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u28" class="ax_default table_cell">
-          <img id="u28_img" class="img " src="/media/image/u28.png"/>
-          <div id="u28_text" class="text " style="font-weight: bold;">
+        <div id="m28" class="ax_default table_cell">
+          <img id="m28_img" class="img " src="/media/image/u28.png"/>
+          <div id="m28_text" class="text " style="font-weight: bold;">
             <p><span>size</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u29" class="ax_default table_cell">
-          <img id="u29_img" class="img " src="/media/image/u29.png"/>
-          <div id="u29_text" class="text ">
+        <div id="m29" class="ax_default table_cell">
+          <img id="m29_img" class="img " src="/media/image/u29.png"/>
+          <div id="m29_text" class="text ">
             <p><span>{{ size }}</span></p>
           </div>
         </div>
@@ -279,132 +283,132 @@
 
 
       <!-- Unnamed (Table) -->
-      <div id="u30" class="ax_default">
+      <div id="m30" class="ax_default">
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u31" class="ax_default table_cell">
-          <img id="u31_img" class="img " src="/media/image/u31.png"/>
-          <div id="u31_text" class="text " style="font-weight: bold;">
+        <div id="m31" class="ax_default table_cell">
+          <img id="m31_img" class="img " src="/media/image/u31.png"/>
+          <div id="m31_text" class="text " style="font-weight: bold;">
             <p><span>Parameter</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u32" class="ax_default table_cell">
-          <img id="u32_img" class="img " src="/media/image/u32.png"/>
-          <div id="u32_text" class="text " style="font-weight: bold;">
+        <div id="m32" class="ax_default table_cell">
+          <img id="m32_img" class="img " src="/media/image/u32.png"/>
+          <div id="m32_text" class="text " style="font-weight: bold;">
             <p><span>Value</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u33" class="ax_default table_cell">
-          <img id="u33_img" class="img " src="/media/image/u33.png"/>
-          <div id="u33_text" class="text " style="font-weight: bold;">
+        <div id="m33" class="ax_default table_cell">
+          <img id="m33_img" class="img " src="/media/image/u33.png"/>
+          <div id="m33_text" class="text " style="font-weight: bold;">
             <p><span>x</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u34" class="ax_default table_cell">
-          <img id="u34_img" class="img " src="/media/image/u34.png"/>
-          <div id="u34_text" class="text " style="visibility: visible">
+        <div id="m34" class="ax_default table_cell">
+          <img id="m34_img" class="img " src="/media/image/u34.png"/>
+          <div id="m34_text" class="text " style="visibility: visible">
             <input type="text" id="x" name="x" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="enter number of x here (int)">
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u35" class="ax_default table_cell">
-          <img id="u35_img" class="img " src="/media/image/u35.png"/>
-          <div id="u35_text" class="text " style="font-weight: bold;">
+        <div id="m35" class="ax_default table_cell">
+          <img id="m35_img" class="img " src="/media/image/u35.png"/>
+          <div id="m35_text" class="text " style="font-weight: bold;">
             <p><span>y</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u36" class="ax_default table_cell">
-          <img id="u36_img" class="img " src="/media/image/u36.png"/>
-          <div id="u36_text" class="text " style="visibility: visible">
+        <div id="m36" class="ax_default table_cell">
+          <img id="m36_img" class="img " src="/media/image/u36.png"/>
+          <div id="m36_text" class="text " style="visibility: visible">
             <input type="text" id="y" name="y" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="enter number of y here (int)">
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u37" class="ax_default table_cell">
-          <img id="u37_img" class="img " src="/media/image/u35.png"/>
-          <div id="u37_text" class="text " style="font-weight: bold;">
+        <div id="m37" class="ax_default table_cell">
+          <img id="m37_img" class="img " src="/media/image/u35.png"/>
+          <div id="m37_text" class="text " style="font-weight: bold;">
             <p><span>input_len</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u38" class="ax_default table_cell">
-          <img id="u38_img" class="img " src="/media/image/u36.png"/>
-          <div id="u38_text" class="text " style="visibility: visible">
+        <div id="m38" class="ax_default table_cell">
+          <img id="m38_img" class="img " src="/media/image/u36.png"/>
+          <div id="m38_text" class="text " style="visibility: visible">
             <input type="text" id="len" name="len" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="empty to auto detect (int)">
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u39" class="ax_default table_cell">
-          <img id="u39_img" class="img " src="/media/image/u35.png"/>
-          <div id="u39_text" class="text " style="font-weight: bold;">
+        <div id="m39" class="ax_default table_cell">
+          <img id="m39_img" class="img " src="/media/image/u35.png"/>
+          <div id="m39_text" class="text " style="font-weight: bold;">
             <p><span>sigma</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u40" class="ax_default table_cell">
-          <img id="u40_img" class="img " src="/media/image/u36.png"/>
-          <div id="u40_text" class="text " style="visibility: visible">
+        <div id="m40" class="ax_default table_cell">
+          <img id="m40_img" class="img " src="/media/image/u36.png"/>
+          <div id="m40_text" class="text " style="visibility: visible">
             <input type="text" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.3 (double)">
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u41" class="ax_default table_cell">
-          <img id="u41_img" class="img " src="/media/image/u35.png"/>
-          <div id="u41_text" class="text " style="font-weight: bold;">
+        <div id="m41" class="ax_default table_cell">
+          <img id="m41_img" class="img " src="/media/image/u35.png"/>
+          <div id="m41_text" class="text " style="font-weight: bold;">
             <p><span>learning_rate</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u42" class="ax_default table_cell">
-          <img id="u42_img" class="img " src="/media/image/u36.png"/>
-          <div id="u42_text" class="text " style="visibility: visible">
+        <div id="m42" class="ax_default table_cell">
+          <img id="m42_img" class="img " src="/media/image/u36.png"/>
+          <div id="m42_text" class="text " style="visibility: visible">
             <input type="text" id="LR" name="LR" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.5 (double)">
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u43" class="ax_default table_cell">
-          <img id="u43_img" class="img " src="/media/image/u35.png"/>
-          <div id="u43_text" class="text " style="font-weight: bold;">
+        <div id="m43" class="ax_default table_cell">
+          <img id="m43_img" class="img " src="/media/image/u35.png"/>
+          <div id="m43_text" class="text " style="font-weight: bold;">
             <p><span>Iteration number</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u44" class="ax_default table_cell">
-          <img id="u44_img" class="img " src="/media/image/u36.png"/>
-          <div id="u44_text" class="text " style="visibility: visible">
+        <div id="m44" class="ax_default table_cell">
+          <img id="m44_img" class="img " src="/media/image/u36.png"/>
+          <div id="m44_text" class="text " style="visibility: visible">
             <input type="text" id="Iteration" name="Iteration" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 100 (int)">
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u45" class="ax_default table_cell">
-          <img id="u45_img" class="img " src="/media/image/u35.png"/>
-          <div id="u45_text" class="text " style="font-weight: bold;">
+        <div id="m45" class="ax_default table_cell">
+          <img id="m45_img" class="img " src="/media/image/u35.png"/>
+          <div id="m45_text" class="text " style="font-weight: bold;">
             <p><span>neighborhood</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u46" class="ax_default table_cell">
-          <img id="u46_img" class="img " src="/media/image/u36.png"/>
-          <div id="u46_text" class="text " style="visibility: visible">
+        <div id="m46" class="ax_default table_cell">
+          <img id="m46_img" class="img " src="/media/image/u36.png"/>
+          <div id="m46_text" class="text " style="visibility: visible">
             {% with 'gaussian mexican_hat bubble triangle' as neighbour_list %}
             <select class="form-control" id="neighbour_option" name="class_name" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;">
                 {% for item in neighbour_list.split %}
@@ -416,17 +420,17 @@
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u47" class="ax_default table_cell">
-          <img id="u47_img" class="img " src="/media/image/u35.png"/>
-          <div id="u47_text" class="text " style="font-weight: bold;">
+        <div id="m47" class="ax_default table_cell">
+          <img id="m47_img" class="img " src="/media/image/u35.png"/>
+          <div id="m47_text" class="text " style="font-weight: bold;">
             <p><span>topology</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u48" class="ax_default table_cell">
-          <img id="u48_img" class="img " src="/media/image/u36.png"/>
-          <div id="u48_text" class="text " style="visibility: visible">
+        <div id="m48" class="ax_default table_cell">
+          <img id="m48_img" class="img " src="/media/image/u36.png"/>
+          <div id="m48_text" class="text " style="visibility: visible">
             {% with 'rectangular hexagonal' as topology_list %}
             <select class="form-control" id="topology_option" name="class_name" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;">
                 {% for item in topology_list.split %}
@@ -438,17 +442,17 @@
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u49" class="ax_default table_cell">
-          <img id="u49_img" class="img " src="/media/image/u35.png"/>
-          <div id="u49_text" class="text " style="font-weight: bold;">
+        <div id="m49" class="ax_default table_cell">
+          <img id="m49_img" class="img " src="/media/image/u35.png"/>
+          <div id="m49_text" class="text " style="font-weight: bold;">
             <p><span>activation_distance</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u50" class="ax_default table_cell">
-          <img id="u50_img" class="img " src="/media/image/u36.png"/>
-          <div id="u50_text" class="text " style="visibility: visible">
+        <div id="m50" class="ax_default table_cell">
+          <img id="m50_img" class="img " src="/media/image/u36.png"/>
+          <div id="m50_text" class="text " style="visibility: visible">
             {% with 'euclidean cosine manhattan chebyshev' as activation_list %}
             <select class="form-control" id="activation_option" name="class_name" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;">
                 {% for item in activation_list.split %}
@@ -460,18 +464,99 @@
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u51" class="ax_default table_cell">
-          <img id="u51_img" class="img " src="/media/image/u51.png"/>
-          <div id="u51_text" class="text " style="font-weight: bold;">
+        <div id="m51" class="ax_default table_cell">
+          <img id="m51_img" class="img " src="/media/image/u51.png"/>
+          <div id="m51_text" class="text " style="font-weight: bold;">
             <p><span>random_seed</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="u52" class="ax_default table_cell">
-          <img id="u52_img" class="img " src="/media/image/u52.png"/>
-          <div id="u52_text" class="text " style="visibility: visible">
+        <div id="m52" class="ax_default table_cell">
+          <img id="m52_img" class="img " src="/media/image/u52.png"/>
+          <div id="m52_text" class="text " style="visibility: visible">
             <input type="text" id="random_seed" name="random_seed" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: None (double)">
+          </div>
+        </div>
+      </div>
+
+
+        <!-- save button -->
+        <div id="mv53" style="background-color:#FFFFFF;border: thin solid black;visibility:hidden;">
+        <div id="mv53_state0" class="panel_state" data-label="State 1" style="">
+          <div id="mv53_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m54" class="ax_default heading_1">
+              <div id="m54_div" class=""></div>
+              <div id="m54_text" class="text ">
+                <p><span>Save successfully!</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m55" class="ax_default primary_button" style="cursor: pointer;">
+              <div id="m55_div" class="" tabindex="0"></div>
+              <div id="m55_text" class="text ">
+                <p><span>Publish</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m56" class="ax_default primary_button">
+              <div id="m56_div" class=""></div>
+              <div id="m56_text" class="text ">
+                <p><span>Exit</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m57" class="ax_default box_1">
+              <div id="m57_div" class=""></div>
+              <div id="m57_text" class="text ">
+                <p><span>visualization</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m58" class="ax_default heading_3">
+              <div id="m58_div" class=""></div>
+              <div id="m58_text" class="text ">
+                <p><span>Enter your visualization name: </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m59" class="ax_default box_1">
+              <div id="m59_div" class=""></div>
+              <div id="m59_text" class="text ">
+                <p><span>anthor</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m60" class="ax_default heading_3">
+              <div id="m60_div" class=""></div>
+              <div id="m60_text" class="text ">
+                <p><span>Enter your name: </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m61" class="ax_default box_1">
+              <div id="m61_div" class=""></div>
+              <div id="m61_text" class="text ">
+                <p><span>description</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (Rectangle) -->
+            <div id="m62" class="ax_default heading_3">
+              <div id="m62_div" class=""></div>
+              <div id="m62_text" class="text ">
+                <p><span>Enter your description: </span></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -541,7 +626,7 @@
       var s = new sigma(
         {
           renderer: {
-          container: 'u14',
+          container: 'm14',
           type: 'canvas'
         },
            settings: {
@@ -573,10 +658,10 @@
               cleanValue();
               s.graph.clear();
               s.refresh();
-              $('#u14_img').css('visibility','visible');
+              $('#m14_img').css('visibility','visible');
           },
       complete: function(){
-              $('#u14_img').css('visibility','hidden');
+              $('#m14_img').css('visibility','hidden');
           },
       success: function as(raw_data) {
 

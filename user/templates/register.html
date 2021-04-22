@@ -37,13 +37,9 @@
     <script src="{% static 'js/scripts/axure/viewer.js' %}"></script>
     <script src="{% static 'js/scripts/axure/math.js' %}"></script>
     <script src="{% static 'js/scripts/axure/jquery.nicescroll.min.js' %}"></script>
-    <script src="{% static 'js/document.js' %}"></script>
-    <script src="{% static 'js/data.js' %}"></script>
-    <script type="text/javascript">
-      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
-      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
-      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
-    </script>
+    <script src="{% static 'js/rdocument.js' %}"></script>
+    <script src="{% static 'js/rdata.js' %}"></script>
+
   </head>
   <body>
     <div id="base" class="">
@@ -139,7 +135,7 @@
         <div id="u11_div" class=""></div>
         <div id="u11_text" class="text ">
           <p><span style="font-family:'ComicSansMS-Bold', 'Comic Sans MS Bold', 'Comic Sans MS', sans-serif;font-weight:700;color:#555555;">Already have an account?</span><span style="font-family:'ComicSansMS', 'Comic Sans MS', sans-serif;font-weight:400;color:#555555;"> </span><span style="font-family:'ComicSansMS', 'Comic Sans MS', sans-serif;font-weight:400;text-decoration:underline ;color:#63A103;">
-			  <a href="../login/">Login now!</a></span></p>
+			  <a href="{% url 'user:login'%}">Login now!</a></span></p>
         </div>
       </div>
 

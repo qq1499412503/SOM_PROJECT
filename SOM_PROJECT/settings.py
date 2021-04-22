@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'som',
     'user',
+    'publish'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
 
 ROOT_URLCONF = 'SOM_PROJECT.urls'
 
@@ -104,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTHENTICATION_BACKENDS = ['example.api.auth.AlwaysRootBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -127,3 +136,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
