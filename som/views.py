@@ -14,7 +14,7 @@ import json
 
 class QueryUserInfo(APIView):
 
-    def post(self, request):
+    def post1(self, request):
         # print('keydict')
         for key in request.POST:
             keydict = eval(key)

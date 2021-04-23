@@ -45,3 +45,4 @@ class Login_Test(TestCase):
         test_data ={'username':'admin', 'password':'admin123456', 'email':'admin@email.com'}
         response = self.client.post('/user/login/', data = test_data)
         self.assertEqual(response.status_code, 302)
+
