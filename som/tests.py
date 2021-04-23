@@ -87,6 +87,9 @@ class unknowntest(TestCase):
 
 class viewstest(TestCase):
 
+    def setUp(self):
+        self.client = Client()
+
     def views_som_model_test(self):
         url = reverse('som:som_model')
         response = self.client.get(url)
