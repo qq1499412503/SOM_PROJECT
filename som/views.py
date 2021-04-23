@@ -77,9 +77,6 @@ class QueryUserInfo(APIView):
         return super(QueryUserInfo, self).dispatch(*args, **kwargs)
 
 
-
-
-
 def som_model(request):
     if request.method == "GET":
         content = {'name': 'file not uploaded', "attribute": "no attribute detected", "size": "empty_size"}
