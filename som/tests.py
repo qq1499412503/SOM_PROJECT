@@ -27,6 +27,8 @@ class SomTestCase(TestCase):
 #     def setUp(self):
 #         self.code = 'api'
 #
+
+
 #     def test_sample_api_test_case(self):
 #         url = '/som/user_query_info/'
 #         response = self.client.get(url)

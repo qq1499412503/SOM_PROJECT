@@ -20,6 +20,10 @@ class Pagetest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'register.html')
 
+
+
+
+
 class Login_Test(TestCase):
     """测试登陆动作"""
     def setUp(self):
