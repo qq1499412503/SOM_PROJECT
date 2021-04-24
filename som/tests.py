@@ -90,7 +90,7 @@ class viewstest(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def views_som_model_test(self):
+    def test_views_som_model(self):
         url = reverse('som:som_model')
         response = self.client.get(url)
         self.assertEqual(response.status_code,200)
@@ -100,7 +100,7 @@ class sommodeltest(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def models_som_model_test(self):
+    def test_models_som_model(self):
         url = '/som/user_query_info/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
