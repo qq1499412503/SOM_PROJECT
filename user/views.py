@@ -56,10 +56,6 @@ class UpdatePasswd(APIView):
     def dispatch(self, *args, **kwargs):
         return super(UpdatePasswd, self).dispatch(*args, **kwargs)
 
-
-
-
-
 def get_user(email):
     try:
         user = User.objects.get(email=email)
