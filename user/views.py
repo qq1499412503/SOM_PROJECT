@@ -103,7 +103,7 @@ def login_view(request):
 
             return redirect('/som/')
         else:
-            content = {"msg": "username or password incorrect"}
+            content = {"code":"164" ,"msg": "username or password incorrect"}
             return render(request, 'login.html', content)
 
 
