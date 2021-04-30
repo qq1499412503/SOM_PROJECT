@@ -61,10 +61,6 @@ class UpdatePasswd(APIView):
     def dispatch(self, *args, **kwargs):
         return super(UpdatePasswd, self).dispatch(*args, **kwargs)
 
-
-
-
-
 def get_user(email):
     try:
         user = User.objects.get(email=email)
@@ -78,24 +74,24 @@ def check_error_register(username, email, password):
     if username != '' and username is not None:
         try:
             user = User.objects.get(username=username)
-            return {"code": "222", "msg": "username existed"}
+            return {"code": "111", "msg": "username existed"}
         except User.DoesNotExist:
             pass
     else:
-        return {"code": "111", "msg": "username error or username existed"}
+        return {"code": "222", "msg": "username error or username existed"}
     if email != '' and email is not None:
         try:
             user = User.objects.get(email=email)
-            return {"code": "222", "msg": "email existed"}
+            return {"code": "333", "msg": "email existed"}
         except User.DoesNotExist:
             pass
     else:
-        return {"code": "111", "msg": "email error or email existed"}
+        return {"code": "444", "msg": "email error or email existed"}
     if password != '' and password is not None and len(password) >= 8:
         pass
     else:
-        return {"code": "111", "msg": "password error"}
-    return {"code": "200", "msg": "all correct"}
+        return {"code": "555", "msg": "password error"}
+    return {"code": "666", "msg": "all correct"}
 
 
 def login_view(request):
@@ -112,7 +108,7 @@ def login_view(request):
 
             return redirect('/som/')
         else:
-            content = {"msg": "username or password incorrect"}
+            content = {"code":"164" ,"msg": "username or password incorrect"}
             return render(request, 'login.html', content)
 
 
