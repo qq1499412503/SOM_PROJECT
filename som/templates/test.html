@@ -1,0 +1,48 @@
+{% load static %}
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<form method="post" action="{% url 'som:user_query_info' %}">
+<!--{% csrf_token %}-->
+<div>
+    <input id="key_words" name="key_words" type="text">
+    <a onclick="query('{{ user_id }}')">查询</a>
+    <input type = "button" onclick="query('111')" value = "Click Here"  >
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>手机号</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="user_info">
+    </tbody>
+</table>
+
+<button type="submit">保存</button>
+
+
+     <script type="text/javascript">
+        function query(user_id){
+            var key_words= $('#key_words').val()
+            $.ajax({
+                type: "post",
+                url: "{% url 'som:user_query_info' %}",
+                dataType: "json",
+                data: JSON.stringify({user_id: "user_id", key_words: "key_words"}),
+                success: function (data) { alert(data.user_id);
+                    // for (var i = 0; i < data.length; i++) {
+                    //     $('#user_info').append("<tr id='row"+i+"'><input type='hidden' name='row"+ i +"' value='"+i+"'><td>"+ data[i]['name'] + "</td><input type='hidden' name='name"+ i +"' value='"+data[i]['name']+"'><td>"+ data[i]['id_no'] + "</td><input type='hidden' name='id_no"+ i +"' value='"+data[i]['id_no']+"'><td>" + data[i]['mobile_no']+"</td><input type='hidden' name='mobile_no"+ i +"' value='"+data[i]['mobile_no']+"'><td><a onclick='remove("+i+")'>移除</a></td></tr>")
+                    // }
+                }
+            });
+        }
+
+        function remove(i) {
+           $('#row'+i).remove()
+        }
+    </script>
