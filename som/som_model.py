@@ -3,6 +3,17 @@ import numpy as np
 import pandas as pa
 import csv
 from minisom import MiniSom
+import matplotlib.pyplot as plt
+from matplotlib.patches import RegularPolygon, Ellipse
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from matplotlib import cm, colorbar
+from matplotlib.lines import Line2D
+import matplotlib
+from bokeh.colors import RGB
+from bokeh.io import curdoc, show, output_notebook
+from bokeh.transform import factor_mark, factor_cmap
+from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.plotting import figure, output_file
 
 #
 #
@@ -59,33 +70,21 @@ class Som:
         self.model_som.train(self.data, epoch)
 
     def process_map(self):
-        coordinates = np.array([self.model_som.winner(x) for x in self.data]).T
-        cluster_index = np.ravel_multi_index(coordinates, (self.x, self.y))
-        num_ind = 1
-        map = {}
-        node_list = []
-        print(np.unique(cluster_index))
-        color = ['red', 'blue', 'yellow', 'green', '#7AB415', '#1DD676']
-        for index in np.unique(cluster_index):
-            # print(index)
-            x = self.data[cluster_index == index, 0]
-            y = self.data[cluster_index == index, 1]
-            # print(len(x))
-            for sub_index in range(len(x)):
-                nodes = {'id': str(num_ind)+str(sub_index), 'label': str(index), 'x': round(float(x[sub_index]),2), 'y': round(float(y[sub_index]),2),
-                         'size': 2, 'color': color[num_ind-1], 'class': str(num_ind)}
-                # print(nodes)
-                node_list.append(nodes)
-            num_ind += 1
+        map={}
+        nodes = []
+        xx, yy = self.model_som.get_euclidean_coordinates()
+        umatrix = self.model_som.distance_map()
+        weights = self.model_som.get_weights()
+        for j in range(weights.shape[1]):
+            sub_nodes = []
+            for i in range(weights.shape[0]):
+                color = matplotlib.colors.rgb2hex(cm.Blues(umatrix[i, j]))
+                sub_nodes.append(color)
+            nodes.append(sub_nodes)
+        map['nodes'] = nodes
 
-        cp_count = 0
-        # for cp in self.weights:
-        #     nodes = {'id': str('cp') + str(cp_count), 'label': str(cp_count), 'x': round(float(cp[:, 0][0]), 2),
-        #              'y': round(float(cp[:, 1][0]), 2),
-        #              'size': 2, 'color': 'black', 'class': str(cp_count)}
-        #     node_list.append(nodes)
-        #     cp_count+=1
+        # print(map)
 
-        #nodes center point
-        map['nodes'] = node_list
         return map
+
+

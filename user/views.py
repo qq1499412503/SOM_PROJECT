@@ -7,13 +7,18 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http40
 from .models import UserInfo
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, timezone
-
+from som.models import dataframe
+from bson.objectid import ObjectId
+import json
 # Create your views here.
+
+
 
 
 class UpdateUser(APIView):
 
     def post(self, request):
+        print(request.POST)
         for key in request.POST:
             keydict = eval(key)
             uid = keydict["user_id"]
@@ -137,5 +142,29 @@ def profile_view(request):
     else:
         raise Http404
     if request.method == "GET":
-        content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d')}
+        data = dataframe.objects.filter(uid=uid).order_by('-time')[:5]
+        # for a in data:
+            # print(a._id,a.file_name,a.author,a.description)
+        content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data":data}
         return render(request, 'profile.html', content)
+    if request.method == "POST":
+        data_id = ObjectId(str(request.POST['did']))
+        current_object = dataframe.objects.get(_id=data_id)
+        file_name = current_object.file_name
+        author = current_object.author
+        time = current_object.time
+        description = current_object.description
+        publish = current_object.publish
+        data_name = str(current_object.data).split('/')[-1]
+        map = json.dumps(dict(current_object.map))
+        x = current_object.x
+        y = current_object.y
+        content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y }
+        return render(request, 'view.html', content)
+
+
+def logout_view(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+    if request.method == "POST":
+        return render(request, 'login.html')

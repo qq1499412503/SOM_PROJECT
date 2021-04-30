@@ -1,4 +1,5 @@
 {% load static %}
+{% load template %}
 <html>
   <head>
     <title>profile</title>
@@ -40,11 +41,7 @@
     <script src="{% static 'js/prdocument.js' %}"></script>
     <script src="{% static 'js/prdata.js' %}"></script>
 
-    <script type="text/javascript">
-      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
-      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
-      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
-    </script>
+
   </head>
   <body>
     <div id="base" class="">
@@ -78,7 +75,7 @@
         <div id="u3_div" class=""></div>
         <div id="u3_text" class="text ">
           {% if user.is_authenticated %}
-          <p><span>Welcome, {{ user.get_username }}</span></p>
+          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'som:som_model' %}">New Project,</a>&nbsp;&nbsp;<a href="{% url 'user:logout' %}">logout</a></p>
         {% endif %}
         </div>
       </div>
@@ -93,7 +90,9 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u5" class="ax_default icon">
+        <a href="{% url 'publish:list' %}">
         <img id="u5_img" class="img " src="/media/image/pr5.svg"/>
+        </a>
         <div id="u5_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
@@ -183,7 +182,7 @@
                 </div>
 
                 <!-- Save Button (Rectangle) -->
-                <div id="u19" class="ax_default primary_button" data-label="Save Button" onclick="update_user()">
+                <div id="u19" class="ax_default primary_button" data-label="Save Button" onclick="update_password()">
                   <div id="u19_div" class=""></div>
                   <div id="u19_text" class="text ">
                     <p><span>Save</span></p>
@@ -400,7 +399,7 @@
       <script type="text/javascript">
 
 
-      function update_user(){
+      function update_password(){
 
       $.ajax({
       type: "post",
@@ -566,48 +565,58 @@
 
               <!-- Unnamed (Table) -->
               <div id="u64" class="ax_default">
+              {% for each_data in data %}
 
-
+              <form id="{{ forloop.counter0 }}" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <input id="did" name="did" type="text" value="{{ each_data|private:'_id' }}" hidden/>
+              </form>
 
                 <!-- Unnamed (Table Cell) -->
-                <div id="u70" class="ax_default table_cell">
-                  <img id="u70_img" class="img " src="/media/image/pr70.png"/>
+                <div id="u70" class="ax_default table_cell" style="top:calc(70px*{{ forloop.counter0 }})">
+                  <img id="u70_img" class="img " src="/media/image/pr70.png" style="top:0px"/>
                   <div id="u70_text" class="text ">
-                    <p><span>GTA</span></p>
+                    <input name="fname"  id="view_button" type="submit" form="{{ forloop.counter0 }}" hidden/>
+                    <label for="view_button">{{ each_data.file_name }}</label>
                   </div>
                 </div>
 
                 <!-- Unnamed (Table Cell) -->
-                <div id="u71" class="ax_default table_cell">
-                  <img id="u71_img" class="img " src="/media/image/pr71.png"/>
-                  <div id="u71_text" class="text " style="display:none; visibility: hidden">
-                    <p></p>
+                <div id="u71" class="ax_default table_cell" style="top:calc(70px*{{ forloop.counter0 }})">
+                  <img id="u71_img" class="img " src="/media/image/pr71.png" style="top:0px"/>
+                  <div id="u71_text" class="text ">
+                    <p><span>{{ each_data.description }}</span></p>
                   </div>
                 </div>
 
                 <!-- Unnamed (Table Cell) -->
-                <div id="u72" class="ax_default table_cell">
-                  <img id="u72_img" class="img " src="/media/image/pr72.png"/>
-                  <div id="u72_text" class="text " style="display:none; visibility: hidden">
-                    <p></p>
+                <div id="u72" class="ax_default table_cell" style="top:calc(70px*{{ forloop.counter0 }})">
+                  <img id="u72_img" class="img " src="/media/image/pr72.png" style="top:0px"/>
+                  <div id="u72_text" class="text ">
+                    <p><span>{{ each_data.author }}</span></p>
                   </div>
                 </div>
 
                 <!-- Unnamed (Table Cell) -->
-                <div id="u73" class="ax_default table_cell">
-                  <img id="u73_img" class="img " src="/media/image/pr73.png"/>
-                  <div id="u73_text" class="text " style="display:none; visibility: hidden">
-                    <p></p>
+                <div id="u73" class="ax_default table_cell" style="top:calc(70px*{{ forloop.counter0 }})">
+                  <img id="u73_img" class="img " src="/media/image/pr73.png" style="top:0px"/>
+                  <div id="u73_text" class="text ">
+                    <p><span>{{ each_data.time }}</span></p>
                   </div>
                 </div>
 
                 <!-- Unnamed (Table Cell) -->
-                <div id="u74" class="ax_default table_cell">
-                  <img id="u74_img" class="img " src="/media/image/pr74.png"/>
+                <div id="u74" class="ax_default table_cell" style="top:calc(70px*{{ forloop.counter0 }})">
+                  <img id="u74_img" class="img " src="/media/image/pr74.png" style="top:0px"/>
                   <div id="u74_text" class="text ">
+                    {% if each_data.publish %}
+                    <p><span>Public</span></p>
+                    {% else %}
                     <p><span>Private</span></p>
+                    {% endif %}
                   </div>
                 </div>
+                {% endfor %}
               </div>
             </div>
           </div>

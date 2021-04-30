@@ -8,6 +8,7 @@ body {
   margin-right:auto;
   text-align:left;
 }
+
 .form_sketch {
   border-color:transparent;
   background-color:transparent;
@@ -128,7 +129,7 @@ body {
 #u3 {
   border-width:0px;
   position:absolute;
-  left:1700px;
+  left:1400px;
   top:14px;
   width:88px;
   height:21px;
@@ -18275,7 +18276,7 @@ body {
   border-width:0px;
   word-wrap:break-word;
   text-transform:none;
-  visibility:hidden;
+
 }
 #u72_img {
   border-width:0px;
@@ -18306,7 +18307,7 @@ body {
   border-width:0px;
   word-wrap:break-word;
   text-transform:none;
-  visibility:hidden;
+
 }
 #u73_img {
   border-width:0px;
@@ -18337,7 +18338,7 @@ body {
   border-width:0px;
   word-wrap:break-word;
   text-transform:none;
-  visibility:hidden;
+
 }
 #u74_img {
   border-width:0px;
