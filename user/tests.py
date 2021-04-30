@@ -98,6 +98,7 @@ class Login_Test(TestCase):
 
     def setUp(self):
         User.objects.create_user('admin','admin@email.com', 'admin123456')
+        self.client = Client()
 
     def test_add_admin(self):
         user = User.objects.get(username='admin')
@@ -125,6 +126,7 @@ class Register_Test(TestCase):
 
     def setUp(self):
         User.objects.create_user('admin', 'admin@email.com', 'admin123456')
+        self.client = Client()
 
     def test_add_admin(self):
         user = User.objects.get(username='admin')
@@ -171,6 +173,7 @@ class Profile_view_test(TestCase):
 
     def setUp(self):
         User.objects.create_user('admin', 'admin@email.com', 'admin123456')
+        self.client = Client()
         #user = User.is_authenticated
 
     def test_profile_view(self):
@@ -181,7 +184,21 @@ class Profile_view_test(TestCase):
         # user_ob = User.objects.get(pk=1)
         # current_user = UserInfo.objects.get(user=user_ob)
 
-#class UpdateUser_test(TestCase):
+class Logout_test(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_logout_get(self):
+        response = self.client.get('/user/logout')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html')
+
+    def test_logout_post(self):
+        response = self.client.post('/user/logout')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html')
+
 
 
 
