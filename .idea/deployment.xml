@@ -12,7 +12,7 @@
       <paths name="whatever">
         <serverdata>
           <mappings>
-            <mapping deploy="/SOM_PROJECT" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
