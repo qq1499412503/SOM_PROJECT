@@ -70,14 +70,15 @@ class QueryUserInfo(APIView):
             models.model()
             models.fit(iteration)
             results = models.process_map()
+            current_object.map = results
+            current_object.x = x
+            current_object.y = y
+            current_object.save()
         return JsonResponse(results, safe=False)
 
     #@csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(QueryUserInfo, self).dispatch(*args, **kwargs)
-
-
-
 
 
 def som_model(request):
@@ -102,11 +103,61 @@ def som_model(request):
 
 
 
+def test(request):
+    if request.method == "GET":
+        return render(request, 'visual.html')
+
+
+def tt(request):
+    if request.method == "GET":
+        return render(request, 'test.html')
 
 
 
 
+class SaveMap(APIView):
 
+    def post(self, request):
+        for key in request.POST:
+            keydict = eval(key)
+            uid = str(keydict["user_id"])
+            data_id = ObjectId(str(keydict["data_id"]))
+            author = str(keydict["author"])
+            vis_name = str(keydict["vis_name"])
+            description = str(keydict["description"])
+            current_object = dataframe.objects.get(_id=data_id)
+            current_object.uid = uid
+            current_object.author = author
+            current_object.description = description
+            current_object.file_name = vis_name
+            current_object.save()
+            results = {"code":"200","msg":"successful"}
+        return JsonResponse(results, safe=False)
 
+    #@csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(SaveMap, self).dispatch(*args, **kwargs)
 
+class SaveAndPublish(APIView):
 
+    def post(self, request):
+        for key in request.POST:
+            keydict = eval(key)
+            uid = str(keydict["user_id"])
+            data_id = ObjectId(str(keydict["data_id"]))
+            author = str(keydict["author"])
+            vis_name = str(keydict["vis_name"])
+            description = str(keydict["description"])
+            current_object = dataframe.objects.get(_id=data_id)
+            current_object.uid = uid
+            current_object.author = author
+            current_object.description = description
+            current_object.file_name = vis_name
+            current_object.publish = True
+            current_object.save()
+            results = {"code":"200","msg":"successful"}
+        return JsonResponse(results, safe=False)
+
+    #@csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(SaveAndPublish, self).dispatch(*args, **kwargs)

@@ -1,48 +1,335 @@
 {% load static %}
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<form method="post" action="{% url 'som:user_query_info' %}">
-<!--{% csrf_token %}-->
-<div>
-    <input id="key_words" name="key_words" type="text">
-    <a onclick="query('{{ user_id }}')">查询</a>
-    <input type = "button" onclick="query('111')" value = "Click Here"  >
-</div>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Hexagons Test</title>
+    <script type="text/javascript" src="{% static 'js/d3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/d3.behavior.min.js' %}"></script>
+    <style type="text/css">
+svg {
+    border: none;
+    background: white;
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>姓名</th>
-            <th>身份证号</th>
-            <th>手机号</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody id="user_info">
-    </tbody>
-</table>
+.bounds {
+    stroke: red;
+    fill: none;
+}
 
-<button type="submit">保存</button>
+.tile {
+    stroke: black;
+    stroke-width: 1px;
+    fill: black;
+    fill-opacity: 0.05;
+}
+
+.tile.resource {
+    fill: grey;
+    fill-opacity: 0.8;
+}
+
+.over {
+    fill: red !important;
+    fill-opacity: 0.8 !important;
+}
+
+.selected {
+    fill: yellow;
+    fill-opacity: 0.8 !important;
+}
+
+div.tooltip {
+    background: white;
+    padding: 0px 2px;
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+    font-size: 0.8em;
+    font-family: sans-serif;
+}
+
+div.visible {
+    visibility: visible !important;
+}
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
 
 
-     <script type="text/javascript">
-        function query(user_id){
-            var key_words= $('#key_words').val()
-            $.ajax({
-                type: "post",
-                url: "{% url 'som:user_query_info' %}",
-                dataType: "json",
-                data: JSON.stringify({user_id: "user_id", key_words: "key_words"}),
-                success: function (data) { alert(data.user_id);
-                    // for (var i = 0; i < data.length; i++) {
-                    //     $('#user_info').append("<tr id='row"+i+"'><input type='hidden' name='row"+ i +"' value='"+i+"'><td>"+ data[i]['name'] + "</td><input type='hidden' name='name"+ i +"' value='"+data[i]['name']+"'><td>"+ data[i]['id_no'] + "</td><input type='hidden' name='id_no"+ i +"' value='"+data[i]['id_no']+"'><td>" + data[i]['mobile_no']+"</td><input type='hidden' name='mobile_no"+ i +"' value='"+data[i]['mobile_no']+"'><td><a onclick='remove("+i+")'>移除</a></td></tr>")
-                    // }
-                }
+var data = [];
+
+var svg,
+    tooltip;
+
+(function() {
+
+window.onload = function() {
+    initialize();
+};
+
+var size = 40, // hexagon size
+    radius = 25, // map radius
+    tilted = false; // true is horizontal alignment
+
+var w = 960, // width
+    h = 500, // height
+    padding = 50;
+
+var translate = [0, 0];
+
+function initialize() {
+    svg = d3.select('body')
+        .append('svg:svg')
+        .attr('width', w)
+        .attr('height', h)
+        .attr('pointer-events', 'all');
+
+    // binding events over 'svg' only
+    svg.on('mousedown', mouseDrag)
+        .on('mousewheel', mouseScroll) // webkit
+        .on('DOMMouseScroll', mouseScroll); // firefox
+
+    svg.append('svg:rect')
+        .classed('bounds', true)
+        .attr('x', padding)
+        .attr('y', padding)
+        .attr('width', w - padding * 2)
+        .attr('height', h - padding * 2);
+
+    // crosshair
+    svg.append('svg:circle')
+        .classed('bounds', true)
+        .attr('cx', w / 2)
+        .attr('cy', h / 2)
+        .attr('r', 2);
+
+    tooltip = d3.select('body')
+        .append('div')
+        .classed('tooltip', true);
+
+    fillMap();
+    position();
+    render();
+}
+
+function fillMap() {
+    var id = 0,
+        limit1 = 0,
+        limit2 = radius;
+    for (var j = -radius; j <= radius; j++) {
+        var i = limit1;
+        while (i <= limit2) {
+            data.push({
+                id: id++,
+                coordinates: [i, j],
+                lastSelected: 0,
+                type: 'regular',
+                resource: Math.random() < .005
             });
+            i++;
         }
+        if (j < 0) {
+            limit1--;
+        } else {
+            limit2--;
+        }
+    }
+}
 
-        function remove(i) {
-           $('#row'+i).remove()
-        }
+function position() {
+    // http://goo.gl/8djhT
+    var stepX = tilted ? size * 3 / 4 : Math.sqrt(3) * size / 2,
+        stepY = tilted ? Math.sqrt(3) * size / 2 : size * 3 / 4,
+        offset = size / Math.sqrt(3) * 3 / 4
+    data.map(function(d) {
+        var i = d.coordinates[0],
+            j = d.coordinates[1],
+            x = stepX * i + (!tilted ? offset * j : 0) + w / 2,
+            y = stepY * j + (tilted ? offset * i : 0) + h / 2;
+        d.centroid = [Math.round(x * 1e2) / 1e2, Math.round(y * 1e2) / 1e2];
+        d.visible = !outbounds(x, y);
+    });
+}
+
+function render() {
+    renderMap();
+}
+
+function renderMap() {
+    var grid = svg.selectAll('polygon.tile')
+        .data(getVisibleData(), function(d) { return d.id; });
+
+    grid.enter()
+        .sort(function(a, b) { return a.id - b.id; })
+        .append('svg:polygon')
+        .classed('tile', true)
+        .classed('selected', function(d) { return !~(d.type.search('r')); })
+        .classed('resource', function(d) { return d.resource; })
+        .attr('points', function(d) {
+            return hex(d.centroid, size, tilted).join(' ');
+        })
+        .on('mouseover', mouseOver)
+        .on('mousemove', mouseMove)
+        .on('mouseout', mouseOut)
+        .on('mousedown', click);
+
+    grid.exit().remove();
+}
+
+// Custom drag behavior (replacing 'zoom')
+function mouseDrag() {
+    var m0 = d3.svg.mouse(this),
+        that = this,
+        previousMove = [0, 0];
+
+    d3.select('body').on('mousemove', function() {
+        var m1 = d3.svg.mouse(that),
+            shift = d3.event.shiftKey,
+            ctrl = d3.event.ctrlKey,
+            alt = d3.event.altKey,
+            x = ctrl ? 0 : m1[0] - m0[0] - previousMove[0],
+            y = shift ? 0 : m1[1] - m0[1] - previousMove[1];
+
+        move(x, y);
+        previousMove[0] += x;
+        previousMove[1] += y;
+    });
+
+    d3.select('body').on('mouseup', function() {
+        d3.select('body')
+            .on('mousemove', null)
+            .on('mouseup', null);
+    });
+
+    d3.event.preventDefault();
+}
+//
+
+function move(x, y) {
+    translate[0] += x;
+    translate[1] += y;
+
+    moveMap();
+}
+
+function moveMap() {
+    var dx = translate[0],
+        dy = translate[1];
+
+    // Update data
+    data.filter(function(d) {
+        var x = d.centroid[0] + dx,
+            y = d.centroid[1] + dy;
+        return d.visible && outbounds(x, y);
+    }).map(function(d) {
+        d.visible = false;
+        return d;
+    });
+
+    data.filter(function(d) {
+        var x = d.centroid[0] + dx,
+            y = d.centroid[1] + dy;
+        return !d.visible && !outbounds(x, y);
+    }).map(function(d) {
+        d.visible = true;
+        return d;
+    });
+    //
+
+    renderMap();
+
+    svg.selectAll('.tile')
+        .attr('transform', 'translate(' + [dx, dy] + ')');
+}
+
+function outbounds(x, y) {
+    return x < padding || x > w - padding || y < padding || y > h - padding;
+}
+
+function removeAll() {
+    svg.selectAll('.tile').remove();
+}
+
+function hex(centroid) {
+    var a = size / 2,
+        b = (Math.sqrt(3) * a) / 2,
+        x = centroid[0],
+        y = centroid[1];
+    return tilted
+        ? [[x - a / 2, y - b], [x - a, y], [x - a / 2, y + b], [x + a / 2, y + b], [x + a, y], [x + a / 2, y - b]]
+        : [[x - b, y - a / 2], [x - b, y + a / 2], [x, y + a], [x + b, y + a / 2], [x + b, y - a / 2], [x, y - a]];
+}
+
+// d3 mouse events
+function mouseOver(d, i) {
+    d3.select(this).classed('over', true);
+    tooltip.text(d.id + ' (' + d.coordinates + ') / ' + d.lastSelected)
+        .classed('visible', true);
+}
+
+function mouseMove(d, i) {
+    tooltip.style('top', (d3.event.pageY - 20) + 'px')
+        .style('left', (d3.event.pageX + 20) + 'px');
+}
+
+function mouseOut(d, i) {
+    d3.select(this).classed('over', false);
+    tooltip.classed('visible', false);
+}
+
+function click(d, i) {
+    var element = d3.select(this),
+        selected = element.classed('selected');
+
+        element.classed('selected', !selected);
+        d.type = selected ? 'regular' : 'selected';
+        d.lastSelected = +d3.event.timeStamp;
+
+        tooltip.text(d.id + ' (' + d.coordinates + ') / ' + d.lastSelected);
+}
+
+function mouseScroll(d, i) {
+    var e = d3.event,
+        delta = e.wheelDelta ? e.wheelDelta : e.detail ? -e.detail : 0;
+    if (delta > 0) {
+        scrollUp();
+    } else {
+        scrollDown();
+    }
+    d3.event.preventDefault();
+}
+//
+
+function scrollDown() {
+    if (size > 20) {
+        zoom(-20); // zoom out
+    }
+}
+
+function scrollUp() {
+    if (size < 80) {
+        zoom(20); // zoom in
+    }
+}
+
+function zoom(amount) {
+    var proportion = (size + amount) / size,
+        dx = translate[0] * proportion - translate[0],
+        dy = translate[1] * proportion - translate[1];
+    size += amount;
+    removeAll();
+    position();
+    move(dx, dy);
+}
+
+function getVisibleData() {
+    return data.filter(function(d) { return d.visible; });
+}
+
+})();
+
     </script>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load template %}
 <html>
   <head>
     <title>publish</title>
@@ -66,7 +67,9 @@
 
       <!-- Unnamed (Shape) -->
       <div id="p2" class="ax_default icon">
+        <a href="{% url 'user:profile'%}">
         <img id="p2_img" class="img " src="/media/image/p2.svg"/>
+        </a>
         <div id="p2_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
@@ -76,7 +79,9 @@
       <div id="p3" class="ax_default heading_3">
         <div id="p3_div" class=""></div>
         <div id="p3_text" class="text ">
-          <p><span>Username</span></p>
+          {% if user.is_authenticated %}
+          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'som:som_model' %}">New Project,</a>&nbsp;&nbsp;<a href="{% url 'user:logout' %}">logout</a></p>
+          {% endif %}
         </div>
       </div>
 
@@ -111,349 +116,58 @@
       <!-- Unnamed (Table) -->
       <div id="p7" class="ax_default">
 
-        <!-- Unnamed (Table Cell) -->
-        <div id="p8" class="ax_default image">
-          <img id="p8_img" class="img " src="/media/image/p8.png"/>
-          <div id="p8_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
-          </div>
-        </div>
+      {% for each_data in data %}
+        <form id="{{ forloop.counter0 }}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <input id="did" name="did" type="text" value="{{ each_data|private:'_id' }}" hidden/>
+      </form>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="p9" class="ax_default box_1">
-          <img id="p9_img" class="img " src="/media/image/p9.png"/>
-          <div id="p9_text" class="text ">
-            <p><span>Visualization name 1</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p10" class="ax_default box_1">
-          <img id="p10_img" class="img " src="/media/image/p10.png"/>
-          <div id="p10_text" class="text ">
-            <p><span>author 1 publish date 1</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p11" class="ax_default box_1">
-          <img id="p11_img" class="img " src="/media/image/p11.png"/>
-          <div id="p11_text" class="text ">
-            <p><span>description 1</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p12" class="ax_default box_1">
-          <img id="p12_img" class="img " src="/media/image/p12.png"/>
-          <div id="p12_text" class="text ">
-          <input type="submit" id="view1" form="upload_form" hidden/>
-          <label for="view1">view</label>
-        </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p14" class="ax_default image">
-          <img id="p14_img" class="img " src="/media/image/p8.png"/>
-          <div id="p14_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p15" class="ax_default box_1">
-          <img id="p15_img" class="img " src="/media/image/p9.png"/>
-          <div id="p15_text" class="text ">
-            <p><span>Visualization name 2</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p16" class="ax_default box_1">
-          <img id="p16_img" class="img " src="/media/image/p10.png"/>
-          <div id="p16_text" class="text ">
-            <p><span>author 2 publish date 2</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p17" class="ax_default box_1">
-          <img id="p17_img" class="img " src="/media/image/p11.png"/>
-          <div id="p17_text" class="text ">
-            <p><span>description 2</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p18" class="ax_default box_1">
-          <img id="p18_img" class="img " src="/media/image/p12.png"/>
-          <div id="p18_text" class="text ">
-          <input type="submit" id="view2" form="upload_form" hidden/>
-          <label for="view2">view</label>
-        </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p20" class="ax_default image">
-          <img id="p20_img" class="img " src="/media/image/p8.png"/>
-          <div id="p20_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p21" class="ax_default box_1">
-          <img id="p21_img" class="img " src="/media/image/p9.png"/>
-          <div id="p21_text" class="text ">
-            <p><span>Visualization name 3</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p22" class="ax_default box_1">
-          <img id="p22_img" class="img " src="/media/image/p10.png"/>
-          <div id="p22_text" class="text ">
-            <p><span>author 3 publish date 3</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p23" class="ax_default box_1">
-          <img id="p23_img" class="img " src="/media/image/p11.png"/>
-          <div id="p23_text" class="text ">
-            <p><span>description 3</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p24" class="ax_default box_1">
-          <img id="p24_img" class="img " src="/media/image/p12.png"/>
-          <div id="p24_text" class="text ">
-          <input type="submit" id="view3" form="upload_form" hidden/>
-          <label for="view3">view</label>
-        </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p26" class="ax_default image">
-          <img id="p26_img" class="img " src="/media/image/p8.png"/>
-          <div id="p26_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p27" class="ax_default box_1">
-          <img id="p27_img" class="img " src="/media/image/p9.png"/>
-          <div id="p27_text" class="text ">
-            <p><span>Visualization name 4</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p28" class="ax_default box_1">
-          <img id="p28_img" class="img " src="/media/image/p10.png"/>
-          <div id="p28_text" class="text ">
-            <p><span>author 4 publish date 4</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p29" class="ax_default box_1">
-          <img id="p29_img" class="img " src="/media/image/p11.png"/>
-          <div id="p29_text" class="text ">
-            <p><span>description 4</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p30" class="ax_default box_1">
-          <img id="p30_img" class="img " src="/media/image/p12.png"/>
-          <div id="p30_text" class="text ">
-          <input type="submit" id="view4" form="upload_form" hidden/>
-          <label for="view4">view</label>
-        </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p32" class="ax_default image">
-          <img id="p32_img" class="img " src="/media/image/p8.png"/>
-          <div id="p32_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p33" class="ax_default box_1">
-          <img id="p33_img" class="img " src="/media/image/p9.png"/>
-          <div id="p33_text" class="text ">
-            <p><span>Visualization name 5</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p34" class="ax_default box_1">
-          <img id="p34_img" class="img " src="/media/image/p10.png"/>
-          <div id="p34_text" class="text ">
-            <p><span>author 5 publish date 5</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p35" class="ax_default box_1">
-          <img id="p35_img" class="img " src="/media/image/p11.png"/>
-          <div id="p35_text" class="text ">
-            <p><span>description 5</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p36" class="ax_default box_1">
-          <img id="p36_img" class="img " src="/media/image/p12.png"/>
-          <div id="p36_text" class="text ">
-          <input type="submit" id="view5" form="upload_form" hidden/>
-          <label for="view5">view</label>
-        </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p38" class="ax_default image">
-          <img id="p38_img" class="img " src="/media/image/p8.png"/>
-          <div id="p38_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p39" class="ax_default box_1">
-          <img id="p39_img" class="img " src="/media/image/p9.png"/>
-          <div id="p39_text" class="text ">
-            <p><span>Visualization name 6</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p40" class="ax_default box_1">
-          <img id="p40_img" class="img " src="/media/image/p10.png"/>
-          <div id="p40_text" class="text ">
-            <p><span>author 6 publish date 6</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p41" class="ax_default box_1">
-          <img id="p41_img" class="img " src="/media/image/p11.png"/>
-          <div id="p41_text" class="text ">
-            <p><span>description 6</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p42" class="ax_default box_1">
-          <img id="p42_img" class="img " src="/media/image/p12.png"/>
-          <div id="p42_text" class="text ">
-          <input type="submit" id="view6" form="upload_form" hidden/>
-          <label for="view6">view</label>
-        </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="p44" class="ax_default image">
+        <div id="p44" class="ax_default image" style="top:calc(90px*{{ forloop.counter0 }})">
           <img id="p44_img" class="img " src="/media/image/p44.png"/>
-          <div id="p44_text" class="text " style="display:none; visibility: hidden">
-            <p></p>
+          <div id="p44_text" class="text ">
+            <p><span>{{ each_data.author }}</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="p45" class="ax_default box_1">
+        <div id="p45" class="ax_default box_1" style="top:calc(90px*{{ forloop.counter0 }})">
           <img id="p45_img" class="img " src="/media/image/p45.png"/>
           <div id="p45_text" class="text ">
-            <p><span>Visualization name 7</span></p>
+            <p><span>{{ each_data.time }}</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="p46" class="ax_default box_1">
+        <div id="p46" class="ax_default box_1" style="top:calc(90px*{{ forloop.counter0 }})">
           <img id="p46_img" class="img " src="/media/image/p46.png"/>
           <div id="p46_text" class="text ">
-            <p><span>author 7 publish date 7</span></p>
+            <p><span>{{ each_data.file_name }}</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="p47" class="ax_default box_1">
+        <div id="p47" class="ax_default box_1" style="top:calc(90px*{{ forloop.counter0 }})">
           <img id="p47_img" class="img " src="/media/image/p47.png"/>
           <div id="p47_text" class="text ">
-            <p><span>description 7</span></p>
+            <p><span>{{ each_data.description }}</span></p>
           </div>
         </div>
 
         <!-- Unnamed (Table Cell) -->
-        <div id="p48" class="ax_default box_1">
+        <div id="p48" class="ax_default box_1" style="top:calc(90px*{{ forloop.counter0 }})">
           <img id="p48_img" class="img " src="/media/image/p48.png"/>
           <div id="p48_text" class="text ">
-          <input type="submit" id="view7" form="upload_form" hidden/>
-          <label for="view7">view</label>
+          <input name="fname"  id="view_button" type="submit" form="{{ forloop.counter0 }}" hidden/>
+                <label for="view_button">view</label>
         </div>
         </div>
+        {% endfor %}
       </div>
 
-      <!-- Unnamed (Image) -->
-      <div id="p50" class="ax_default image">
-        <img id="p50_img" class="img " src="/media/image/p50.png"/>
-        <div id="p50_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
 
-      <!-- Unnamed (Image) -->
-      <div id="p51" class="ax_default image">
-        <img id="p51_img" class="img " src="/media/image/p50.png"/>
-        <div id="p51_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
 
-      <!-- Unnamed (Image) -->
-      <div id="p52" class="ax_default image">
-        <img id="p52_img" class="img " src="/media/image/p50.png"/>
-        <div id="p52_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
 
-      <!-- Unnamed (Image) -->
-      <div id="p53" class="ax_default image">
-        <img id="p53_img" class="img " src="/media/image/p50.png"/>
-        <div id="p53_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="p54" class="ax_default image">
-        <img id="p54_img" class="img " src="/media/image/p50.png"/>
-        <div id="p54_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="p55" class="ax_default image">
-        <img id="p55_img" class="img " src="/media/image/p50.png"/>
-        <div id="p55_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="p56" class="ax_default image">
-        <img id="p56_img" class="img " src="/media/image/p50.png"/>
-        <div id="p56_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
 
       <!-- Unnamed (Rectangle) -->
       <div id="p57" class="ax_default heading_1">

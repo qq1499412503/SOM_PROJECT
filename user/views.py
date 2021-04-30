@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,13 +7,18 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http40
 from .models import UserInfo
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, timezone
-
+from som.models import dataframe
+from bson.objectid import ObjectId
+import json
 # Create your views here.
+
+
 
 
 class UpdateUser(APIView):
 
     def post(self, request):
+        print(request.POST)
         for key in request.POST:
             keydict = eval(key)
             uid = keydict["user_id"]
@@ -56,10 +61,6 @@ class UpdatePasswd(APIView):
     def dispatch(self, *args, **kwargs):
         return super(UpdatePasswd, self).dispatch(*args, **kwargs)
 
-
-
-
-
 def get_user(email):
     try:
         user = User.objects.get(email=email)
@@ -73,24 +74,24 @@ def check_error_register(username, email, password):
     if username != '' and username is not None:
         try:
             user = User.objects.get(username=username)
-            return {"code": "222", "msg": "username existed"}
+            return {"code": "111", "msg": "username existed"}
         except User.DoesNotExist:
             pass
     else:
-        return {"code": "111", "msg": "username error or username existed"}
+        return {"code": "222", "msg": "username error or username existed"}
     if email != '' and email is not None:
         try:
             user = User.objects.get(email=email)
-            return {"code": "222", "msg": "email existed"}
+            return {"code": "333", "msg": "email existed"}
         except User.DoesNotExist:
             pass
     else:
-        return {"code": "111", "msg": "email error or email existed"}
+        return {"code": "444", "msg": "email error or email existed"}
     if password != '' and password is not None and len(password) >= 8:
         pass
     else:
-        return {"code": "111", "msg": "password error"}
-    return {"code": "200", "msg": "all correct"}
+        return {"code": "555", "msg": "password error"}
+    return {"code": "666", "msg": "all correct"}
 
 
 def login_view(request):
@@ -107,7 +108,7 @@ def login_view(request):
 
             return redirect('/som/')
         else:
-            content = {"msg": "username or password incorrect"}
+            content = {"code":"164" ,"msg": "username or password incorrect"}
             return render(request, 'login.html', content)
 
 
@@ -137,5 +138,27 @@ def profile_view(request):
     else:
         raise Http404
     if request.method == "GET":
-        content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d')}
+        data = dataframe.objects.filter(uid=uid).order_by('-time')[:5]
+        # for a in data:
+            # print(a._id,a.file_name,a.author,a.description)
+        content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data":data}
         return render(request, 'profile.html', content)
+    if request.method == "POST":
+        data_id = ObjectId(str(request.POST['did']))
+        current_object = dataframe.objects.get(_id=data_id)
+        file_name = current_object.file_name
+        author = current_object.author
+        time = current_object.time
+        description = current_object.description
+        publish = current_object.publish
+        data_name = str(current_object.data).split('/')[-1]
+        map = json.dumps(dict(current_object.map))
+        x = current_object.x
+        y = current_object.y
+        content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y }
+        return render(request, 'view.html', content)
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'login.html')
