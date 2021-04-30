@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -160,7 +160,5 @@ def profile_view(request):
 
 
 def logout_view(request):
-    if request.method == "GET":
-        return render(request, 'login.html')
-    if request.method == "POST":
-        return render(request, 'login.html')
+    logout(request)
+    return render(request, 'login.html')
