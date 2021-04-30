@@ -91,7 +91,7 @@ def check_error_register(username, email, password):
         pass
     else:
         return {"code": "555", "msg": "password error"}
-    return {"code": "666", "msg": "all correct"}
+    return {"code": "200", "msg": "all correct"}
 
 
 def login_view(request):
@@ -125,7 +125,7 @@ def register_view(request):
             user.save()
             user_info = UserInfo(user=user,DOB=datetime.now())
             user_info.save()
-            return render(request, 'visualization0.1.html')
+            return redirect('/som/')
         else:
             return render(request, 'register.html', verify)
 
