@@ -10,6 +10,6 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http40
 def redirect_view(request):
     if request.method == "GET":
         if request.user.is_authenticated:
-            return redirect('/som/')
+            return redirect('/publish/list')
         else:
             return redirect('/user/login')
