@@ -181,7 +181,7 @@ class Profile_view_test(TestCase):
         # user_ob = User.objects.get(pk=1)
         # current_user = UserInfo.objects.get(user=user_ob)
 
-class UpdateUser_test(TestCase):
+#class UpdateUser_test(TestCase):
 
 
 
