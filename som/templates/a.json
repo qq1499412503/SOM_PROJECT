@@ -1,0 +1,8 @@
+{
+  "nodes":[
+    {"x": 1,"y": 2,"color": "#fffff"},
+    {"x": 10,"y": 21,"color": "#fffff"},
+    {"x": 34,"y": 21,"color": "#fffff"}
+
+  ]
+}
