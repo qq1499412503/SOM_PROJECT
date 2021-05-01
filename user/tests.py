@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from .models import UserInfo
 from django.core.exceptions import ValidationError
 from django.http import QueryDict
+from som.models import dataframe
+from bson.objectid import ObjectId
 import datetime
 # Create your tests here.
 
@@ -45,7 +47,7 @@ class Pagetest(TestCase):
             print(user.id)
         except User.DoesNotExist:
             self.assertRaises(ValidationError)
-        #self.assertEqual(user.password, password)？
+
 
 class ApiTestCase(TestCase):
     def setUp(self):
@@ -74,8 +76,6 @@ class ApiTestCase(TestCase):
                 print(eval(key))
             print(qdic)
             response2 = self.client.post(url,qdic)
-
-            #
             data = response2.json()
             self.assertEqual(data['code'], '200')
             #confirm update
@@ -172,13 +172,31 @@ class Register_Test(TestCase):
 class Profile_view_test(TestCase):
 
     def setUp(self):
-        User.objects.create_user('admin', 'admin@email.com', 'admin123456')
+        user = User.objects.create_user('admin', 'admin@email.com', 'admin123456')
+        user.save()
+        user_info = UserInfo(user=user, DOB=datetime.datetime.now())
+        user_info.save()
         self.client = Client()
-        #user = User.is_authenticated
 
     def test_profile_view(self):
+        response_login = self.client.post('/user/login/',{'email':"admin@email.com",'password':"admin123456"})
         response = self.client.get('/user/profile/')
-        self.assertEqual(response.status_code, 404)
+        uid = User.objects.get(email = "admin@email.com").id
+        data = dataframe.objects.filter(uid=uid).order_by('-time')[:5]
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'profile.html')
+        self.assertEqual(list(data),list(response.context['data']))
+
+    # def test_profile_post(self):
+    #     response_login = self.client.post('/user/login/',{'email': "admin@email.com", 'password': "admin123456"})
+    #     response = self.client.post('/user/profile/',{'name':"spike"})
+    #     data_id = ObjectId(response)
+    #     current_object = dataframe.objects.get(_id=data_id)
+    #     file_name = current_object.file_name
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'view.html')
+    #     self.assertEqual(file_name, response.context['file_name'])
+
         # data = response.json()
         # self.assertEqual(data['code'], '200')
         # user_ob = User.objects.get(pk=1)
@@ -194,10 +212,6 @@ class Logout_test(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
 
-    def test_logout_post(self):
-        response = self.client.post('/user/logout')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'login.html')
 
 
 

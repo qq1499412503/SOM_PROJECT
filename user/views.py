@@ -91,7 +91,7 @@ def check_error_register(username, email, password):
         pass
     else:
         return {"code": "555", "msg": "password error"}
-    return {"code": "666", "msg": "all correct"}
+    return {"code": "200", "msg": "all correct"}
 
 
 def login_view(request):
