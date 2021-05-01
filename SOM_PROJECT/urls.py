@@ -20,6 +20,7 @@ from django.views.static import serve
 from .settings import MEDIA_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^$', include('redirect.urls', namespace='redirect')),
     url(r'^som/', include('som.urls', namespace='som')),
     url(r'^user/', include('user.urls', namespace='user')),
     url(r'^publish/', include('publish.urls', namespace='publish')),

@@ -125,7 +125,8 @@ def register_view(request):
             user.save()
             user_info = UserInfo(user=user,DOB=datetime.now())
             user_info.save()
-            return render(request, 'visualization0.1.html')
+            login(request, user)
+            return redirect('/som/')
         else:
             return render(request, 'register.html', verify)
 
