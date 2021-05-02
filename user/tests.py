@@ -165,9 +165,9 @@ class Register_Test(TestCase):
 
     def test_register_success(self):
         test_data = {'username': 'test', 'password': 'admin123456', 'email': 'test@email.com'}
-        response = self.client.post(path = '/user/register/', data=test_data)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["code"], "666")
+        response = self.client.post('/user/register/', data=test_data)
+        self.assertEqual(response.status_code, 302)
+        #self.assertEqual(response.context["code"], "200")？
 
 class Profile_view_test(TestCase):
 
@@ -187,20 +187,17 @@ class Profile_view_test(TestCase):
         self.assertTemplateUsed(response, 'profile.html')
         self.assertEqual(list(data),list(response.context['data']))
 
-    # def test_profile_post(self):
-    #     response_login = self.client.post('/user/login/',{'email': "admin@email.com", 'password': "admin123456"})
-    #     response = self.client.post('/user/profile/',{'name':"spike"})
-    #     data_id = ObjectId(response)
-    #     current_object = dataframe.objects.get(_id=data_id)
-    #     file_name = current_object.file_name
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'view.html')
-    #     self.assertEqual(file_name, response.context['file_name'])
-
-        # data = response.json()
-        # self.assertEqual(data['code'], '200')
-        # user_ob = User.objects.get(pk=1)
-        # current_user = UserInfo.objects.get(user=user_ob)
+    def test_profile_post(self):
+        response_login = self.client.post('/user/login/',{'email': "admin@email.com", 'password': "admin123456"})
+        dataframe.objects.create(file_name="som_1")
+        data_id = ObjectId(dataframe.objects.create(file_name="som_1")._id)
+        current_object = dataframe.objects.get(_id=data_id)
+        file_name = current_object.file_name
+        dic = {'did':data_id, 'name':file_name}
+        response = self.client.post('/user/profile/',dic)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'view.html')
+        self.assertIn('som_1'.encode('UTF-8'), response.content)
 
 class Logout_test(TestCase):
 
@@ -211,6 +208,8 @@ class Logout_test(TestCase):
         response = self.client.get('/user/logout')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
+
+
 
 
 

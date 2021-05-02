@@ -13,6 +13,7 @@ class SomTestCase(TestCase):
         url = '/som/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'visualization0.1.html')
 
 # class ApiTestCase(TestCase):
 #     def setUp(self):
@@ -30,9 +31,14 @@ class ProjectTest(TestCase):
         dataframe.objects.create(file_name="som_project")
 
     def test_create(self):
-        dataframe.objects.create(file_name="som_1")
+        dataframe.objects.create(file_name="som_1", author = "spike", uid = 2, description= "this is a test",x = 5, y= 8)
         d = dataframe.objects.get(file_name="som_1")
         self.assertEqual(d.file_name, "som_1")
+        self.assertEqual(d.author, "spike")
+        self.assertEqual(d.uid, 2)
+        self.assertEqual(d.description, "this is a test")
+        self.assertEqual(d.x, 5)
+        self.assertEqual(d.y, 8)
 
     def test_delete(self):
         d = dataframe.objects.get(file_name="som_project")
@@ -47,14 +53,7 @@ class ProjectTest(TestCase):
         result = dataframe.objects.get(file_name="som_update")
         self.assertEqual(result.file_name, "som_update")
 
-class visualPagetest(TestCase):
-
-    def test_visual_page_template(self):
-        response = self.client.get('/som/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'visualization0.1.html')
-
-class views_som_model_test(TestCase):
+class Views_som_model_test(TestCase):
 
     def setUp(self):
         self.client = Client()
@@ -72,17 +71,27 @@ class views_som_model_test(TestCase):
         test_data = {'name': 'somtest1', "attribute": "100", "size": "2000"}
         response = self.client.post(self.url, data = test_data)
         self.assertEqual(response.status_code, 200)
+        #self.assertTemplateUsed(response, 'upload.html')
 
-
-class user_query_test(TestCase):
+class Test_test(TestCase):
 
     def setUp(self):
         self.client = Client()
 
-    def test_models_som_model(self):
-        url = '/som/user_query_info/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 405)
+    def test_logout_get(self):
+        response = self.client.get('/som/test')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'visual.html')
+
+class TT_test(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_logout_get(self):
+        response = self.client.get('/som/tt')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'test.html')
 
 
 
