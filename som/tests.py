@@ -5,6 +5,7 @@ from django.test import Client
 from django.urls import reverse, resolve
 
 
+
 class SomTestCase(TestCase):
     def setUp(self):
        self.client = Client()
