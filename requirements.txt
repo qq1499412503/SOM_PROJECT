@@ -4,3 +4,4 @@ djongo
 MiniSom
 django
 djangorestframework
+matplotlib
