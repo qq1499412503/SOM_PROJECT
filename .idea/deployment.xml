@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="som" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" serverName="som" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="som">
         <serverdata>
@@ -9,14 +9,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="whatever">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/SOM_PROJECT" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
     </serverData>
-    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

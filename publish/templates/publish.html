@@ -40,11 +40,7 @@
     <script src="{% static 'js/scripts/axure/jquery.nicescroll.min.js' %}"></script>
     <script src="{% static 'js/document.js' %}"></script>
     <script src="{% static 'js/data.js' %}"></script>
-    <script type="text/javascript">
-      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
-      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
-      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
-    </script>
+
   </head>
   <body>
     <div id="base" class="">
@@ -176,6 +172,39 @@
           <p><span>VISUALIZATION FORUM </span></p>
         </div>
       </div>
+
+      <div id="p58" class="ax_default link_button" style="visibility: hidden">
+        <img id="p58_img" class="img " src="/media/image/p58.svg"/>
+        <div id="p58_text" class="text ">
+        <p><input type="submit" id="Last" form="pages_last" hidden/>
+          <label for="Last">Previous Page</label></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="p59" class="ax_default link_button">
+        <img id="p59_img" class="img " src="/media/image/p58.svg"/>
+        <div id="p59_text" class="text ">
+        <p><input type="submit" id="Next" form="pages_next" hidden/>
+          <label for="Next">Next Page</label></p>
+        </div>
+      </div>
+
+      <form id="pages_next" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+      <input id="page_n" name="page_n" value="{{ page }}" hidden/>
+      </form>
+
+      <form id="pages_last" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+      <input id="page_l" name="page_l" value="{{ page }}" hidden/>
+      </form>
+
+<script>
+  if (parseInt("{{ page }}")>0){ $('#p58').css('visibility','visible'); }
+  else { $('#p58').css('visibility','hidden'); }
+</script>
+
     </div>
     <script src="{% static 'js/scripts/axure/ios.js' %}"></script>
   </body>
