@@ -17,6 +17,8 @@ class Publish_Test(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'publish.html')
         self.assertEqual(list(data), list(response.context['data']))
+        # try
+        # except userdoesnotexsited
 
     def test_publish_post(self):
         dataframe.objects.create(file_name="som_1")
