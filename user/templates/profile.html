@@ -617,7 +617,47 @@
                   </div>
                 </div>
                 {% endfor %}
+                <div id="u75" class="ax_default link_button" style="visibility: hidden">
+                <div id="u75_div" class=""></div>
+                <div id="u75_text" class="text ">
+        <p><input type="submit" id="Last" form="pages_last" hidden/>
+          <label for="Last">Previous Page</label></p>
+                </div>
               </div>
+
+              <!-- Unnamed (Rectangle) -->
+              <div id="u76" class="ax_default link_button">
+                <div id="u76_div" class=""></div>
+                <div id="u76_text" class="text ">
+        <p><input type="submit" id="Next" form="pages_next" hidden/>
+          <label for="Next">Next Page</label></p>
+                </div>
+              </div>
+
+      <form id="pages_next" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+      <input id="page_n" name="page_n" value="{{ page }}" hidden/>
+      </form>
+
+      <form id="pages_last" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+      <input id="page_l" name="page_l" value="{{ page }}" hidden/>
+      </form>
+
+              </div>
+              <script>
+                function load()  {
+                  if (parseInt("{{ page }}")>0){
+                    $('#u75').css('visibility','visible');
+                  }
+                if ("{{ show_data }}" == "True"){
+                  document.getElementById("u10").click();
+
+                }}
+                $(document).ready(function() {load()});
+              </script>
+
+
             </div>
           </div>
         </div>
