@@ -20,9 +20,10 @@ class QueryUserInfo(APIView):
             # print(keydict)
             data_id = ObjectId(str(keydict["data_id"]))
             current_object = dataframe.objects.get(_id=data_id)
-            df = load_data(current_object.data)
+            df, lb = load_data(current_object.data)
             models = Som()
             models.read_data(df)
+            models.read_label(lb)
             # print(models.data)
             try:
                 x = int(keydict["x"])
