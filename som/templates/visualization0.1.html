@@ -757,6 +757,52 @@ function process_point(){
     }
     return points;
 }
+
+
+function process_point_plus(){
+    var points = [];
+    for (var i = 0; i < MapRows; i++) {
+        for (var j = 0; j < MapColumns; j++) {
+            var x = hexRadius * j * Math.sqrt(3)
+            var wx = hexRadius * MapColumns * Math.sqrt(3)
+            var wy = hexRadius * MapRows * 1.5
+
+            if((MapColumns%2 == 0 && MapRows%2 == 0 )||(MapRows%2 == 0)){var bx = 0} else {var bx = (hexRadius * Math.sqrt(3))/2;}
+            if(i%2 === 1) x += (hexRadius * Math.sqrt(3))/2
+            var y = hexRadius * i * 1.5
+            var color =  getValue()['nodes'][i][j]
+            var weights = getValue()['weights'][i][j]
+            var label = getValue()['label'][i][j]
+            // points.push([x,y,color])
+          points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+wx,"y": y,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-wx,"y": y,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+2*wx,"y": y,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-2*wx,"y": y,"color": color,"weights":weights,"label":label})
+          points.push({"x": x,"y": y+2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x,"y": y-2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+2*wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-2*wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-2*wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+2*wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+2*wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-2*wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x-2*wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
+          points.push({"x": x+2*wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
+        }
+    }
+    return points;
+}
     // var point = get_point();
 
 
@@ -812,10 +858,10 @@ function moveMap(d){
   var translate = getTranslation(d3.select(this).attr("transform"));
       x = d3.event.dx+translate[0];
       y = d3.event.dy+translate[1];
-      x = Math.max(Math.min(-width1*0.9),Math.min(-width1*0.9),x);
-      x = Math.min(Math.max(width1*0.9),Math.max(width1*0.9),x);
-      y = Math.max(Math.min(-width1*0.77),Math.min(-width1*0.77),y);
-      y = Math.min(Math.max(width1*0.85),Math.max(width1*0.85),y);
+      x = Math.max(Math.min(-width1*1.9),Math.min(-width1*1.9),x);
+      x = Math.min(Math.max(width1*1.9),Math.max(width1*1.9),x);
+      y = Math.max(Math.min(-width1*1.5),Math.min(-width1*1.5),y);
+      y = Math.min(Math.max(width1*1.5),Math.max(width1*1.5),y);
       g.selectAll("path")
       .attr("transform", "translate(" + x + "," + y + ")");
       g.selectAll("text")
@@ -910,7 +956,7 @@ function mouseOut(d, i) {
       a.classed('tooltip', true);
 
       // var point = get_point();
-      var point = process_point();
+      var point = process_point_plus();
 
       g.append("clipPath")
       .attr("id", "clip")
@@ -933,7 +979,7 @@ function mouseOut(d, i) {
 	})
       .attr("stroke-width", "1px")
       .attr("fill", function(d){ return d.color; })
-              .attr("transform","translate("+(width1)/16+","+(height1)/16+")")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
       .call(_drag)
         .on('mouseover', mouseOver)
         .on('mouseout', mouseOut)

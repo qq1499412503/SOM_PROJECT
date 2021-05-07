@@ -108,14 +108,19 @@ class Som:
         if self.label is not None:
             for each_data in self.data:
                 winner = self.model_som.winner(each_data)
+                # print(winner)
+                # print(str(self.label[d_count]))
+                # print('-----------------')
                 sub_str = main_winner[winner[0]][winner[1]] + str(self.label[d_count])
-                sub_list = [' ' for a in range(self.x)]
+
+                sub_list = main_winner[winner[0]][:]
                 sub_list[winner[1]] = sub_str
+                # print(sub_list)
                 main_winner[winner[0]] = sub_list
                 main_winner[winner[0]][winner[1]] += ' '
                 d_count += 1
             map['label'] = main_winner
-            print(main_winner)
+            # print(main_winner)
         return map
 
 
