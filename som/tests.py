@@ -26,8 +26,7 @@ class ApiTestCase(TestCase):
     def setUp(self):
         self.code = 'api'
 
-    def test_sample_api_test_case(self):
-        url = '/som/user_query_info'
+
         # data1 = [[0.80, 0.55, 0.22, 0.03],
         #         [0.82, 0.50, 0.23, 0.03],
         #         [0.80, 0.54, 0.22, 0.03],
@@ -37,31 +36,32 @@ class ApiTestCase(TestCase):
         #         [0.77, 0.59, 0.22, 0.03],
         #         [0.1, 0.2, 0.3, 0.01]]
         # data = np.array(data1)
+    # def test_sample_api_test_case(self):
+    #     url = '/som/user_query_info'
+    #     with open('som_model.py') as fp:
+    #         response = self.client.post(url, { 'df': fp})
+    #         self.assertEqual(response.status_code,200)
 
-        dataframe.objects.create(file_name="som_1")
-        data_id = ObjectId(dataframe.objects.get(file_name="som_1")._id)
-        current_object = dataframe.objects.get(_id=data_id)
-        df = load_data(current_object.data)
-        x = 5
-        y = 5
-        length = 100
-        sigmas = 0.2
-        lr = 0.01
-        iteration = 200
-        neighbour = "gaussian"
-        topology = "rectangular"
-        activation = "euclidean"
-        randoms = 0.2
-
-        dic = {"data_id": data_id, "x": x, "y": y, "length": length, "sigmas": sigmas, "lr": lr,"iteration":iteration, "neighbour": neighbour,
-               "topology":topology, "activation":activation , "randoms":randoms , "data":df}
-        qdic = QueryDict.dict({str(dic): ""})
-
-        response = self.client.post(url, qdic)
-        data = response.json()
-        self.assertEqual(data['code'], '200')
-        self.assertEqual(data['msg'], 'successful')
-
+        # x = 5
+        # y = 5
+        # length = 100
+        # sigmas = 0.2
+        # lr = 0.01
+        # iteration = 200
+        # neighbour = "gaussian"
+        # topology = "rectangular"
+        # activation = "euclidean"
+        # randoms = 0.2
+        #
+        # dic = {"data_id": data_id, "x": x, "y": y, "length": length,
+        #        "sigmas": sigmas, "lr": lr,"iteration":iteration, "neighbour": neighbour,
+        #        "topology":topology, "activation":activation , "randoms":randoms , "data":df}
+        # qdic = QueryDict.dict({str(dic): ""})
+        #
+        # response = self.client.post(url, qdic)
+        # data = response.json()
+        # self.assertEqual(data['code'], '200')
+        # self.assertEqual(data['msg'], 'successful')
 
     def test_save_map(self):
         url = '/som/save_map'
@@ -78,7 +78,8 @@ class ApiTestCase(TestCase):
             author = "spike"
             vis_name = "som_project1"
             description = "this is a test"
-            dic = {"user_id": uid,"data_id":data_id, "author": author, "vis_name": vis_name, "description": description}
+            dic = {"user_id": uid,"data_id":data_id, "author": author,
+                   "vis_name": vis_name, "description": description}
             qdic = QueryDict.dict({str(dic): ""})
 
             response = self.client.post(url, qdic)
@@ -118,13 +119,15 @@ class ApiTestCase(TestCase):
             author = "spike"
             vis_name = "som_project1"
             description = "this is a test"
-            dic = {"user_id": uid, "data_id": data_id, "author": author, "vis_name": vis_name,
+            dic = {"user_id": uid, "data_id": data_id,
+                   "author": author, "vis_name": vis_name,
                    "description": description}
             qdic = QueryDict.dict({str(dic): ""})
 
             response = self.client.post(url, qdic)
             data = response.json()
             self.assertEqual(data['code'], '200')
+            self.assertEqual(data['msg'], 'successful')
 
             # confirm update
             user = User.objects.get(pk=uid)

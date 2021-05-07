@@ -195,7 +195,8 @@ class Profile_view_test(TestCase):
         self.assertEqual(list(data),list(response.context['data']))
 
     def test_profile_post(self):
-        response_login = self.client.post('/user/login/',{'email': "admin@email.com", 'password': "admin123456"})
+        response_login = self.client.post('/user/login/',
+                                          {'email': "admin@email.com", 'password': "admin123456"})
         dataframe.objects.create(file_name="som_1")
         data_id = ObjectId(dataframe.objects.get(file_name="som_1")._id)
         current_object = dataframe.objects.get(_id=data_id)
