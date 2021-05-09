@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from user.models import UserInfo
 import datetime
 from django.test import Client
+from django.urls import reverse, resolve
+from . import views
 # Create your tests here.
 class Redirect_test(TestCase):
 
@@ -13,13 +15,15 @@ class Redirect_test(TestCase):
         user_info.save()
         self.client = Client()
 
-    def test_redirect(self):
+    def test_redirect_return_to_publish(self):
         response_login = self.client.post('/user/login/', {'email': "admin@email.com", 'password': "admin123456"})
-        response = self.client.get('/publish/list')
-        self.assertEqual(response.status_code, 301)
-        #self.assertTemplateUsed(response, 'publish.html')
+        url = reverse('redirect:redirect')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/publish/list')
 
-    # def test_redirect_failed(self):
-    #     response = self.client.get('/publish/list')
-    #     self.assertEqual(response.status_code, 301)
-    #     self.assertTemplateUsed(response, 'login.html')
+    def test_redirect_return_to_login(self):
+        url = reverse('redirect:redirect')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/user/login')
