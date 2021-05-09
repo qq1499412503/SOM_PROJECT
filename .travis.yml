@@ -1,6 +1,5 @@
 language: python # language
 python: # python version
-  - "3.6"
   - "3.8"
 services: # DB we use nosql
   - mongodb
