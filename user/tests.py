@@ -33,6 +33,8 @@ class Pagetest(TestCase):
             print(user.id)
         except User.DoesNotExist:
             self.assertRaises(ValidationError)
+        self.assertEqual(response2.status_code, 200)
+
 
     def test_register_page(self):
         response = self.client.get('/user/register/')
@@ -41,7 +43,8 @@ class Pagetest(TestCase):
         username = "test"
         email = "test@email.com"
         password = "test1234"
-        response2 = self.client.post('/user/register/', {"username": username, "email": email, "password": password})
+        response2 = self.client.post('/user/register/',
+                                     {"username": username, "email": email, "password": password})
         try:
             user = User.objects.get(username=username)
             self.assertEqual(user.username, username)
@@ -49,6 +52,8 @@ class Pagetest(TestCase):
             print(user.id)
         except User.DoesNotExist:
             self.assertRaises(ValidationError)
+        self.assertRedirects(response2, '/som/', status_code=302,
+                             target_status_code=200, fetch_redirect_response=True)
 
 
 class ApiTestCase(TestCase):
@@ -64,7 +69,7 @@ class ApiTestCase(TestCase):
             User.objects.create_user(username1, email1, password1)
             user = User.objects.get(username="test1")
             uid = user.id
-            print(uid)
+            #print(uid)
             username = "test2"
             email = "test2@email.com"
             phone_number = "0426276721"
@@ -73,10 +78,10 @@ class ApiTestCase(TestCase):
             user_info.save()
             dic = {"user_id": uid, "username": username, "email": email, "phone_number": phone_number, "DOB": DOB}
             qdic = QueryDict.dict({str(dic):""})
-            for key in qdic:
-                print(key)
-                print(eval(key))
-            print(qdic)
+            # for key in qdic:
+            #     print(key)
+            #     print(eval(key))
+            # print(qdic)
             response2 = self.client.post(url,qdic)
             data = response2.json()
             self.assertEqual(data['code'], '200')
@@ -169,7 +174,7 @@ class Register_Test(TestCase):
         test_data = {'username': 'test', 'password': 'admin123456', 'email': 'test@email.com'}
         response = self.client.post('/user/register/', data=test_data)
         self.assertEqual(response.status_code, 302)
-        #self.assertEqual(response.context["code"], "200")？
+
 
 class Profile_view_test(TestCase):
 
@@ -190,9 +195,10 @@ class Profile_view_test(TestCase):
         self.assertEqual(list(data),list(response.context['data']))
 
     def test_profile_post(self):
-        response_login = self.client.post('/user/login/',{'email': "admin@email.com", 'password': "admin123456"})
+        response_login = self.client.post('/user/login/',
+                                          {'email': "admin@email.com", 'password': "admin123456"})
         dataframe.objects.create(file_name="som_1")
-        data_id = ObjectId(dataframe.objects.create(file_name="som_1")._id)
+        data_id = ObjectId(dataframe.objects.get(file_name="som_1")._id)
         current_object = dataframe.objects.get(_id=data_id)
         file_name = current_object.file_name
         dic = {'did':data_id, 'name':file_name}

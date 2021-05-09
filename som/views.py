@@ -11,7 +11,6 @@ from .models import dataframe
 import time
 import json
 
-
 class QueryUserInfo(APIView):
 
     def post(self, request):
