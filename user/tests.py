@@ -240,6 +240,7 @@ class Profile_view_test(TestCase):
         self.assertEqual(list(data), list(response.context['data']))
         self.assertEqual(list(str(page+1)), list(response.context['page']))
 
+
     def test_profile_post_pagel(self):
         response_login = self.client.post('/user/login/',
                                           {'email': "admin@email.com", 'password': "admin123456"})
