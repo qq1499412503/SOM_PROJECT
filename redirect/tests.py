@@ -6,6 +6,7 @@ from django.test import Client
 from django.urls import reverse, resolve
 from . import views
 # Create your tests here.
+
 class Redirect_test(TestCase):
 
     def setUp(self):

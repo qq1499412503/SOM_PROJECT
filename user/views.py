@@ -101,9 +101,9 @@ def login_view(request):
         username = get_user(request.POST['email'])
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        print(user)
+        #print(user)
         if user is not None:
-            print('yes')
+            #print('yes')
             login(request, user)
 
             return redirect('/som/')
@@ -129,6 +129,7 @@ def register_view(request):
             return redirect('/som/')
         else:
             return render(request, 'register.html', verify)
+
 
 
 def profile_view(request):
@@ -161,22 +162,22 @@ def profile_view(request):
             return render(request, 'view.html', content)
         elif 'page_n' in request.POST:
             page = int(request.POST["page_n"])
-            data = dataframe.objects.filter(publish=True).order_by('-time')[(1 + page) * 5:(2 + page) * 5]
+            data = dataframe.objects.filter(uid = uid).order_by('-time')[(1 + page) * 5:(2 + page) * 5]
             if len(data) > 0:
                 content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data": data, "page": str(page + 1), "show_data":"True"}
                 return render(request, 'profile.html', content)
             else:
-                data = dataframe.objects.filter(publish=True).order_by('-time')[page * 5:(1 + page) * 5]
+                data = dataframe.objects.filter(uid = uid).order_by('-time')[page * 5:(1 + page) * 5]
                 content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data": data, "page": str(page), "show_data":"True"}
                 return render(request, 'profile.html', content)
         elif 'page_l' in request.POST:
             page = int(request.POST["page_l"])
-            data = dataframe.objects.filter(publish=True).order_by('-time')[(page - 1) * 5:page * 5]
+            data = dataframe.objects.filter(uid = uid).order_by('-time')[(page - 1) * 5:page * 5]
             if len(data) > 0:
                 content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data": data, "page": str(page - 1), "show_data":"True"}
                 return render(request, 'profile.html', content)
             else:
-                data = dataframe.objects.filter(publish=True).order_by('-time')[page * 5:(1 + page) * 5]
+                data = dataframe.objects.filter(uid = uid).order_by('-time')[page * 5:(1 + page) * 5]
                 content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data": data, "page": str(page), "show_data":"True"}
                 return render(request, 'profile.html', content)
 

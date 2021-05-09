@@ -16,11 +16,6 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 import io
 
 
-
-
-
-
-
 class SomTestCase(TestCase):
     def setUp(self):
        self.client = Client()
