@@ -1,0 +1,25 @@
+[run]
+branch = True
+source = .
+omit =
+   _credentials.py
+   manage.py
+   scripts/fake.py
+   */migrations/*
+   publish/apps.py
+   coveragerc.py
+   redirect/admin.py
+   redirect/models.py
+   redirect/apps.py
+   som/apps.py
+   som/data_sample.py
+   som/tests.py
+   user/apps.py
+   user/tests.py
+   som/upload.py
+   SOM_PROJECT/wsgi.py
+
+
+[report]
+show_missing = True
+skip_covered = True
