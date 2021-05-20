@@ -14,7 +14,7 @@ from bokeh.io import curdoc, show, output_notebook
 from bokeh.transform import factor_mark, factor_cmap
 from bokeh.models import ColumnDataSource, HoverTool
 from bokeh.plotting import figure, output_file
-
+from .ecsom import *
 #
 #
 # for centroid in som.get_weights():
@@ -66,11 +66,11 @@ class Som:
 
     def model(self):
         if self.random_seed is not None:
-            self.model_som = MiniSom(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma, learning_rate=self.lr,
+            self.model_som = Mm(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma, learning_rate=self.lr,
                                      neighborhood_function=self.neighborhood_function,topology=self.topology,
                                      activation_distance=self.activation_distance,random_seed=self.random_seed)
         else:
-            self.model_som = MiniSom(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma,
+            self.model_som = Mm(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma,
                                      learning_rate=self.lr,
                                      neighborhood_function=self.neighborhood_function, topology=self.topology,
                                      activation_distance=self.activation_distance)
@@ -95,7 +95,7 @@ class Som:
                 weight_raw = weights[i,j].tolist()
                 weight_process = ""
                 for w in weight_raw:
-                    weight_process = weight_process + str(w) + ' '
+                    weight_process = weight_process + str(w) + ', '
                 sub_weight.append(weight_process)
             nodes.append(sub_nodes)
             weight.append(sub_weight)

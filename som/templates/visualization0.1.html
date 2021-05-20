@@ -569,6 +569,84 @@
         </div>
       </div>
 
+            <div id="u60" class="ax_default box_1">
+        <div id="u60_div" class=""></div>
+        <div id="u60_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+              <div id="u54" class="ax_default table_cell">
+          <img id="u54_img" class="img " src="/media/image/ua54.png"/>
+          <div id="u54_text" class="text " style="display:none; visibility: hidden">
+            <p></p>
+          </div>
+        </div>
+
+       <div id="u55" class="ax_default table_cell">
+          <img id="u55_img" class="img " src="/media/image/ua55.png"/>
+          <div id="u55_text" class="text ">
+            <p><span>Value</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="u56" class="ax_default table_cell">
+          <img id="u56_img" class="img " src="/media/image/ua56.png"/>
+          <div id="u56_text" class="text ">
+            <p><span>Color</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="u57" class="ax_default table_cell">
+          <img id="u57_img" class="img " src="/media/image/ua57.png"/>
+          <div id="u57_text" class="text " >
+            <select class="form-control" id="color" name="color" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;">
+              <option>blue</option>
+              <option>red</option>
+              <option>green</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="u58" class="ax_default table_cell">
+          <img id="u58_img" class="img " src="/media/image/ua58.png"/>
+          <div id="u58_text" class="text ">
+            <p><span>Font size</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="u59" class="ax_default table_cell">
+          <img id="u59_img" class="img " src="/media/image/ua59.png"/>
+          <div id="u59_text" class="text ">
+            <input type="text" id="font_size" name="font_size" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: None (int)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+
+
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u61" class="ax_default box_1">
+        <div id="u61_div" class=""></div>
+        <div id="u61_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u62" class="ax_default box_1">
+        <div id="u62_div" class=""></div>
+        <div id="u62_text" class="text " >
+          <p></p>
+        </div>
+      </div>
+
+      </div>
 
         <!-- save button -->
         <div id="mv53" style="background-color:#FFFFFF;border: thin solid black;visibility:hidden;">
@@ -729,99 +807,6 @@ function get_point(){
     return points;
 }
 
-function process_point(){
-    var points = [];
-    for (var i = 0; i < MapRows; i++) {
-        for (var j = 0; j < MapColumns; j++) {
-            var x = hexRadius * j * Math.sqrt(3)
-            var wx = hexRadius * MapColumns * Math.sqrt(3)
-            var wy = hexRadius * MapRows * 1.5
-
-            if((MapColumns%2 == 0 && MapRows%2 == 0 )||(MapRows%2 == 0)){var bx = 0} else {var bx = (hexRadius * Math.sqrt(3))/2;}
-            if(i%2 === 1) x += (hexRadius * Math.sqrt(3))/2
-            var y = hexRadius * i * 1.5
-            var color =  getValue()['nodes'][i][j]
-            var weights = getValue()['weights'][i][j]
-            var label = getValue()['label'][i][j]
-            // points.push([x,y,color])
-          points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-        }
-    }
-    return points;
-}
-
-
-function process_point_plus(){
-    var points = [];
-    for (var i = 0; i < MapRows; i++) {
-        for (var j = 0; j < MapColumns; j++) {
-            var x = hexRadius * j * Math.sqrt(3)
-            var wx = hexRadius * MapColumns * Math.sqrt(3)
-            var wy = hexRadius * MapRows * 1.5
-
-            if((MapColumns%2 == 0 && MapRows%2 == 0 )||(MapRows%2 == 0)){var bx = 0} else {var bx = (hexRadius * Math.sqrt(3))/2;}
-            if(i%2 === 1) x += (hexRadius * Math.sqrt(3))/2
-            var y = hexRadius * i * 1.5
-            var color =  getValue()['nodes'][i][j]
-            var weights = getValue()['weights'][i][j]
-            var label = getValue()['label'][i][j]
-            // points.push([x,y,color])
-          points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+2*wx,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-2*wx,"y": y,"color": color,"weights":weights,"label":label})
-          points.push({"x": x,"y": y+2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x,"y": y-2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+2*wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-2*wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-2*wx-bx,"y": y+wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+2*wx-bx,"y": y-wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+2*wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-2*wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x-2*wx,"y": y+2*wy,"color": color,"weights":weights,"label":label})
-          points.push({"x": x+2*wx,"y": y-2*wy,"color": color,"weights":weights,"label":label})
-        }
-    }
-    return points;
-}
-    // var point = get_point();
-
-
-    // var x = d3.scaleLinear()
-    //     .domain([0, width/100])
-    //     .range([0, width]);
-    //
-    // var y = d3.scaleLinear()
-    //     .domain([0, height/100])
-    //     .range([height, 0]);
-
-    // var xAxis =l.append("g")
-    //     .attr("class", "axis axis--x")
-    //     .attr("transform", "translate(0," + height + ")")
-    //     .call(d3.axisBottom(x));
-    //
-    // var yAxis = l.append("g")
-    //     .attr("class", "axis axis--y")
-    //     .call(d3.axisLeft(y));
 
     var _zoom = d3.zoom()
       .scaleExtent([.5, 20])
@@ -837,10 +822,6 @@ function getTranslation(transform) {
 
 
     var _drag = d3.drag()
-    //  .subject(function() {
-    //     var t = d3.select(this);
-    //     return {x: t.node().getBBox().x, y: t.node().getBBox().y};
-    // })
       .on("drag",moveMap);
 
 
@@ -853,21 +834,441 @@ function getTranslation(transform) {
 
 
 
+function right_r(d){
+  // var d = get_point();
+  var dm = Math.max.apply(Math, d.map(function(d) { return d.x; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].x !== dm){
+      target.push(d[i]);
+      // alert(d[i].x);
+    }
+  }
 
+  return target
+
+}
+function left_l(d){
+  // var d = get_point();
+  var dm = Math.min.apply(Math, d.map(function(d) { return d.x; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].x !== dm){
+      target.push(d[i]);
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+function right_l(d){
+  // var d = get_point();
+  var dm = Math.max.apply(Math, d.map(function(d) { return d.x; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].x === dm){
+      target.push({"x": d[i].x-hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+function left_r(d){
+  // var d = get_point();
+  var dm = Math.min.apply(Math, d.map(function(d) { return d.x; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].x === dm){
+      target.push({"x": d[i].x+hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+
+function up_b(d){
+  // var d = get_point();
+  var dm = Math.min.apply(Math, d.map(function(d) { return d.y; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].y === dm){
+      target.push({"x": d[i].x,"y": d[i].y+hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+
+function up_u(d){
+  // var d = get_point();
+  var dm = Math.min.apply(Math, d.map(function(d) { return d.y; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].y !== dm){
+      target.push(d[i]);
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+
+function down_u(d){
+  // var d = get_point();
+  var dm = Math.max.apply(Math, d.map(function(d) { return d.y; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].y === dm){
+      target.push({"x": d[i].x,"y": d[i].y-hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+
+function down_b(d){
+  // var d = get_point();
+  var dm = Math.max.apply(Math, d.map(function(d) { return d.y; }));
+  var target = [];
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].y !== dm){
+      target.push(d[i]);
+      // alert(d[i].x);
+    }
+  }
+
+  return target
+
+}
+
+function update_data(d,ar){
+  var target = [];
+  if(ar === 'r'){
+  var dm = Math.max.apply(Math, d.map(function(d) { return d.x; }));
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].x === dm){
+      target.push({"x": d[i].x-hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }else{
+      target.push(d[i]);
+    }
+  }
+  }
+  else if(ar === 'l'){
+  var dm = Math.min.apply(Math, d.map(function(d) { return d.x; }));
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].x === dm){
+      target.push({"x": d[i].x+hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }else{
+      target.push(d[i]);
+    }
+  }
+  }
+    else if(ar === 'u'){
+  var dm = Math.min.apply(Math, d.map(function(d) { return d.y; }));
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].y === dm){
+      target.push({"x": d[i].x,"y": d[i].y+hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }else{
+      target.push(d[i]);
+    }
+  }
+  }
+        else if(ar === 'd'){
+  var dm = Math.max.apply(Math, d.map(function(d) { return d.y; }));
+  for (var i = 0; i < d.length; i++){
+    // alert(i);
+    if (d[i].y === dm){
+      target.push({"x": d[i].x,"y": d[i].y-hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      // alert(d[i].x);
+    }else{
+      target.push(d[i]);
+    }
+  }
+  }
+  return target
+}
+
+var init_dt;
+
+
+
+
+var initx = 34.78;
+var w;
+var h;
+var inity = 31.03;
 function moveMap(d){
   var translate = getTranslation(d3.select(this).attr("transform"));
       x = d3.event.dx+translate[0];
       y = d3.event.dy+translate[1];
-      x = Math.max(Math.min(-width1*1.9),Math.min(-width1*1.9),x);
-      x = Math.min(Math.max(width1*1.9),Math.max(width1*1.9),x);
-      y = Math.max(Math.min(-width1*1.5),Math.min(-width1*1.5),y);
-      y = Math.min(Math.max(width1*1.5),Math.max(width1*1.5),y);
+      // x = Math.max(Math.min(-width1*1.9),Math.min(-width1*1.9),x);
+      // x = Math.min(Math.max(width1*1.9),Math.max(width1*1.9),x);
+      // y = Math.max(Math.min(-width1*1.5),Math.min(-width1*1.5),y);
+      // y = Math.min(Math.max(width1*1.5),Math.max(width1*1.5),y);
       g.selectAll("path")
       .attr("transform", "translate(" + x + "," + y + ")");
       g.selectAll("text")
       .attr("transform", "translate(" + x + "," + y + ")");
+      console.log(y);
+      // ssss
+  // while (x-initx<-30)
+  while (x-initx>w) {
+    initx = x;
+    g.selectAll("path").data(right_r(init_dt)).attr("d", function (d) {
+      return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+    }).attr("stroke", function (d, i) {
+      return "#e5b367";
+    })
+            .attr("stroke-width", "1px")
+            .attr("fill", function (d) {
+              return d.color;
+            })
 
+            .exit()
+            .remove();
+    ///
 
+        g.select("g")      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)").selectAll(".hexagon")
+                .data(right_l(init_dt))
+      .enter().append("path")
+      .attr("d", function (d) {
+		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+	})
+         .attr("stroke", function (d,i) {
+		return "#e5b367";
+	})
+      .attr("stroke-width", "1px")
+      .attr("fill", function(d){ return d.color; })
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+      .call(_drag);
+        // .on('mouseover', mouseOver)
+        // .on('mouseout', mouseOut)
+        // .on('mousemove', mouseMove);
+              g.selectAll("text").data(right_r(init_dt))
+                            .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central").exit().remove();
+          g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll("labels")
+      .data(right_l(init_dt))
+      .enter()
+      .append("text")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 10)
+        .style("fill", "black");
+  init_dt = update_data(init_dt,'r');
+
+  }
+  while (x-initx<-w) {
+    initx = x;
+    g.selectAll("path").data(left_l(init_dt)).attr("d", function (d) {
+      return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+    }).attr("stroke", function (d, i) {
+      return "#e5b367";
+    })
+            .attr("stroke-width", "1px")
+            .attr("fill", function (d) {
+              return d.color;
+            })
+
+            .exit()
+            .remove();
+    ///
+
+        g.select("g")      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)").selectAll(".hexagon")
+                .data(left_r(init_dt))
+      .enter().append("path")
+      .attr("d", function (d) {
+		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+	})
+         .attr("stroke", function (d,i) {
+		return "#e5b367";
+	})
+      .attr("stroke-width", "1px")
+      .attr("fill", function(d){ return d.color; })
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+      .call(_drag);
+        // .on('mouseover', mouseOver)
+        // .on('mouseout', mouseOut)
+        // .on('mousemove', mouseMove);
+
+              g.selectAll("text").data(left_l(init_dt))
+                            .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central").exit().remove();
+          g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll("labels")
+      .data(left_r(init_dt))
+      .enter()
+      .append("text")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 10)
+        .style("fill", "black");
+  init_dt = update_data(init_dt,'l');
+
+  }
+   while (y-inity>h) {
+    inity = y;
+    g.selectAll("path").data(down_b(init_dt)).attr("d", function (d) {
+      return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+    }).attr("stroke", function (d, i) {
+      return "#e5b367";
+    })
+            .attr("stroke-width", "1px")
+            .attr("fill", function (d) {
+              return d.color;
+            })
+
+            .exit()
+            .remove();
+    ///
+
+        g.select("g")      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)").selectAll(".hexagon")
+                .data(down_u(init_dt))
+      .enter().append("path")
+      .attr("d", function (d) {
+		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+	})
+         .attr("stroke", function (d,i) {
+		return "#e5b367";
+	})
+      .attr("stroke-width", "1px")
+      .attr("fill", function(d){ return d.color; })
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+      .call(_drag);
+        // .on('mouseover', mouseOver)
+        // .on('mouseout', mouseOut)
+        // .on('mousemove', mouseMove);
+              g.selectAll("text").data(down_b(init_dt))
+                            .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central").exit().remove();
+          g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll("labels")
+      .data(down_u(init_dt))
+      .enter()
+      .append("text")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 10)
+        .style("fill", "black");
+  init_dt = update_data(init_dt,'d');
+
+  }
+      while (y-inity<-h) {
+    inity = y;
+    g.selectAll("path").data(up_u(init_dt)).attr("d", function (d) {
+      return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+    }).attr("stroke", function (d, i) {
+      return "#e5b367";
+    })
+            .attr("stroke-width", "1px")
+            .attr("fill", function (d) {
+              return d.color;
+            })
+
+            .exit()
+            .remove();
+    ///
+
+        g.select("g")      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)").selectAll(".hexagon")
+                .data(up_b(init_dt))
+      .enter().append("path")
+      .attr("d", function (d) {
+		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+	})
+         .attr("stroke", function (d,i) {
+		return "#e5b367";
+	})
+      .attr("stroke-width", "1px")
+      .attr("fill", function(d){ return d.color; })
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+      .call(_drag);
+        // .on('mouseover', mouseOver)
+        // .on('mouseout', mouseOut)
+        // .on('mousemove', mouseMove);
+              g.selectAll("text").data(up_u(init_dt))
+                            .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central").exit().remove();
+          g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll("labels")
+      .data(up_b(init_dt))
+      .enter()
+      .append("text")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 10)
+        .style("fill", "black");
+  init_dt = update_data(init_dt,'u');
+
+  }
 }
 
 
@@ -887,9 +1288,9 @@ function moveMap(d){
 
     function mouseOver(d, i) {
     d3.select(this).classed('over', true);
-    a.text(d.weights );
+    d3.select("#u62_text").text(d.weights );
     // ' (' + parseInt(d.x) + ',' + parseInt(d.y) + ')'
-    a.style("visibility", "visible");
+    // a.style("visibility", "visible");
 
 }
 function mouseMove(d, i) {
@@ -938,7 +1339,7 @@ function mouseOut(d, i) {
       height/((MapRows + 1/3) * 1.5)]);
       width1 = MapColumns*hexRadius*Math.sqrt(3);
       height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
-
+      h = (height/((MapRows + 1/3) * 1.5))*2;
         // x = d3.scaleLinear()
         // .domain([0, 20])
         // .range([0, (width1/MapColumns)*20]);
@@ -954,10 +1355,10 @@ function mouseOut(d, i) {
       // .call(d3.axisLeft(y));
 
       a.classed('tooltip', true);
-
+      init_dt = get_point();
       // var point = get_point();
-      var point = process_point_plus();
-
+      var point = get_point();
+      w = (width/((MapColumns + 0.5) * Math.sqrt(3)))/2;
       g.append("clipPath")
       .attr("id", "clip")
       .append("rect")
@@ -970,7 +1371,6 @@ function mouseOut(d, i) {
       .selectAll(".hexagon")
       .data(point)
       .enter().append("path")
-              // .attr("x",function (d) {return d3.event.x;}).attr("y",function (d) {return d3.event.y;})
       .attr("d", function (d) {
 		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
 	})
@@ -981,9 +1381,9 @@ function mouseOut(d, i) {
       .attr("fill", function(d){ return d.color; })
               .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
       .call(_drag)
-        .on('mouseover', mouseOver)
-        .on('mouseout', mouseOut)
-        .on('mousemove', mouseMove);
+        .on('mouseover', mouseOver);
+        // .on('mouseout', mouseOut)
+        // .on('mousemove', mouseMove);
 
       g.append("g")
       .attr("class", "hexagon")
@@ -992,13 +1392,13 @@ function mouseOut(d, i) {
       .data(point)
       .enter()
       .append("text")
-              .attr("transform","translate("+(width1)/16+","+(height1)/16+")")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
         .attr("x", function(d){return d.x})
         .attr("y", function(d){return d.y})
         .text(function(d){ return d.label; })
         .attr("text-anchor", "middle")
         .attr("alignment-baseline", "central")
-        .style("font-size", 8)
+        .style("font-size", 10)
         .style("fill", "black");
 
 
