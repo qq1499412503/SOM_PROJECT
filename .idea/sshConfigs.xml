@@ -2,11 +2,13 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
+
       <sshConfig authType="PASSWORD" host="192.168.0.128" id="da508bdc-737d-49a7-b6ba-90870a9abb29" port="20" nameFormat="DESCRIPTIVE" username="root" />
       <sshConfig authType="PASSWORD" host="192.168.0.128" id="a3f8dbec-d084-4735-8ce8-c617d9e0878a" port="20" nameFormat="DESCRIPTIVE" username="root" />
       <sshConfig authType="PASSWORD" id="d8bbe6a5-d16e-4c79-ad89-83508dee45d5" port="22" customName="whatever" nameFormat="CUSTOM">
         <option name="customName" value="whatever" />
       </sshConfig>
+
     </configs>
   </component>
 </project>

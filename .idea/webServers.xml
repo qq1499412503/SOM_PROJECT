@@ -3,16 +3,18 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="8ef978b1-e581-48bd-a61a-d234996588a7" name="som">
+
         <fileTransfer rootFolder="/root" accessType="SFTP" host="192.168.0.128" port="20" sshConfigId="a3f8dbec-d084-4735-8ce8-c617d9e0878a" sshConfig="root@192.168.0.128:20 password">
+
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="76ff9b3b-1250-484d-a9c4-d98bfd4a97d1" name="whatever">
-        <fileTransfer accessType="SFTP" port="22" sshConfigId="d8bbe6a5-d16e-4c79-ad89-83508dee45d5" sshConfig="whatever">
+      <webServer id="59c84ad7-57ed-49e5-a6a9-d8e331d8320a" name="whatever">
+        <fileTransfer rootFolder="/root" accessType="SFTP" host="localhost" port="20" sshConfigId="b4046122-731e-467d-91dc-5b1f50b193f9" sshConfig="root@localhost:20 password">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
