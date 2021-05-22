@@ -8,8 +8,12 @@ from django.core.exceptions import ValidationError
 from django.http import QueryDict
 from bson.objectid import ObjectId
 import numpy as np
-
-
+import os
+from som.Form import UploadFileForm
+from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import io
 
 
 class SomTestCase(TestCase):
@@ -24,44 +28,43 @@ class SomTestCase(TestCase):
 
 class ApiTestCase(TestCase):
     def setUp(self):
+        self.client = Client(enforce_csrf_checks=True)
         self.code = 'api'
 
+    def test_userqueryinfo(self):
+        url = reverse('som:som_model')
+        response = self.client.get(url)
+        csrf_token = response.cookies['csrftoken'].value
+        fp = open('./som/animal.txt', "rb")
 
-        # data1 = [[0.80, 0.55, 0.22, 0.03],
-        #         [0.82, 0.50, 0.23, 0.03],
-        #         [0.80, 0.54, 0.22, 0.03],
-        #         [0.80, 0.53, 0.26, 0.03],
-        #         [0.79, 0.56, 0.22, 0.03],
-        #         [0.75, 0.60, 0.25, 0.03],
-        #         [0.77, 0.59, 0.22, 0.03],
-        #         [0.1, 0.2, 0.3, 0.01]]
-        # data = np.array(data1)
-    # def test_sample_api_test_case(self):
-    #     url = '/som/user_query_info'
-    #     with open('som_model.py') as fp:
-    #         response = self.client.post(url, { 'df': fp})
-    #         self.assertEqual(response.status_code,200)
+        myBytesIO = io.BytesIO(fp.read())
+        myBytesIO.seek(0)
+        txt = InMemoryUploadedFile(
+            myBytesIO, None, 'random-name.txt', 'txt', len(myBytesIO.getvalue()), None
+        )
 
-        # x = 5
-        # y = 5
-        # length = 100
-        # sigmas = 0.2
-        # lr = 0.01
-        # iteration = 200
-        # neighbour = "gaussian"
-        # topology = "rectangular"
-        # activation = "euclidean"
-        # randoms = 0.2
-        #
-        # dic = {"data_id": data_id, "x": x, "y": y, "length": length,
-        #        "sigmas": sigmas, "lr": lr,"iteration":iteration, "neighbour": neighbour,
-        #        "topology":topology, "activation":activation , "randoms":randoms , "data":df}
-        # qdic = QueryDict.dict({str(dic): ""})
-        #
-        # response = self.client.post(url, qdic)
-        # data = response.json()
-        # self.assertEqual(data['code'], '200')
-        # self.assertEqual(data['msg'], 'successful')
+        response1 = self.client.post(url, data={"csrfmiddlewaretoken": csrf_token, "data": txt})
+        self.assertEqual(response1.status_code, 200)
+        data_id = response1.context["data_id"]
+
+        x = 5
+        y = 5
+        length = 100
+        sigmas = 0.2
+        lr = 0.01
+        iteration = 200
+        neighbour = "gaussian"
+        topology = "rectangular"
+        activation = "euclidean"
+        randoms = 0.2
+        dic = {"data_id":data_id,"x":x,"y":y,"length":length,"sigmas":sigmas,"lr":lr,"iteration":iteration,
+               "topology":topology,"neighbour":neighbour,"activation":activation,"randoms":randoms}
+        qdic = QueryDict.dict({str(dic):""})
+
+        response2 = self.client.post('/som/user_query_info/', qdic)
+        self.assertEqual(response2.status_code, 200)
+        self.assertIn("weight".encode('UTF-8'), response2.content)
+        self.assertIn("label".encode('UTF-8'), response2.content)
 
     def test_save_map(self):
         url = '/som/save_map'
@@ -194,10 +197,27 @@ class Views_som_model_test(TestCase):
         self.assertIn('empty_size'.encode('UTF-8'), response.content)
 
     def test_views_som_model_post(self):
-        test_data = {'name': 'somtest1', "attribute": "100", "size": "2000"}
-        response = self.client.post(self.url, data = test_data)
+        response1 = self.client.get(self.url)
+        csrf_token = response1.cookies['csrftoken'].value
+        fp = open('./som/animal.txt', "rb")
+
+        myBytesIO = io.BytesIO(fp.read())
+        myBytesIO.seek(0)
+        txt = InMemoryUploadedFile(
+            myBytesIO, None, 'random-name.txt', 'txt', len(myBytesIO.getvalue()), None
+        )
+
+        response = self.client.post(self.url, data={"csrfmiddlewaretoken": csrf_token, "data": txt})
         self.assertEqual(response.status_code, 200)
-        #self.assertTemplateUsed(response, 'upload.html')
+        try:
+            data_id = response.context["data_id"]
+            output_result = True
+        except TypeError:
+            print("fail to initialize data")
+            output_result = False
+        self.assertEqual(output_result, True)
+        self.assertTemplateUsed(response, 'visualization0.1.html')
+
 
 class Test_test(TestCase):
 
