@@ -10,6 +10,9 @@ from bson.objectid import ObjectId
 from .models import dataframe
 import time
 import json
+from matplotlib import cm, colorbar
+import matplotlib
+
 
 class QueryUserInfo(APIView):
 
@@ -161,3 +164,39 @@ class SaveAndPublish(APIView):
     #@csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(SaveAndPublish, self).dispatch(*args, **kwargs)
+
+class ChangeColor(APIView):
+
+    def post(self, request):
+        for key in request.POST:
+            keydict = eval(key)
+            # print(request.POST['color'])
+            print(keydict['color'])
+            color = []
+            for i in range(len(keydict['nodes'])):
+                sub_color = []
+                for j in range(len(keydict['nodes'][0])):
+                    if keydict['color'] == 'blue':
+                        nc = cm.Blues(keydict['color_value'][i][j])
+                    elif keydict['color'] == 'red':
+                        nc = cm.Reds(keydict['color_value'][i][j])
+                    elif keydict['color'] == 'green':
+                        nc = cm.Greens(keydict['color_value'][i][j])
+                    elif keydict['color'] == 'blue to red':
+                        if keydict['color_value'][i][j] >= 0.5:
+                            new_val = (keydict['color_value'][i][j]-0.5)/0.5
+                            nc = cm.Reds(new_val)
+                        else:
+                            new_val = (0.5-keydict['color_value'][i][j])/0.5
+                            nc = cm.Blues(new_val)
+
+                    new_color = matplotlib.colors.rgb2hex(nc)
+                    sub_color.append(new_color)
+                color.append(sub_color)
+            keydict['nodes'] = color
+
+        return JsonResponse(keydict, safe=False)
+
+    # @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(ChangeColor, self).dispatch(*args, **kwargs)

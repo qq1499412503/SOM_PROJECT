@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^save_and_publish', views.SaveAndPublish.as_view(), name='save_and_publish'),
     url(r'^test', views.test, name='test'),
     url(r'^tt', views.tt, name='tt'),
+    url(r'^ChangeColor', views.ChangeColor.as_view(), name='ChangeColor'),
     
 ]

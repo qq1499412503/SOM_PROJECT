@@ -569,7 +569,7 @@
         </div>
       </div>
 
-            <div id="u60" class="ax_default box_1">
+            <div id="u60" class="ax_default box_1" style="visibility: hidden">
         <div id="u60_div" class=""></div>
         <div id="u60_text" class="text " style="display:none; visibility: hidden">
           <p></p>
@@ -600,10 +600,11 @@
         <div id="u57" class="ax_default table_cell">
           <img id="u57_img" class="img " src="/media/image/ua57.png"/>
           <div id="u57_text" class="text " >
-            <select class="form-control" id="color" name="color" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;">
+            <select class="form-control" id="color" name="color" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;" onchange="change_color()">
               <option>blue</option>
               <option>red</option>
               <option>green</option>
+              <option>blue to red</option>
             </select>
           </div>
 
@@ -621,7 +622,7 @@
         <div id="u59" class="ax_default table_cell">
           <img id="u59_img" class="img " src="/media/image/ua59.png"/>
           <div id="u59_text" class="text ">
-            <input type="text" id="font_size" name="font_size" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: None (int)">
+            <input type="text" id="font_size" name="font_size" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: None (int)" onchange="change_font()">
           </div>
         </div>
       </div>
@@ -631,7 +632,7 @@
 
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u61" class="ax_default box_1">
+      <div id="u61" class="ax_default box_1" style="visibility: hidden">
         <div id="u61_div" class=""></div>
         <div id="u61_text" class="text " style="display:none; visibility: hidden">
           <p></p>
@@ -639,7 +640,7 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u62" class="ax_default box_1">
+      <div id="u62" class="ax_default box_1" style="visibility: hidden">
         <div id="u62_div" class=""></div>
         <div id="u62_text" class="text " >
           <p></p>
@@ -737,7 +738,11 @@
 
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+<!--    <script src="http://benschmidt.org/colorbar/colorbar.js"></script>-->
+    <script src="{% static 'js/cb.js' %}"></script>
     <script type="text/javascript">
+
+
       var data;
       function setValue(val){
           data=val;
@@ -800,8 +805,9 @@ function get_point(){
             var color =  getValue()['nodes'][i][j]
             var weights = getValue()['weights'][i][j]
             var label = getValue()['label'][i][j]
+            var color_value = getValue()['color_value'][i][j]
             // points.push([x,y,color])
-          points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label})
+          points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label,"cv":color_value})
         }
     }
     return points;
@@ -871,7 +877,7 @@ function right_l(d){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].x === dm){
-      target.push({"x": d[i].x-hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x-hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }
   }
@@ -886,7 +892,7 @@ function left_r(d){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].x === dm){
-      target.push({"x": d[i].x+hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x+hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }
   }
@@ -902,7 +908,7 @@ function up_b(d){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].y === dm){
-      target.push({"x": d[i].x,"y": d[i].y+hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x,"y": d[i].y+hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }
   }
@@ -934,7 +940,7 @@ function down_u(d){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].y === dm){
-      target.push({"x": d[i].x,"y": d[i].y-hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x,"y": d[i].y-hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }
   }
@@ -966,7 +972,7 @@ function update_data(d,ar){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].x === dm){
-      target.push({"x": d[i].x-hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x-hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }else{
       target.push(d[i]);
@@ -978,7 +984,7 @@ function update_data(d,ar){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].x === dm){
-      target.push({"x": d[i].x+hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x+hexRadius * MapColumns * Math.sqrt(3),"y": d[i].y,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }else{
       target.push(d[i]);
@@ -990,7 +996,7 @@ function update_data(d,ar){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].y === dm){
-      target.push({"x": d[i].x,"y": d[i].y+hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x,"y": d[i].y+hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }else{
       target.push(d[i]);
@@ -1002,7 +1008,7 @@ function update_data(d,ar){
   for (var i = 0; i < d.length; i++){
     // alert(i);
     if (d[i].y === dm){
-      target.push({"x": d[i].x,"y": d[i].y-hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label});
+      target.push({"x": d[i].x,"y": d[i].y-hexRadius * MapRows * 1.5,"color": d[i].color,"weights":d[i].weights,"label":d[i].label,"cv":d[i].cv});
       // alert(d[i].x);
     }else{
       target.push(d[i]);
@@ -1320,11 +1326,19 @@ function mouseOut(d, i) {
       beforeSend: function(){
 
               $('#m14_img').css('visibility','visible');
+              $('#u60').css('visibility','hidden');
+              $('#u61').css('visibility','hidden');
+              $('#u62').css('visibility','hidden');
+              document.getElementById('color').value = 'blue'
           },
       complete: function(){
               $('#m14_img').css('visibility','hidden');
+              $('#u60').css('visibility','visible');
+              $('#u61').css('visibility','visible');
+              $('#u62').css('visibility','visible');
           },
       success: function as(raw_data) {
+
       setValue(raw_data);
       svg.remove();
       svg = d3.select("#m14").append("svg")
@@ -1333,13 +1347,34 @@ function mouseOut(d, i) {
       g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       // l = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       a = d3.select("body").append("div").classed('tooltip', true).style("visibility", "hidden");
+
+// myScale = d3.scaleLinear().range(["red","white","blue"]).domain([0,4,25])
+//
+// colorbar = Colorbar()
+// 	.origin([15,60])
+// 	.scale(myScale)
+// 	.orient("vertical")
+//
+// placeholder = "#u61"
+//
+// colorbarObject = d3.select(placeholder)
+//     .call(colorbar)
+
+
+
+
+
+
+
+
+
       MapColumns = col();
       MapRows = row();
       hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
       height/((MapRows + 1/3) * 1.5)]);
       width1 = MapColumns*hexRadius*Math.sqrt(3);
       height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
-      h = (height/((MapRows + 1/3) * 1.5))*2;
+      h = hexRadius  * 1.5;
         // x = d3.scaleLinear()
         // .domain([0, 20])
         // .range([0, (width1/MapColumns)*20]);
@@ -1410,6 +1445,66 @@ function mouseOut(d, i) {
       })
       ;
       }
+
+      function change_font(){
+      g.selectAll("text").style("font-size", document.getElementById('font_size').value);
+
+      }
+
+function change_color(){
+      data['color'] = document.getElementById('color').value
+
+      $.ajax({
+      type: "post",
+      url: "{% url 'som:ChangeColor' %}",
+      dataType: "json",
+      data: JSON.stringify(getValue()),
+
+      success: function as(raw_data) {
+        setValue(raw_data);
+        init_dt = get_point();
+        point = get_point();
+        g.selectAll("path").remove();
+        g.selectAll("text").remove();
+        g.append("g")
+        .attr("class", "hexagon")
+        .attr("clip-path", "url(#clip)")
+        .selectAll(".hexagon")
+        .data(point)
+        .enter().append("path")
+        .attr("d", function (d) {
+          return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+      })
+           .attr("stroke", function (d,i) {
+          return "#e5b367";
+      })
+        .attr("stroke-width", "1px")
+        .attr("fill", function(d){ return d.color; })
+                .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .call(_drag)
+          .on('mouseover', mouseOver);
+
+        g.append("g")
+        .attr("class", "hexagon")
+        .attr("clip-path", "url(#clip)")
+        .selectAll("labels")
+        .data(point)
+        .enter()
+        .append("text")
+                .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+          .attr("x", function(d){return d.x})
+          .attr("y", function(d){return d.y})
+          .text(function(d){ return d.label; })
+          .attr("text-anchor", "middle")
+          .attr("alignment-baseline", "central")
+          .style("font-size", 10)
+          .style("fill", "black");
+        // alert(1);
+      }
+      })
+      ;
+      }
+
     </script>
 
     </div>

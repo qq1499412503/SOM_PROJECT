@@ -83,24 +83,31 @@ class Som:
         map={}
         nodes = []
         weight = []
+        color_val = []
         xx, yy = self.model_som.get_euclidean_coordinates()
         umatrix = self.model_som.distance_map()
         weights = self.model_som.get_weights()
         for j in range(weights.shape[1]):
             sub_nodes = []
             sub_weight = []
+            sub_cv = []
             for i in range(weights.shape[0]):
                 color = matplotlib.colors.rgb2hex(cm.Blues(umatrix[i, j]))
+                color_value = umatrix[i, j]
                 sub_nodes.append(color)
+                sub_cv.append(color_value)
                 weight_raw = weights[i,j].tolist()
                 weight_process = ""
                 for w in weight_raw:
                     weight_process = weight_process + str(w) + ', '
+                weight_process = "(" + weight_process[:-2] + ")"
                 sub_weight.append(weight_process)
             nodes.append(sub_nodes)
             weight.append(sub_weight)
+            color_val.append(sub_cv)
         map['nodes'] = nodes
         map['weights'] = weight
+        map['color_value'] = color_val
         # print(map)
         d_count = 0
         x_winner = [' ' for a in range(self.x)]
