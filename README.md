@@ -1,1 +1,2 @@
-# SOM_PROJECT
+# Initial page
+
