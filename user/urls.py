@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^profile/', views.profile_view, name='profile'),
     url(r'^update_user', views.UpdateUser.as_view(), name='update_user'),
     url(r'^update_passwd', views.UpdatePasswd.as_view(), name='update_passwd'),
-    url(r'^logout', views.logout_view, name='logout'),
+    url(r'^logout/', views.logout_view, name='logout'),
 ]

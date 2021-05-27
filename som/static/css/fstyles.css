@@ -2952,7 +2952,7 @@ body {
   border-width:0px;
   word-wrap:break-word;
   text-transform:none;
-  visibility:hidden;
+  /*visibility:hidden;*/
 }
 #u61_div {
   border-width:0px;
@@ -2975,11 +2975,11 @@ body {
 #u61 {
   border-width:0px;
   position:absolute;
-  left:1840px;
+  left:1800px;
   top:177px;
-  width:45px;
+  width:50px;
   height:591px;
-  display:flex;
+  /*display:flex;*/
 }
 #u61 .text {
   position:absolute;

@@ -171,27 +171,31 @@ class ChangeColor(APIView):
         for key in request.POST:
             keydict = eval(key)
             # print(request.POST['color'])
-            print(keydict['color'])
+            print(len(keydict['nodes'][0]))
             color = []
             for i in range(len(keydict['nodes'])):
                 sub_color = []
                 for j in range(len(keydict['nodes'][0])):
-                    if keydict['color'] == 'blue':
-                        nc = cm.Blues(keydict['color_value'][i][j])
-                    elif keydict['color'] == 'red':
-                        nc = cm.Reds(keydict['color_value'][i][j])
-                    elif keydict['color'] == 'green':
-                        nc = cm.Greens(keydict['color_value'][i][j])
-                    elif keydict['color'] == 'blue to red':
-                        if keydict['color_value'][i][j] >= 0.5:
-                            new_val = (keydict['color_value'][i][j]-0.5)/0.5
-                            nc = cm.Reds(new_val)
-                        else:
-                            new_val = (0.5-keydict['color_value'][i][j])/0.5
-                            nc = cm.Blues(new_val)
+                    if i % 2 == 0 and j % 2 == 0:
+                        sub_color.append('#B8B8B8')
+                    else:
+                        if keydict['color'] == 'blue':
+                            nc = cm.Blues(keydict['color_value'][i][j])
+                        elif keydict['color'] == 'red':
+                            nc = cm.Reds(keydict['color_value'][i][j])
+                        elif keydict['color'] == 'green':
+                            nc = cm.Greens(keydict['color_value'][i][j])
+                        elif keydict['color'] == 'blue to red':
+                            if keydict['color_value'][i][j] >= 0.5:
+                                new_val = (keydict['color_value'][i][j]-0.5)/0.5
+                                nc = cm.Reds(new_val)
+                            else:
+                                new_val = (0.5-keydict['color_value'][i][j])/0.5
+                                nc = cm.Blues(new_val)
 
-                    new_color = matplotlib.colors.rgb2hex(nc)
-                    sub_color.append(new_color)
+                        new_color = matplotlib.colors.rgb2hex(nc)
+                        sub_color.append(new_color)
+
                 color.append(sub_color)
             keydict['nodes'] = color
 

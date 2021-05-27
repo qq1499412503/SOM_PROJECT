@@ -93,3 +93,37 @@ class Mm(MiniSom):
     self._weights += einsum('ij, ijk->ijk', g21, np.tile(x-self._weights,(3,3,1)))[bx:bx*2,by:by*2,:]
     g22 = self.neighborhood((wx+bx*2,wy+by*2), sig)*eta
     self._weights += einsum('ij, ijk->ijk', g22, np.tile(x-self._weights,(3,3,1)))[bx:bx*2,by:by*2,:]
+
+  def distance_map(self):
+        um = np.zeros((self._weights.shape[0]*2,
+                    self._weights.shape[1]*2,
+                    8))
+        ii = [[1, 1, 1, 0, -1, 0], [0, 1, 0, -1, -1, -1]]
+        jj = [[1, 0, -1, -1, 0, 1], [1, 0, -1, -1, 0, 1]]
+        for x in range(self._weights.shape[0]):
+            for y in range(self._weights.shape[1]):
+                e = y % 2 == 0
+                # print(e)
+                w_2 = self._weights[x, y]
+                new_x = 2*x
+                new_y = 2*y
+                # um[new_x, new_y, k] = w_2
+                for k, (i, j) in enumerate(zip(ii[e], jj[e])):
+                    um[new_x, new_y, k] = fast_norm(w_2)
+                    if (x+i >= 0 and x+i < self._weights.shape[0] and
+                            y+j >= 0 and y+j < self._weights.shape[1]):
+                        w_1 = self._weights[x+i, y+j]
+                        um[new_x+i, new_y+j, k] = fast_norm(w_2-w_1)
+                    elif x+i < 0 and y+j < 0:
+                        w_1 = self._weights[self._weights.shape[0]-1, self._weights.shape[1]-1]
+                        um[self._weights.shape[0]*2-1, self._weights.shape[1]*2-1, k] = fast_norm(w_2-w_1)
+                        break
+                    elif x+i < 0 and y+j < self._weights.shape[1]:
+                        w_1 = self._weights[self._weights.shape[0]-1, y+j]
+                        um[self._weights.shape[0]*2-1, new_y+j, k] = fast_norm(w_2-w_1)
+                    elif y+j < 0 and x+i < self._weights.shape[0]:
+                        w_1 = self._weights[x+i, self._weights.shape[1]-1]
+                        um[new_x+i, self._weights.shape[1]*2-1, k] = fast_norm(w_2-w_1)
+
+        um = um.sum(axis=2)
+        return um/um.max()
