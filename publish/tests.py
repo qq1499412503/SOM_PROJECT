@@ -49,7 +49,7 @@ class Publish_Test(TestCase):
         dic = {'did': data_id, 'name': file_name}
         response = self.client.post('/publish/list/', dic)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'view.html')
+        self.assertTemplateUsed(response, 'view.html.bak')
         self.assertIn('som_1'.encode('UTF-8'), response.content)
 
     def test_publish_post_pagen(self):

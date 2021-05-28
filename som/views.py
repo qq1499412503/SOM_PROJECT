@@ -146,6 +146,7 @@ class SaveAndPublish(APIView):
     def post(self, request):
         for key in request.POST:
             keydict = eval(key)
+            # print(keydict)
             uid = str(keydict["user_id"])
             data_id = ObjectId(str(keydict["data_id"]))
             author = str(keydict["author"])

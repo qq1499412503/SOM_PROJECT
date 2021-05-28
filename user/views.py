@@ -159,7 +159,7 @@ def profile_view(request):
             x = current_object.x
             y = current_object.y
             content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y }
-            return render(request, 'view.html', content)
+            return render(request, 'view.html.bak', content)
         elif 'page_n' in request.POST:
             page = int(request.POST["page_n"])
             data = dataframe.objects.filter(uid = uid).order_by('-time')[(1 + page) * 5:(2 + page) * 5]

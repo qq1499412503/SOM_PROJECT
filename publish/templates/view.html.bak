@@ -1,0 +1,396 @@
+{% load static %}
+<html>
+  <head>
+    <title>view template</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<!--    <link href="{% static 'css/vaxure_rp_page.css' %}" type="text/css" rel="stylesheet"/>-->
+    <link href="{% static 'css/vstyle.css' %}" type="text/css" rel="stylesheet"/>
+    <link href="{% static 'css/vstyles.css' %}" type="text/css" rel="stylesheet"/>
+    <script src="{% static 'js/scripts/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/axQuery.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/globals.js' %}"></script>
+    <script src="{% static 'js/scripts/axutils.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/annotation.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/axQuery.std.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/doc.js' %}"></script>
+    <script src="{% static 'js/scripts/messagecenter.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/events.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/recording.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/action.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/expr.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/geometry.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/flyout.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/model.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/repeater.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/sto.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/utils.temp.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/variables.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/drag.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/move.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/visibility.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/style.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/adaptive.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/tree.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/init.temp.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/legacy.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/viewer.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/math.js' %}"></script>
+    <script src="{% static 'js/scripts/axure/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/document.js' %}"></script>
+    <script src="{% static 'js/data.js' %}"></script>
+    <style>
+  div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+</style>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="v0" class="ax_default box_1">
+        <img id="v0_img" class="img " src="/media/image/v0.svg"/>
+        <div id="v0_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="v1" class="ax_default box_1">
+        <img id="v1_img" class="img " src="/media/image/v1.svg"/>
+        <div id="v1_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="v2" class="ax_default icon">
+        <img id="v2_img" class="img " src="/media/image/v2.svg"/>
+        <div id="v2_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="v3" class="ax_default heading_3">
+        <div id="v3_div" class=""></div>
+        <div id="v3_text" class="text ">
+          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'som:som_model' %}">New Project,</a>&nbsp;&nbsp;<a href="{% url 'user:logout' %}">logout</a></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="v4" class="ax_default heading_2">
+        <div id="v4_div" class=""></div>
+        <div id="v4_text" class="text ">
+          <p><span>SOM map </span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="v5" class="ax_default icon">
+        <a href="{% url 'publish:list' %}">
+        <img id="v5_img" class="img " src="/media/image/v5.svg"/>
+          </a>
+        <div id="v5_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="v6" class="ax_default heading_1">
+        <div id="v6_div" class=""></div>
+        <div id="v6_text" class="text ">
+          <p><span>VISUALIZATION FORUM </span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (Table) -->
+      <div id="v7" class="ax_default">
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v8" class="ax_default table_cell">
+          <img id="v8_img" class="img " src="/media/image/v8.png"/>
+          <div id="v8_text" class="text ">
+            <p><span>Project name</span></p>
+          </div>
+        </div>
+        <!-- Unnamed (Table Cell) -->
+        <div id="v9" class="ax_default table_cell">
+          <img id="v9_img" class="img " src="/media/image/v9.png"/>
+          <div id="v9_text" class="text " style="visibility: visible">
+            {{ name }}
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v10" class="ax_default table_cell">
+          <img id="v10_img" class="img " src="/media/image/v10.png"/>
+          <div id="v10_text" class="text ">
+            <p><span>Author</span></p>
+          </div>
+        </div>
+        <!-- Unnamed (Table Cell) -->
+        <div id="v11" class="ax_default table_cell">
+          <img id="v11_img" class="img " src="/media/image/v11.png"/>
+          <div id="v11_text" class="text " style="visibility: visible">
+            {{ Author }}
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v12" class="ax_default table_cell">
+          <img id="v12_img" class="img " src="/media/image/v12.png"/>
+          <div id="v12_text" class="text ">
+            <p><span>Publish data</span></p>
+          </div>
+        </div>
+        <!-- Unnamed (Table Cell) -->
+        <div id="v13" class="ax_default table_cell">
+          <img id="v13_img" class="img " src="/media/image/v13.png"/>
+          <div id="v13_text" class="text " style="visibility: visible">
+            {{ Date }}
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v14" class="ax_default table_cell">
+          <img id="v14_img" class="img " src="/media/image/v14.png"/>
+          <div id="v14_text" class="text ">
+            <p><span>Description</span></p>
+          </div>
+        </div>
+        <!-- Unnamed (Table Cell) -->
+        <div id="v15" class="ax_default table_cell">
+          <img id="v15_img" class="img " src="/media/image/v15.png"/>
+          <div id="v15_text" class="text " style="visibility: visible">
+			  {{ Description }}
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v16" class="ax_default table_cell">
+          <img id="v16_img" class="img " src="/media/image/v16.png"/>
+          <div id="v16_text" class="text ">
+            <p><span>Data file</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v17" class="ax_default table_cell">
+          <img id="v17_img" class="img " src="/media/image/v17.png"/>
+          <div id="v17_text" class="text " style="visibility: visible">
+            {{ Data_file }}
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v19" class="ax_default table_cell">
+          <img id="v19_img" class="img " src="/media/image/v19.png"/>
+          <div id="v19_text" class="text ">
+            <p><span>Publish</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Table Cell) -->
+        <div id="v20" class="ax_default table_cell">
+          <img id="v20_img" class="img " src="/media/image/v20.png"/>
+          <div id="v20_text" class="text " style="visibility: visible">
+            {{ Publish }}
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (Image) -->
+      <div id="v21" class="ax_default image">
+<!--        <img id="v21_img" class="img "/>-->
+        <div id="v21_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
+      </div>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script type="text/javascript">
+      var data;
+      function setValue(val){
+          data=JSON.parse(val);
+
+      }
+
+      function getValue(){
+          return data;
+      }
+
+      function cleanValue(){
+          data = null;
+      }
+
+function col(){
+
+          return parseInt('{{ x }}');
+
+
+}
+
+function row(){
+
+          return parseInt('{{ y }}');
+
+
+}
+
+var svg = d3.select("#v21").append("svg")
+                .attr("width", document.querySelector('#v21').offsetWidth)
+                .attr("height", document.querySelector('#v21').offsetHeight),
+    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
+    l = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
+    a = d3.select("body").append("div").classed('tooltip', true).style("visibility", "hidden");
+
+    var MapColumns = col(),
+        MapRows = row();
+
+    var hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
+                height/((MapRows + 1/3) * 1.5)]);
+    width1 = MapColumns*hexRadius*Math.sqrt(3);
+    height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
+    var hexbin = d3.hexbin()
+        .radius(hexRadius);
+
+ setValue('{{ map|safe }}');
+
+function get_point(){
+    var points = [];
+    for (var i = 0; i < MapRows; i++) {
+        for (var j = 0; j < MapColumns; j++) {
+            var x = hexRadius * j * Math.sqrt(3)
+            if(i%2 === 1) x += (hexRadius * Math.sqrt(3))/2
+            var y = hexRadius * i * 1.5
+            var color =  getValue()['nodes'][i][j]
+            // points.push([x,y,color])
+          points.push({"x": x,"y": y,"color": color})
+        }
+    }
+
+    return points;
+}
+
+    var point = get_point();
+
+
+   var  x = d3.scaleLinear()
+    .domain([0, 20])
+    .range([0, (width1/MapColumns)*20]);
+
+    var y = d3.scaleLinear()
+    .domain([0, MapRows])
+    .range([height1, 0]);
+
+    var xAxis =l.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    var yAxis = l.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(y));
+
+    var _zoom = d3.zoom()
+      .scaleExtent([.5, 20])
+      .extent([[0, 0], [width, height]])
+      .on("zoom", updateChart);
+
+
+
+    g.append("clipPath")
+        .attr("id", "clip")
+      .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+
+
+      g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll(".hexagon")
+      .data(point)
+      .enter().append("path")
+      .attr("d", function (d) {
+		return "M" + d.x + "," + (height-d.y) + hexbin.radius(hexRadius).hexagon();
+	})
+         .attr("stroke", function (d,i) {
+		return "#e5b367";
+	})
+      .attr("stroke-width", "1px")
+      .attr("fill", function(d){ return d.color; })
+      .call(_zoom)
+        .on('mouseover', mouseOver)
+        .on('mouseout', mouseOut)
+        .on('mousemove', mouseMove);
+
+
+function updateChart() {
+  var newX = d3.event.transform.rescaleX(x);
+  var newY = d3.event.transform.rescaleY(y);
+  // var currentZoomScale = d3.event.transform.k;
+  xAxis.call(d3.axisBottom(newX));
+  yAxis.call(d3.axisLeft(newY));
+  g.selectAll("path")
+  .on('dblclick.zoom', false)
+  .attr("d", function (d) {
+    return "M" + d.x + "," + (height-d.y) + hexbin.radius(hexRadius).hexagon();
+})
+  .attr("transform", d3.event.transform);
+}
+
+    function mouseOver(d, i) {
+    d3.select(this).classed('over', true);
+    a.text( ' (' + parseInt(d.x) + ',' + parseInt(d.y) + ')');
+    a.style("visibility", "visible");
+
+}
+function mouseMove(d, i) {
+    a.style('top', (d3.event.pageY - 10) + 'px').style('left', (d3.event.pageX + 10) + 'px');
+}
+function mouseOut(d, i) {
+    d3.select(this).classed('over', false);
+    a.style("visibility", "hidden");
+}
+
+
+
+
+
+
+
+    </script>
+
+
+
+      <!-- Unnamed (Shape) -->
+      <div id="v22" class="ax_default primary_button">
+        <img id="v22_img" class="img " src="/media/image/v22.svg"/>
+        <div id="v22_text" class="text ">
+          <p><span><a href="javascript:history.back()">Back</a></span></p>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/scripts/axure/ios.js' %}"></script>
+  </body>
+</html>
