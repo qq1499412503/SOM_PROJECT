@@ -1028,22 +1028,30 @@ var initx = 34.78;
 var w;
 var h;
 var inity = 31.03;
+// var dx =0;
+// var lw =1;
 function moveMap(d){
   var translate = getTranslation(d3.select(this).attr("transform"));
       x = d3.event.dx+translate[0];
       y = d3.event.dy+translate[1];
-      // x = Math.max(Math.min(-width1*1.9),Math.min(-width1*1.9),x);
-      // x = Math.min(Math.max(width1*1.9),Math.max(width1*1.9),x);
-      // y = Math.max(Math.min(-width1*1.5),Math.min(-width1*1.5),y);
-      // y = Math.min(Math.max(width1*1.5),Math.max(width1*1.5),y);
+
+      // x = Math.max(Math.min(-w*lw),Math.min(-w*lw),d3.event.dx+translate[0]);
+      // x = Math.min(Math.max(w),Math.max(w),x);
+      // y = Math.max(Math.min(-h),Math.min(-h),y);
+      // y = Math.min(Math.max(h),Math.max(h),y);
+      // dx += d3.event.dx
+
       g.selectAll("path")
       .attr("transform", "translate(" + x + "," + y + ")");
       g.selectAll("text")
       .attr("transform", "translate(" + x + "," + y + ")");
-      console.log(y);
+// console.log(dx);
       // ssss
-  // while (x-initx<-30)
-  while (x-initx>w) {
+  // while (x-initx>w) {
+while (x-initx>=w) {
+  console.log(x);
+// lw += 1;
+//   dx=0;
     initx = x;
     g.selectAll("path").data(right_r(init_dt)).attr("d", function (d) {
       return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
@@ -1437,8 +1445,9 @@ function continuous(selector_id, colorscale) {
       height/((MapRows + 1/3) * 1.5)]);
       width1 = MapColumns*hexRadius*Math.sqrt(3);
       height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
-      h = hexRadius  * 1.5;
-
+      // h = hexRadius  * 1.5;
+      h = (height1/(MapRows/2))/2;
+      //   h = height/((MapRows + 1/3) * 1.5);
 var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
   .domain([0, 1]);
 
@@ -1455,6 +1464,7 @@ continuous("#u61", colorScale1);
       // var point = get_point();
       var point = get_point();
       w = (width/((MapColumns + 0.5) * Math.sqrt(3)))/2;
+        // w = width1/MapColumns
       g.append("clipPath")
       .attr("id", "clip")
       .append("rect")

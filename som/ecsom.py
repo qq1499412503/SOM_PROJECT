@@ -109,7 +109,7 @@ class Mm(MiniSom):
                 new_y = 2*y
                 # um[new_x, new_y, k] = w_2
                 for k, (i, j) in enumerate(zip(ii[e], jj[e])):
-                    um[new_x, new_y, k] = fast_norm(w_2)
+
                     if (x+i >= 0 and x+i < self._weights.shape[0] and
                             y+j >= 0 and y+j < self._weights.shape[1]):
                         w_1 = self._weights[x+i, y+j]

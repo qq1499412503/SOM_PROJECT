@@ -131,6 +131,23 @@ class Som:
     #         # print(main_winner)
     #     return map
 
+    # def get_max(self, arrays):
+    #     value = 0
+    #     for j in range(arrays.shape[1]):
+    #         for i in range(arrays.shape[0]):
+    #             if arrays[i, j] > value:
+    #                 value = arrays[i, j]
+    #                 print(value,i,j)
+    #     return value
+    #
+    #
+    # def get_min(self, arrays):
+    #     value = 1
+    #     for j in range(arrays.shape[1]):
+    #         for i in range(arrays.shape[0]):
+    #             if arrays[i, j] < value:
+    #                 value = arrays[i, j]
+    #     return value
 
     def process_map(self):
         map={}
@@ -141,14 +158,18 @@ class Som:
         umatrix = self.model_som.distance_map()
         # print(umatrix.shape)
         weights = self.model_som.get_weights()
+        # norm = matplotlib.colors.Normalize(vmin=0, vmax=1)
+        # cmap = cm.Blues
+        # m = cm.ScalarMappable(norm=norm, cmap=cmap)
         for j in range(weights.shape[1]*2):
             sub_nodes = []
             sub_weight = []
             sub_cv = []
             for i in range(weights.shape[0]*2):
+                # color = matplotlib.colors.rgb2hex(cmap(norm(umatrix[i, j])))
                 color = matplotlib.colors.rgb2hex(cm.Blues(umatrix[i, j]))
                 color_value = umatrix[i, j]
-
+                # print(color_value,i,j)
                 if i % 2 == 0 and j % 2 == 0:
                     sub_nodes.append('#B8B8B8')
                     sub_cv.append(0)
@@ -168,10 +189,12 @@ class Som:
             nodes.append(sub_nodes)
             weight.append(sub_weight)
             color_val.append(sub_cv)
+
         map['nodes'] = nodes
         map['weights'] = weight
         map['color_value'] = color_val
-        # print(map)
+        # print(np.max(umatrix))
+        # print(umatrix)
         d_count = 0
         x_winner = [' ' for a in range(self.x*2)]
         main_winner = [x_winner for b in range(self.y*2)]
