@@ -1,6 +1,6 @@
 {% load static %}
 
-<html>
+<html id="html">
   <head>
     <title>Visualization</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -41,6 +41,17 @@
     <script src="{% static 'js/document.js' %}"></script>
     <script src="{% static 'js/data.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+  window.onload=function (){
+    var width = $(window).width();
+    var height = $(window).height();
+    var scaleX = width/1920;
+    var scaleY = height/940;
+    document.getElementById('html').style.transform = "scale("+scaleX+","+scaleY+")";
+    document.getElementById('html').style.transformOrigin ='0 top';
+  }
+
+</script>
 <style>
   div.tooltip {
     position: absolute;
@@ -115,12 +126,12 @@
       <form id="upload_form" enctype="multipart/form-data" method="post">
           {% csrf_token %}
 <!--          {{ form.upload }}-->
-      <div id="m7" class="ax_default button">
+      <div id="m7" class="ax_default button" onclick="document.getElementById('upload').click();" style="cursor: pointer;">
         <div id="m7_div" class=""></div>
         <div id="m7_text" class="text ">
 
          <input type="file" name="data" id="upload" onchange="document.getElementById('m16_input').value=document.getElementById('upload').files[0].name" hidden/>
-         <label for="upload">Choose file</label>
+         <label style="cursor: pointer;">Choose file</label>
 
         </div>
       </div>
@@ -136,11 +147,11 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="m9" class="ax_default button">
+      <div id="m9" class="ax_default button"  onclick="document.getElementById('update_log_button').click();" style="cursor: pointer;">
         <div id="m9_div" class=""></div>
         <div id="m9_text" class="text ">
           <input value="train" name="train"  id="update_log_button" type="button" onclick="query('111')" hidden/>
-          <label for="update_log_button">train</label>
+          <label style="cursor: pointer;">train</label>
         </div>
       </div>
 
@@ -155,7 +166,7 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="m11" class="ax_default button" onclick="pre_save()">
+      <div id="m11" class="ax_default button" onclick="pre_save()" style="cursor: pointer">
         <div id="m11_div" class=""></div>
         <div id="m11_text" class="text ">
           <p><span>Save</span></p>
@@ -186,7 +197,10 @@
       data: JSON.stringify({user_id: "{{ user.id }}",data_id:"{{ data_id }}",
         vis_name:document.getElementById('vis_name').value,
         author:document.getElementById('author').value,
-        description:document.getElementById('description').value}),
+        description:document.getElementById('description').value,
+        min_color:document.getElementById('color').value,
+        max_color:document.getElementById('color_max').value
+      }),
       complete: function(){
               $('#mv53').css('visibility','hidden');
           },
@@ -215,7 +229,10 @@
       data: JSON.stringify({user_id: "{{ user.id }}",data_id:"{{ data_id }}",
         vis_name:document.getElementById('vis_name').value,
         author:document.getElementById('author').value,
-        description:document.getElementById('description').value}),
+        description:document.getElementById('description').value,
+        min_color:document.getElementById('color').value,
+        max_color:document.getElementById('color_max').value
+      }),
       complete: function(){
               $('#mv53').css('visibility','hidden');
           },
@@ -239,7 +256,7 @@
         <div id="m12_div" class=""></div>
         <div id="m12_text" class="text ">
           {% if user.is_authenticated %}
-          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'user:logout' %}">logout</a></p>
+          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'som:som_model' %}">New Project,</a>&nbsp;&nbsp;<a href="{% url 'user:logout' %}">logout</a></p>
         {% endif %}
         </div>
       </div>
@@ -263,13 +280,23 @@
 
 
       <!-- Unnamed (Rectangle) -->
-      <div id="m15" class="ax_default button">
+      <div id="m15" class="ax_default button"  onclick="upload()" style="cursor: pointer;">
         <div id="m15_div" class=""></div>
         <div id="m15_text" class="text ">
           <input type="submit" id="submit_upload" form="upload_form" hidden/>
-          <label for="submit_upload">upload</label>
+          <label style="cursor: pointer;">upload</label>
         </div>
       </div>
+
+      <script>
+        function upload(){
+          if (document.getElementById('m16_input').value === ''){
+            alert('please select file before upload');
+          }else{
+            document.getElementById('submit_upload').click();
+          }
+        }
+      </script>
 
       <!-- Unnamed (Text Field) -->
       <div id="m16" class="ax_default text_field">
@@ -333,7 +360,7 @@
         <div id="m25" class="ax_default table_cell">
           <img id="m25_img" class="img " src="/media/image/u25.png"/>
           <div id="m25_text" class="text ">
-            <p><span>{{ name }}</span></p>
+            <p><span id="file_name">{{ name }}</span></p>
           </div>
         </div>
 
@@ -450,7 +477,7 @@
         <div id="m40" class="ax_default table_cell">
           <img id="m40_img" class="img " src="/media/image/u36.png"/>
           <div id="m40_text" class="text " style="visibility: visible">
-            <input type="text" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.6 (double)">
+            <input type="text" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1.5 (double)">
           </div>
         </div>
 
@@ -482,7 +509,7 @@
         <div id="m44" class="ax_default table_cell">
           <img id="m44_img" class="img " src="/media/image/u36.png"/>
           <div id="m44_text" class="text " style="visibility: visible">
-            <input type="text" id="Iteration" name="Iteration" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 100 (int)">
+            <input type="text" id="Iteration" name="Iteration" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1000 (int)">
           </div>
         </div>
 
@@ -592,7 +619,7 @@
         <div id="u56" class="ax_default table_cell">
           <img id="u56_img" class="img " src="/media/image/ua56.png"/>
           <div id="u56_text" class="text ">
-            <p><span>Color</span></p>
+            <p><span>Color min->max</span></p>
           </div>
         </div>
 
@@ -600,12 +627,25 @@
         <div id="u57" class="ax_default table_cell">
           <img id="u57_img" class="img " src="/media/image/ua57.png"/>
           <div id="u57_text" class="text " >
+            <div id="min_color" STYLE="float:left;left:0px;width:50%;height:100%;position: relative;">
             <select class="form-control" id="color" name="color" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;" onchange="change_color()">
+              <option>white</option>
+              <option disabled>blue</option>
+              <option>red</option>
+              <option>green</option>
+              <option>purple</option>
+
+            </select>
+          </div>
+            <div id="max_color" STYLE="float:right;right:0px;width:50%;height:100%;position: relative;">
+            <select class="form-control" id="color_max" name="color_max" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;" onchange="change_color()">
+              <option disabled>white</option>
               <option>blue</option>
               <option>red</option>
               <option>green</option>
-              <option>blue to red</option>
+              <option>purple</option>
             </select>
+          </div>
           </div>
 
         </div>
@@ -668,14 +708,14 @@
             </div>
 
             <!-- Unnamed (Rectangle) -->
-            <div id="m56" class="ax_default primary_button" onclick="save_map()">
+            <div id="m56" class="ax_default primary_button" onclick="save_map()" style="cursor: pointer;">
               <div id="m56_div" class=""></div>
               <div id="m56_text" class="text ">
                 <p><span>Save</span></p>
               </div>
             </div>
 
-            <div id="m561" style="left:600px;position:absolute" onclick="exit_save()">
+            <div id="m561" style="left:600px;position:absolute;color: #0000FF;cursor: pointer;" onclick="exit_save()">
               <p><span>Exit</span></p>
             </div>
 
@@ -729,6 +769,7 @@
           </div>
         </div>
       </div>
+
 
       <!--      <script src="{% static 'js/sigma.js-1.2.1/plugins/sigma.parsers.json/sigma.parsers.json.js' %}"></script>-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -805,7 +846,7 @@ function get_point(){
             var y = hexRadius * i * 1.5
             var color =  getValue()['nodes'][i][j]
             var weights = getValue()['weights'][i][j]
-            var label = getValue()['label'][i][j]
+            var label = getValue()['label'][j][i]
             var color_value = getValue()['color_value'][i][j]
             // points.push([x,y,color])
           points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label,"cv":color_value})
@@ -1387,7 +1428,7 @@ function continuous(selector_id, colorscale) {
 
 
 
-      function query(UID){
+      function querys(UID){
 
       $.ajax({
       type: "post",
@@ -1410,7 +1451,8 @@ function continuous(selector_id, colorscale) {
               $('#u60').css('visibility','hidden');
               $('#u61').css('visibility','hidden');
               $('#u62').css('visibility','hidden');
-              document.getElementById('color').value = 'blue'
+              document.getElementById('color').value = 'white'
+              document.getElementById('color_max').value = 'blue'
               document.getElementById('font_size').value = 10
           },
       complete: function(){
@@ -1516,6 +1558,18 @@ continuous("#u61", colorScale1);
       })
       ;
       }
+      function query(UID){
+        if ($("#file_name").text() ==='file not uploaded'){
+          alert('please upload data before training');
+        }
+        else if (document.getElementById('x').value ==='' || document.getElementById('y').value === '' ){
+          alert('both x and y parameter can not be empty');
+        }else if (document.getElementById('x').value < 2 && document.getElementById('y').value < 2 ){
+          alert('both x and y parameter can not less than 2 at same time');
+        }else{
+          querys(UID);
+        }
+      }
 
       function change_font(){
       g.selectAll("text").style("font-size", document.getElementById('font_size').value);
@@ -1523,35 +1577,118 @@ continuous("#u61", colorScale1);
       }
 
 function change_color(){
-      data['color'] = document.getElementById('color').value
+      data['color_min'] = document.getElementById('color').value;
+      data['color_max'] = document.getElementById('color_max').value;
+    var option = document.getElementById('color_max').getElementsByTagName("option");
+    for (var i = 0; i < option.length; i++) {
+      option[i].disabled = option[i].value === document.getElementById('color').value;}
+    var optionm = document.getElementById('color').getElementsByTagName("option");
+    for (var i = 0; i < optionm.length; i++) {
+      optionm[i].disabled = optionm[i].value === document.getElementById('color_max').value;}
 
 
-      if (document.getElementById('color').value === 'blue'){
+
+  if (document.getElementById('color').value === 'white'){
+      if (document.getElementById('color_max').value === 'blue'){
         var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
         .domain([0, 1]);
-      }else if(document.getElementById('color').value === 'red'){
+      }else if(document.getElementById('color_max').value === 'red'){
         var colorScale1 = d3.scaleSequential(d3.interpolateReds)
         .domain([0, 1]);
-      }else if(document.getElementById('color').value === 'green'){
+      }else if(document.getElementById('color_max').value === 'green'){
         var colorScale1 = d3.scaleSequential(d3.interpolateGreens)
         .domain([0, 1]);
-      }else if(document.getElementById('color').value === 'blue to red'){
-        var colorScale1 = d3.scaleSequential(t => d3.interpolateRdBu(1-t))
+      }else if(document.getElementById('color_max').value === 'purple'){
+        var colorScale1 = d3.scaleSequential(d3.interpolatePurples)
         .domain([0, 1]);
       }
+  }
+  else if (document.getElementById('color').value === 'blue') {
+    if (document.getElementById('color_max').value === 'red') {
+      var colorScale1 = d3.scaleSequential(t => d3.interpolateRdBu(1 - t))
+              .domain([0, 1]);
+    }
+    else if (document.getElementById('color_max').value === 'white') {
+      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateBlues(1 - t))
+              .domain([0,1]);
+    }
+        else if (document.getElementById('color_max').value === 'purple') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[0],"white",d3.schemeCategory10[4]]))
+              .domain([0,1]);
+    }
+    else if (document.getElementById('color_max').value === 'green') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[0],"white",d3.schemeCategory10[2]]))
+              .domain([0,1]);
+    }
+  }
+  else if (document.getElementById('color').value === 'green') {
+    if (document.getElementById('color_max').value === 'red') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[3]]))
+              .domain([0,1]);
+    }
+    else if (document.getElementById('color_max').value === 'white') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateGreens(1 - t))
+              .domain([0,1]);
+
+    }
+        else if (document.getElementById('color_max').value === 'purple') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[4]]))
+              .domain([0,1]);
+
+    }
+    else if (document.getElementById('color_max').value === 'blue') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[0]]))
+              .domain([0,1]);
+    }
+  }
+  else if (document.getElementById('color').value === 'red') {
+    if (document.getElementById('color_max').value === 'green') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[2]]))
+              .domain([0,1]);
+    }
+    else if (document.getElementById('color_max').value === 'white') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateReds(1 - t))
+              .domain([0,1]);
+    }
+        else if (document.getElementById('color_max').value === 'purple') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[4]]))
+              .domain([0,1]);
+    }
+    else if (document.getElementById('color_max').value === 'blue') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[0]]))
+              .domain([0,1]);
+    }
+  }
+  else if (document.getElementById('color').value === 'purple') {
+    if (document.getElementById('color_max').value === 'green') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[2]]))
+              .domain([0,1]);
+    }
+    else if (document.getElementById('color_max').value === 'white') {
+
+      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolatePurples(1 - t))
+              .domain([0,1]);
+    }
+        else if (document.getElementById('color_max').value === 'red') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[3]]))
+              .domain([0,1]);
+    }
+    else if (document.getElementById('color_max').value === 'blue') {
+      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[0]]))
+              .domain([0,1]);
+    }
+  }
+
+
 
 
 continuous("#u61", colorScale1);
-
-
-      $.ajax({
-      type: "post",
-      url: "{% url 'som:ChangeColor' %}",
-      dataType: "json",
-      data: JSON.stringify(getValue()),
-
-      success: function as(raw_data) {
-        setValue(raw_data);
         init_dt = get_point();
         point = get_point();
         g.selectAll("path").remove();
@@ -1569,7 +1706,7 @@ continuous("#u61", colorScale1);
           return "#e5b367";
       })
         .attr("stroke-width", "1px")
-        .attr("fill", function(d){ return d.color; })
+        .attr("fill", function(d){ return colorScale1(d.cv); })
                 .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
         .call(_drag)
           .on('mouseover', mouseOver);
@@ -1589,10 +1726,8 @@ continuous("#u61", colorScale1);
           .attr("alignment-baseline", "central")
           .style("font-size", 10)
           .style("fill", "black");
-        // alert(1);
-      }
-      })
-      ;
+
+
       }
 
     </script>

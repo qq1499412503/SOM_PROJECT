@@ -1,5 +1,5 @@
 {% load static %}
-<html>
+<html  style="width: 100%;height: 100%">
   <head>
     <title>Register</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -64,11 +64,20 @@
         </div>
  		<form id="register_form" enctype="multipart/form-data" method="post">
           {% csrf_token %}
+
+
+                  <!-- Unnamed (Rectangle) -->
+        <div id="u7" class="ax_default box_1">
+          <div id="u7_div" class=""></div>
+          <div id="u7_text" class="text " style="visibility: visible">
+            <input type="text" id="u7_register" name="username" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Username" maxlength="10" required>
+              </div>
+        </div>
         <!-- Unnamed (Rectangle) -->
         <div id="u3" class="ax_default box_1">
           <div id="u3_div" class=""></div>
           <div id="u3_text" class="text " style="visibility: visible">
-            <input type="email" id="u3_register" name="email" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Email">
+            <input type="email" id="u3_register" name="email" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Email" required>
               </div>
         </div>
 
@@ -84,7 +93,7 @@
         <div id="u5" class="ax_default box_1">
           <div id="u5_div" class=""></div>
           <div id="u5_text" class="text " style="visibility: visible">
-            <input type="password" id="u5_register" name="password" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Password">
+            <input type="password" id="u5_register" name="password" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Password" minlength="8" required>
               </div>
         </div>
 
@@ -96,14 +105,8 @@
           </div>
         </div>
 
-        <!-- Unnamed (Rectangle) -->
-        <div id="u7" class="ax_default box_1">
-          <div id="u7_div" class=""></div>
-          <div id="u7_text" class="text " style="visibility: visible">
-            <input type="text" id="u7_register" name="username" style="width: 100%;height:100%;border:0; padding-left: 60px;" placeholder="Username">
-              </div>
-        </div>
-        <div style="top:310px;position:absolute;left:calc(50% - 50px);color:red;"> {{ msg }} </div>
+
+        <div style="top:310px;position:absolute;left:calc(50% - 250px);color:red;text-align: center;width:500px"> {{ msg }} </div>
         <!-- Unnamed (Shape) -->
         <div id="u8" class="ax_default icon">
           <img id="u8_img" class="img " src="/media/image/u7.svg"/>
@@ -115,11 +118,11 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-         <div id="u9" class="ax_default button">
+         <div id="u9" class="ax_default button" style="cursor: pointer;"  onclick="document.getElementById('submit_register').click();">
         <div id="u9_div" class=""></div>
         <div id="u9_text" class="text ">
           <input type="submit" id="submit_register" form="register_form" hidden/>
-          <label for="submit_register">Register</label>
+          <label style="cursor: pointer;">Register</label>
         </div>
       </div>
       <!-- Unnamed (Rectangle) -->

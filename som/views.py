@@ -12,7 +12,7 @@ import time
 import json
 from matplotlib import cm, colorbar
 import matplotlib
-
+from django.contrib.auth.decorators import login_required
 
 class QueryUserInfo(APIView):
 
@@ -58,7 +58,7 @@ class QueryUserInfo(APIView):
             try:
                 iteration = int(keydict["iteration"])
             except:
-                iteration = 100
+                iteration = 1000
             neighbour = str(keydict["neighbour"])
             models.neighborhood_function = neighbour
             topology = str(keydict["topology"])
@@ -83,7 +83,7 @@ class QueryUserInfo(APIView):
     def dispatch(self, *args, **kwargs):
         return super(QueryUserInfo, self).dispatch(*args, **kwargs)
 
-
+@login_required(login_url='/user/login/')
 def som_model(request):
     if request.method == "GET":
         content = {'name': 'file not uploaded', "attribute": "no attribute detected", "size": "empty_size"}
@@ -128,11 +128,15 @@ class SaveMap(APIView):
             author = str(keydict["author"])
             vis_name = str(keydict["vis_name"])
             description = str(keydict["description"])
+            min_color = str(keydict["min_color"])
+            max_color = str(keydict["max_color"])
             current_object = dataframe.objects.get(_id=data_id)
             current_object.uid = uid
             current_object.author = author
             current_object.description = description
             current_object.file_name = vis_name
+            current_object.min_color = min_color
+            current_object.max_color = max_color
             current_object.save()
             results = {"code":"200","msg":"successful"}
         return JsonResponse(results, safe=False)
@@ -152,12 +156,17 @@ class SaveAndPublish(APIView):
             author = str(keydict["author"])
             vis_name = str(keydict["vis_name"])
             description = str(keydict["description"])
+            # print(keydict)
+            min_color = str(keydict["min_color"])
+            max_color = str(keydict["max_color"])
             current_object = dataframe.objects.get(_id=data_id)
             current_object.uid = uid
             current_object.author = author
             current_object.description = description
             current_object.file_name = vis_name
             current_object.publish = True
+            current_object.min_color = min_color
+            current_object.max_color = max_color
             current_object.save()
             results = {"code":"200","msg":"successful"}
         return JsonResponse(results, safe=False)

@@ -15,6 +15,8 @@ class dataframe(models.Model):
     description = models.CharField(max_length=200, default=None)
     x = models.IntegerField(default=None)
     y = models.IntegerField(default=None)
+    min_color = models.CharField(max_length=40, default='white')
+    max_color = models.CharField(max_length=40, default='blue')
     class Meta:
         pass
 

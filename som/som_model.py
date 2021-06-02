@@ -47,7 +47,7 @@ class Som:
         self.x = None
         self.y = None
         self.input_len = None
-        self.sigma = 0.6
+        self.sigma = 1.5
         self.lr = 0.05
         self.neighborhood_function = 'gaussian'
         self.topology = 'rectangular'
@@ -155,7 +155,7 @@ class Som:
         weight = []
         color_val = []
         xx, yy = self.model_som.get_euclidean_coordinates()
-        umatrix = self.model_som.distance_map()
+        umatrix = self.model_som.avg_distance(self.model_som.distance_map())
         # print(umatrix.shape)
         weights = self.model_som.get_weights()
         # norm = matplotlib.colors.Normalize(vmin=0, vmax=1)
@@ -171,11 +171,11 @@ class Som:
                 color_value = umatrix[i, j]
                 # print(color_value,i,j)
                 if i % 2 == 0 and j % 2 == 0:
-                    sub_nodes.append('#B8B8B8')
-                    sub_cv.append(0)
+                    # sub_nodes.append('#B8B8B8')
+                    # sub_cv.append(0)
                     ii = int(i/2)
                     jj = int(j/2)
-
+                    # print(j)
                     weight_raw = weights[ii,jj].tolist()
                     weight_process = ""
                     for w in weight_raw:
@@ -183,9 +183,10 @@ class Som:
                     weight_process = "(" + weight_process[:-2] + ")"
                     sub_weight.append(weight_process)
                 else:
-                    sub_nodes.append(color)
-                    sub_cv.append(color_value)
                     sub_weight.append(' ')
+                sub_nodes.append(color)
+                sub_cv.append(color_value)
+
             nodes.append(sub_nodes)
             weight.append(sub_weight)
             color_val.append(sub_cv)
@@ -196,8 +197,8 @@ class Som:
         # print(np.max(umatrix))
         # print(umatrix)
         d_count = 0
-        x_winner = [' ' for a in range(self.x*2)]
-        main_winner = [x_winner for b in range(self.y*2)]
+        x_winner = [' ' for a in range(self.y*2)]
+        main_winner = [x_winner for b in range(self.x*2)]
         if self.label is not None:
             for each_data in self.data:
                 winner = self.model_som.winner(each_data)
@@ -212,7 +213,14 @@ class Som:
                 main_winner[winner[0]*2] = sub_list
                 main_winner[winner[0]*2][winner[1]*2] += ' '
                 d_count += 1
-            map['label'] = main_winner
+        main_winner = np.array(main_winner)
+        for a in range(self.x * 2):
+            for b in range(self.y * 2):
+                if a % 2 == 0 and b % 2 == 0:
+                    if main_winner[a][b] == ' ':
+                        main_winner[a][b] = '*'
+                        # print(b)
+            map['label'] = main_winner.tolist()
             # print(main_winner)
         return map
 

@@ -127,3 +127,19 @@ class Mm(MiniSom):
 
         um = um.sum(axis=2)
         return um/um.max()
+
+  def avg_distance(self,data):
+      for y in range(self._weights.shape[0]*2):
+          for x in range(self._weights.shape[1]*2):
+              if x % 2 == 0 and y % 2 == 0:
+                  if y-1>0:
+                      if x-1>0:
+                          data[y,x]=(data[y,x+1]+data[y,x-1]+data[y+1,x-1]+data[y+1,x]+data[y-1,x]+data[y-1,x-1])/6
+                      else:
+                          data[y, x] = (data[y, x + 1] + data[y, self._weights.shape[1]] + data[y + 1, self._weights.shape[1]] + data[y + 1, x] + data[y - 1, x] + data[y - 1, self._weights.shape[1]]) / 6
+                  else:
+                      if x-1>0:
+                          data[y,x]=(data[y,x+1]+data[y,x-1]+data[y+1,x-1]+data[y+1,x]+data[self._weights.shape[0],x]+data[self._weights.shape[0],x-1])/6
+                      else:
+                          data[y, x] = (data[y, x + 1] + data[y, self._weights.shape[1]] + data[y + 1, self._weights.shape[1]] + data[y + 1, x] + data[self._weights.shape[0], x] + data[self._weights.shape[0], self._weights.shape[1]]) / 6
+      return data

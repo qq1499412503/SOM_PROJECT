@@ -26,7 +26,7 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:100%;
+  width:1920px;
   min-width:1000px;
   height:55px;
   background:inherit;
@@ -45,7 +45,7 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:100%;
+  width:1920px;
   height:55px;
   display:flex;
   min-width:1000px;
@@ -172,7 +172,7 @@ body {
 #m5 {
   border-width:0px;
   position:absolute;
-  right:2%;
+  left:1850px;
   top:9px;
   width:47px;
   height:37px;
@@ -444,9 +444,9 @@ body {
 #m12 {
   border-width:0px;
   position:absolute;
-  right:6%;
+  left:1500px;
   top:16px;
-  width:200px;
+  width:345px;
   height:23px;
   display:flex;
   font-family:'Arial', sans-serif;
