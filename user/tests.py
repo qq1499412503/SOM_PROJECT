@@ -17,6 +17,12 @@ class Pagetest(TestCase):
 
     def setUp(self):
         self.client = Client()
+        # username = "testt"
+        # email = "test1@email.com"
+        # password = "test1234"
+        # users = User.objects.create_user(username, email, password)
+        # users.save()
+        # logged_in = self.client.login(username=username, password=password)
 
     def test_log_in_page(self):
         response = self.client.get('/user/login/')
@@ -51,7 +57,7 @@ class Pagetest(TestCase):
             self.assertEqual(user.email, email)
         except User.DoesNotExist:
             self.assertRaises(ValidationError)
-        self.assertRedirects(response2, '/som/', status_code=302,
+        self.assertRedirects(response2, '/publish/list/', status_code=302,
                              target_status_code=200, fetch_redirect_response=True)
 
 
@@ -131,7 +137,8 @@ class Login_Test(TestCase):
 class Register_Test(TestCase):
 
     def setUp(self):
-        User.objects.create_user('admin', 'admin@email.com', 'admin123456')
+        users = User.objects.create_user('admin', 'admin@email.com', 'admin123456')
+        users.save()
         self.client = Client()
 
     def test_add_admin(self):
@@ -186,7 +193,13 @@ class Profile_view_test(TestCase):
 
     def test_did_not_login(self):
         response = self.client.get('/user/profile/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
+
+    def test_did_login(self):
+        logged_in = self.client.login(username='admin', password='admin123456')
+        response = self.client.get('/user/profile/')
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
 
     def test_profile_view_get(self):
         response_login = self.client.post('/user/login/',{'email':"admin@email.com",'password':"admin123456"})
@@ -207,7 +220,7 @@ class Profile_view_test(TestCase):
         dic = {'did':data_id, 'name':file_name}
         response = self.client.post('/user/profile/',dic)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'view.html.bak')
+        self.assertTemplateUsed(response, 'view.html')
         self.assertIn('som_1'.encode('UTF-8'), response.content)
 
     def test_profile_post_pagen(self):
@@ -224,7 +237,7 @@ class Profile_view_test(TestCase):
             dataframe.objects.create(file_name="som_1"+test_list[i])
             data_id = ObjectId(dataframe.objects.get(file_name="som_1"+test_list[i])._id)
             dic = {"user_id": uid, "data_id": data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
             response2 = self.client.post('/som/save_map', qdic)
 
@@ -253,7 +266,7 @@ class Profile_view_test(TestCase):
             dataframe.objects.create(file_name="som_1"+test_list[i])
             data_id = ObjectId(dataframe.objects.get(file_name="som_1"+test_list[i])._id)
             dic = {"user_id": uid, "data_id": data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
             response2 = self.client.post('/som/save_map', qdic)
 
@@ -282,7 +295,7 @@ class Profile_view_test(TestCase):
             dataframe.objects.create(file_name="som_1" + test_list[i])
             data_id = ObjectId(dataframe.objects.get(file_name="som_1" + test_list[i])._id)
             dic = {"user_id": uid, "data_id": data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
             response2 = self.client.post('/som/save_map', qdic)
 
@@ -315,9 +328,17 @@ class Logout_test(TestCase):
 
     def setUp(self):
         self.client = Client()
+        username = "testt"
+        email = "test1@email.com"
+        password = "test1234"
+        users = User.objects.create_user(username, email, password)
+        users.save()
+        logged_in = self.client.login(username=username, password=password)
 
     def test_logout_get(self):
-        response = self.client.get('/user/logout')
+        response1 = self.client.get('/user/logout',follow=False)
+        self.assertEqual(response1.status_code, 302)
+        response = self.client.get('/user/logout',follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
 

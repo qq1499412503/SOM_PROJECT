@@ -11,6 +11,8 @@ from som.models import dataframe
 from bson.objectid import ObjectId
 import json
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone as tz
+from django.utils.timezone import make_aware
 # Create your views here.
 
 
@@ -19,7 +21,7 @@ from django.contrib.auth.decorators import login_required
 class UpdateUser(APIView):
 
     def post(self, request):
-        print(request.POST)
+        # print(request.POST)
         for key in request.POST:
             keydict = eval(key)
             uid = keydict["user_id"]
@@ -65,7 +67,7 @@ class UpdatePasswd(APIView):
 def get_user(email):
     try:
         user = User.objects.get(email=email)
-        print(user.username)
+        # print(user.username)
         return user.username
     except User.DoesNotExist:
         return None
@@ -73,12 +75,11 @@ def get_user(email):
 
 def check_error_register(username, email, password):
     if username != '' and username is not None:
-    #     try:
-    #         user = User.objects.get(username=username)
-    #         return {"code": "111", "msg": "username existed, please try with another username"}
-    #     except User.DoesNotExist:
-    #         pass
-        pass
+        try:
+            user = User.objects.get(username=username)
+            return {"code": "111", "msg": "username existed, please try with another username"}
+        except User.DoesNotExist:
+            pass
     else:
         return {"code": "222", "msg": "username can not be None"}
     if email != '' and email is not None:
@@ -126,6 +127,8 @@ def register_view(request):
             user = User.objects.create_user(username, email, password)
             user.save()
             user_info = UserInfo(user=user,DOB=datetime.now())
+            # print(make_aware(datetime.now()).tzinfo)
+            # user_info = UserInfo(user=user, DOB=tz.now())
             user_info.save()
             login(request, user)
             return redirect('/publish/list/')
@@ -149,7 +152,7 @@ def profile_view(request):
         return render(request, 'profile.html', content)
     if request.method == "POST":
         if 'did' in request.POST:
-            print(request.POST)
+            # print(request.POST)
             data_id = ObjectId(str(request.POST['did']))
             current_object = dataframe.objects.get(_id=data_id)
             file_name = current_object.file_name

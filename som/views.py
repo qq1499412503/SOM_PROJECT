@@ -181,7 +181,7 @@ class ChangeColor(APIView):
         for key in request.POST:
             keydict = eval(key)
             # print(request.POST['color'])
-            print(len(keydict['nodes'][0]))
+            # print(len(keydict['nodes'][0]))
             color = []
             for i in range(len(keydict['nodes'])):
                 sub_color = []
