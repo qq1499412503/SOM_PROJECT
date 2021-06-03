@@ -5,4 +5,4 @@ before_install:
 script:
 #   - docker-compose run django cd /SOM_PROJECT && ls
 #   - docker-compose run django ls
-  - docker-compose run django service mongodb start && python ./SOM_PROJECT/manage.py test som
+  - docker-compose run django python ./SOM_PROJECT/manage.py test som
