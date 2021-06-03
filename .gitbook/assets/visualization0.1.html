@@ -1,6 +1,6 @@
 {% load static %}
 
-<html id="html">
+<html>
   <head>
     <title>Visualization</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -41,17 +41,6 @@
     <script src="{% static 'js/document.js' %}"></script>
     <script src="{% static 'js/data.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-  window.onload=function (){
-    var width = $(window).width();
-    var height = $(window).height();
-    var scaleX = width/1920;
-    var scaleY = height/940;
-    document.getElementById('html').style.transform = "scale("+scaleX+","+scaleY+")";
-    document.getElementById('html').style.transformOrigin ='0 top';
-  }
-
-</script>
 <style>
   div.tooltip {
     position: absolute;
@@ -126,12 +115,12 @@
       <form id="upload_form" enctype="multipart/form-data" method="post">
           {% csrf_token %}
 <!--          {{ form.upload }}-->
-      <div id="m7" class="ax_default button" onclick="document.getElementById('upload').click();" style="cursor: pointer;">
+      <div id="m7" class="ax_default button">
         <div id="m7_div" class=""></div>
         <div id="m7_text" class="text ">
 
          <input type="file" name="data" id="upload" onchange="document.getElementById('m16_input').value=document.getElementById('upload').files[0].name" hidden/>
-         <label style="cursor: pointer;">Choose file</label>
+         <label for="upload">Choose file</label>
 
         </div>
       </div>
@@ -147,11 +136,11 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="m9" class="ax_default button"  onclick="document.getElementById('update_log_button').click();" style="cursor: pointer;">
+      <div id="m9" class="ax_default button">
         <div id="m9_div" class=""></div>
         <div id="m9_text" class="text ">
           <input value="train" name="train"  id="update_log_button" type="button" onclick="query('111')" hidden/>
-          <label style="cursor: pointer;">train</label>
+          <label for="update_log_button">train</label>
         </div>
       </div>
 
@@ -166,7 +155,7 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="m11" class="ax_default button" onclick="pre_save()" style="cursor: pointer">
+      <div id="m11" class="ax_default button" onclick="pre_save()">
         <div id="m11_div" class=""></div>
         <div id="m11_text" class="text ">
           <p><span>Save</span></p>
@@ -197,10 +186,7 @@
       data: JSON.stringify({user_id: "{{ user.id }}",data_id:"{{ data_id }}",
         vis_name:document.getElementById('vis_name').value,
         author:document.getElementById('author').value,
-        description:document.getElementById('description').value,
-        min_color:document.getElementById('color').value,
-        max_color:document.getElementById('color_max').value
-      }),
+        description:document.getElementById('description').value}),
       complete: function(){
               $('#mv53').css('visibility','hidden');
           },
@@ -229,10 +215,7 @@
       data: JSON.stringify({user_id: "{{ user.id }}",data_id:"{{ data_id }}",
         vis_name:document.getElementById('vis_name').value,
         author:document.getElementById('author').value,
-        description:document.getElementById('description').value,
-        min_color:document.getElementById('color').value,
-        max_color:document.getElementById('color_max').value
-      }),
+        description:document.getElementById('description').value}),
       complete: function(){
               $('#mv53').css('visibility','hidden');
           },
@@ -256,7 +239,7 @@
         <div id="m12_div" class=""></div>
         <div id="m12_text" class="text ">
           {% if user.is_authenticated %}
-          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'som:som_model' %}">New Project,</a>&nbsp;&nbsp;<a href="{% url 'user:logout' %}">logout</a></p>
+          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'user:logout' %}">logout</a></p>
         {% endif %}
         </div>
       </div>
@@ -280,23 +263,13 @@
 
 
       <!-- Unnamed (Rectangle) -->
-      <div id="m15" class="ax_default button"  onclick="upload()" style="cursor: pointer;">
+      <div id="m15" class="ax_default button">
         <div id="m15_div" class=""></div>
         <div id="m15_text" class="text ">
           <input type="submit" id="submit_upload" form="upload_form" hidden/>
-          <label style="cursor: pointer;">upload</label>
+          <label for="submit_upload">upload</label>
         </div>
       </div>
-
-      <script>
-        function upload(){
-          if (document.getElementById('m16_input').value === ''){
-            alert('please select file before upload');
-          }else{
-            document.getElementById('submit_upload').click();
-          }
-        }
-      </script>
 
       <!-- Unnamed (Text Field) -->
       <div id="m16" class="ax_default text_field">
@@ -360,7 +333,7 @@
         <div id="m25" class="ax_default table_cell">
           <img id="m25_img" class="img " src="/media/image/u25.png"/>
           <div id="m25_text" class="text ">
-            <p><span id="file_name">{{ name }}</span></p>
+            <p><span>{{ name }}</span></p>
           </div>
         </div>
 
@@ -477,7 +450,7 @@
         <div id="m40" class="ax_default table_cell">
           <img id="m40_img" class="img " src="/media/image/u36.png"/>
           <div id="m40_text" class="text " style="visibility: visible">
-            <input type="text" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1.5 (double)">
+            <input type="text" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.3 (double)">
           </div>
         </div>
 
@@ -493,7 +466,7 @@
         <div id="m42" class="ax_default table_cell">
           <img id="m42_img" class="img " src="/media/image/u36.png"/>
           <div id="m42_text" class="text " style="visibility: visible">
-            <input type="text" id="LR" name="LR" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.05 (double)">
+            <input type="text" id="LR" name="LR" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.5 (double)">
           </div>
         </div>
 
@@ -509,7 +482,7 @@
         <div id="m44" class="ax_default table_cell">
           <img id="m44_img" class="img " src="/media/image/u36.png"/>
           <div id="m44_text" class="text " style="visibility: visible">
-            <input type="text" id="Iteration" name="Iteration" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1000 (int)">
+            <input type="text" id="Iteration" name="Iteration" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 100 (int)">
           </div>
         </div>
 
@@ -547,7 +520,7 @@
         <div id="m48" class="ax_default table_cell">
           <img id="m48_img" class="img " src="/media/image/u36.png"/>
           <div id="m48_text" class="text " style="visibility: visible">
-            {% with 'hexagonal' as topology_list %}
+            {% with 'rectangular hexagonal' as topology_list %}
             <select class="form-control" id="topology_option" name="class_name" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;">
                 {% for item in topology_list.split %}
                     <option>{{ item }}</option>
@@ -619,7 +592,7 @@
         <div id="u56" class="ax_default table_cell">
           <img id="u56_img" class="img " src="/media/image/ua56.png"/>
           <div id="u56_text" class="text ">
-            <p><span>Color min->max</span></p>
+            <p><span>Color</span></p>
           </div>
         </div>
 
@@ -627,25 +600,12 @@
         <div id="u57" class="ax_default table_cell">
           <img id="u57_img" class="img " src="/media/image/ua57.png"/>
           <div id="u57_text" class="text " >
-            <div id="min_color" STYLE="float:left;left:0px;width:50%;height:100%;position: relative;">
             <select class="form-control" id="color" name="color" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;" onchange="change_color()">
-              <option>white</option>
-              <option disabled>blue</option>
-              <option>red</option>
-              <option>green</option>
-              <option>purple</option>
-
-            </select>
-          </div>
-            <div id="max_color" STYLE="float:right;right:0px;width:50%;height:100%;position: relative;">
-            <select class="form-control" id="color_max" name="color_max" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align-last:center;" onchange="change_color()">
-              <option disabled>white</option>
               <option>blue</option>
               <option>red</option>
               <option>green</option>
-              <option>purple</option>
+              <option>blue to red</option>
             </select>
-          </div>
           </div>
 
         </div>
@@ -673,7 +633,10 @@
 
       <!-- Unnamed (Rectangle) -->
       <div id="u61" class="ax_default box_1" style="visibility: hidden">
-
+        <div id="u61_div" class=""></div>
+        <div id="u61_text" class="text " style="display:none; visibility: hidden">
+          <p></p>
+        </div>
       </div>
 
       <!-- Unnamed (Rectangle) -->
@@ -708,14 +671,14 @@
             </div>
 
             <!-- Unnamed (Rectangle) -->
-            <div id="m56" class="ax_default primary_button" onclick="save_map()" style="cursor: pointer;">
+            <div id="m56" class="ax_default primary_button" onclick="save_map()">
               <div id="m56_div" class=""></div>
               <div id="m56_text" class="text ">
                 <p><span>Save</span></p>
               </div>
             </div>
 
-            <div id="m561" style="left:600px;position:absolute;color: #0000FF;cursor: pointer;" onclick="exit_save()">
+            <div id="m561" style="left:600px;position:absolute" onclick="exit_save()">
               <p><span>Exit</span></p>
             </div>
 
@@ -770,17 +733,13 @@
         </div>
       </div>
 
-
       <!--      <script src="{% static 'js/sigma.js-1.2.1/plugins/sigma.parsers.json/sigma.parsers.json.js' %}"></script>-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
 <!--    <script src="http://benschmidt.org/colorbar/colorbar.js"></script>-->
-<!--    <script src="{% static 'js/cb.js' %}"></script>-->
-    <script src="https://d3js.org/d3-color.v2.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v2.min.js"></script>
+    <script src="{% static 'js/cb.js' %}"></script>
     <script type="text/javascript">
 
 
@@ -842,11 +801,10 @@ function get_point(){
         for (var j = 0; j < MapColumns; j++) {
             var x = hexRadius * j * Math.sqrt(3)
             if(i%2 === 1) x += (hexRadius * Math.sqrt(3))/2
-            if((i-2)%4===0) x += (hexRadius * Math.sqrt(3))
             var y = hexRadius * i * 1.5
             var color =  getValue()['nodes'][i][j]
             var weights = getValue()['weights'][i][j]
-            var label = getValue()['label'][j][i]
+            var label = getValue()['label'][i][j]
             var color_value = getValue()['color_value'][i][j]
             // points.push([x,y,color])
           points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label,"cv":color_value})
@@ -1069,30 +1027,22 @@ var initx = 34.78;
 var w;
 var h;
 var inity = 31.03;
-// var dx =0;
-// var lw =1;
 function moveMap(d){
   var translate = getTranslation(d3.select(this).attr("transform"));
       x = d3.event.dx+translate[0];
       y = d3.event.dy+translate[1];
-
-      // x = Math.max(Math.min(-w*lw),Math.min(-w*lw),d3.event.dx+translate[0]);
-      // x = Math.min(Math.max(w),Math.max(w),x);
-      // y = Math.max(Math.min(-h),Math.min(-h),y);
-      // y = Math.min(Math.max(h),Math.max(h),y);
-      // dx += d3.event.dx
-
+      // x = Math.max(Math.min(-width1*1.9),Math.min(-width1*1.9),x);
+      // x = Math.min(Math.max(width1*1.9),Math.max(width1*1.9),x);
+      // y = Math.max(Math.min(-width1*1.5),Math.min(-width1*1.5),y);
+      // y = Math.min(Math.max(width1*1.5),Math.max(width1*1.5),y);
       g.selectAll("path")
       .attr("transform", "translate(" + x + "," + y + ")");
       g.selectAll("text")
       .attr("transform", "translate(" + x + "," + y + ")");
-// console.log(dx);
+      console.log(y);
       // ssss
-  // while (x-initx>w) {
-while (x-initx>=w) {
-  console.log(x);
-// lw += 1;
-//   dx=0;
+  // while (x-initx<-30)
+  while (x-initx>w) {
     initx = x;
     g.selectAll("path").data(right_r(init_dt)).attr("d", function (d) {
       return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
@@ -1356,79 +1306,7 @@ function mouseOut(d, i) {
     d3.select(this).classed('over', false);
     a.style("visibility", "hidden");
 }
-
-function continuous(selector_id, colorscale) {
-  d3.select('canvas').remove();
-  d3.select(selector_id).select('svg').remove();
-  var legendheight = 588,
-      legendwidth = 50,
-      margin = {top: 10, right: 25, bottom: 10, left: 2};
-
-  var canvas = d3.select(selector_id)
-    .style("height", legendheight + "px")
-    .style("width", legendwidth + "px")
-    .append("canvas")
-    .attr("height", legendheight - margin.top - margin.bottom)
-    .attr("width", 1)
-    .style("height", (legendheight - margin.top - margin.bottom) + "px")
-    .style("width", (legendwidth - margin.left - margin.right) + "px")
-    .style("border", "1px solid #000")
-    .style("position", "absolute")
-    .style("top", (margin.top) + "px")
-    .style("left", (margin.left) + "px")
-    .node();
-
-  var ctx = canvas.getContext("2d");
-
-  var legendscale = d3.scaleLinear()
-    .range([1, legendheight - margin.top - margin.bottom])
-    .domain(colorscale.domain());
-
-  // image data hackery based on http://bl.ocks.org/mbostock/048d21cf747371b11884f75ad896e5a5
-  var image = ctx.createImageData(1, legendheight);
-  d3.range(legendheight).forEach(function(i) {
-    var c = d3.rgb(colorscale(legendscale.invert(i)));
-    image.data[4*i] = c.r;
-    image.data[4*i + 1] = c.g;
-    image.data[4*i + 2] = c.b;
-    image.data[4*i + 3] = 255;
-  });
-  ctx.putImageData(image, 0, 0);
-
-  // A simpler way to do the above, but possibly slower. keep in mind the legend width is stretched because the width attr of the canvas is 1
-  // See http://stackoverflow.com/questions/4899799/whats-the-best-way-to-set-a-single-pixel-in-an-html5-canvas
-  /*
-  d3.range(legendheight).forEach(function(i) {
-    ctx.fillStyle = colorscale(legendscale.invert(i));
-    ctx.fillRect(0,i,1,1);
-  });
-  */
-
-  var legendaxis = d3.axisRight()
-    .scale(legendscale)
-    .tickSize(6)
-    .ticks(8);
-
-  var svg = d3.select(selector_id)
-    .append("svg")
-    .attr("height", (legendheight) + "px")
-    .attr("width", (legendwidth) + "px")
-    .style("position", "absolute")
-    .style("left", "0px")
-    .style("top", "0px")
-
-  svg
-    .append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(" + (legendwidth - margin.left - margin.right + 3) + "," + (margin.top) + ")")
-    .call(legendaxis);
-
-  d3.select('defs').remove();
-};
-
-
-
-      function querys(UID){
+      function query(UID){
 
       $.ajax({
       type: "post",
@@ -1451,9 +1329,7 @@ function continuous(selector_id, colorscale) {
               $('#u60').css('visibility','hidden');
               $('#u61').css('visibility','hidden');
               $('#u62').css('visibility','hidden');
-              document.getElementById('color').value = 'white'
-              document.getElementById('color_max').value = 'blue'
-              document.getElementById('font_size').value = 10
+              document.getElementById('color').value = 'blue'
           },
       complete: function(){
               $('#m14_img').css('visibility','hidden');
@@ -1472,6 +1348,17 @@ function continuous(selector_id, colorscale) {
       // l = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       a = d3.select("body").append("div").classed('tooltip', true).style("visibility", "hidden");
 
+// myScale = d3.scaleLinear().range(["red","white","blue"]).domain([0,4,25])
+//
+// colorbar = Colorbar()
+// 	.origin([15,60])
+// 	.scale(myScale)
+// 	.orient("vertical")
+//
+// placeholder = "#u61"
+//
+// colorbarObject = d3.select(placeholder)
+//     .call(colorbar)
 
 
 
@@ -1481,32 +1368,32 @@ function continuous(selector_id, colorscale) {
 
 
 
-      MapColumns = col()*2;
-      MapRows = row()*2;
+      MapColumns = col();
+      MapRows = row();
       hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
       height/((MapRows + 1/3) * 1.5)]);
       width1 = MapColumns*hexRadius*Math.sqrt(3);
       height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
-      // h = hexRadius  * 1.5;
-      h = (height1/(MapRows/2))/2;
-      //   h = height/((MapRows + 1/3) * 1.5);
-var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
-  .domain([0, 1]);
-
-continuous("#u61", colorScale1);
-
-
-
-
-
-
+      h = hexRadius  * 1.5;
+        // x = d3.scaleLinear()
+        // .domain([0, 20])
+        // .range([0, (width1/MapColumns)*20]);
+        // y = d3.scaleLinear()
+        // .domain([0, MapRows])
+        // .range([height1, 0]);
+      // xAxis =l.append("g")
+      // .attr("class", "axis axis--x")
+      // .attr("transform", "translate(0," + height + ")")
+      // .call(d3.axisBottom(x));
+      // yAxis = l.append("g")
+      // .attr("class", "axis axis--y")
+      // .call(d3.axisLeft(y));
 
       a.classed('tooltip', true);
       init_dt = get_point();
       // var point = get_point();
       var point = get_point();
       w = (width/((MapColumns + 0.5) * Math.sqrt(3)))/2;
-        // w = width1/MapColumns
       g.append("clipPath")
       .attr("id", "clip")
       .append("rect")
@@ -1558,18 +1445,6 @@ continuous("#u61", colorScale1);
       })
       ;
       }
-      function query(UID){
-        if ($("#file_name").text() ==='file not uploaded'){
-          alert('please upload data before training');
-        }
-        else if (document.getElementById('x').value ==='' || document.getElementById('y').value === '' ){
-          alert('both x and y parameter can not be empty');
-        }else if (document.getElementById('x').value < 2 && document.getElementById('y').value < 2 ){
-          alert('both x and y parameter can not less than 2 at same time');
-        }else{
-          querys(UID);
-        }
-      }
 
       function change_font(){
       g.selectAll("text").style("font-size", document.getElementById('font_size').value);
@@ -1577,118 +1452,16 @@ continuous("#u61", colorScale1);
       }
 
 function change_color(){
-      data['color_min'] = document.getElementById('color').value;
-      data['color_max'] = document.getElementById('color_max').value;
-    var option = document.getElementById('color_max').getElementsByTagName("option");
-    for (var i = 0; i < option.length; i++) {
-      option[i].disabled = option[i].value === document.getElementById('color').value;}
-    var optionm = document.getElementById('color').getElementsByTagName("option");
-    for (var i = 0; i < optionm.length; i++) {
-      optionm[i].disabled = optionm[i].value === document.getElementById('color_max').value;}
+      data['color'] = document.getElementById('color').value
 
+      $.ajax({
+      type: "post",
+      url: "{% url 'som:ChangeColor' %}",
+      dataType: "json",
+      data: JSON.stringify(getValue()),
 
-
-  if (document.getElementById('color').value === 'white'){
-      if (document.getElementById('color_max').value === 'blue'){
-        var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
-        .domain([0, 1]);
-      }else if(document.getElementById('color_max').value === 'red'){
-        var colorScale1 = d3.scaleSequential(d3.interpolateReds)
-        .domain([0, 1]);
-      }else if(document.getElementById('color_max').value === 'green'){
-        var colorScale1 = d3.scaleSequential(d3.interpolateGreens)
-        .domain([0, 1]);
-      }else if(document.getElementById('color_max').value === 'purple'){
-        var colorScale1 = d3.scaleSequential(d3.interpolatePurples)
-        .domain([0, 1]);
-      }
-  }
-  else if (document.getElementById('color').value === 'blue') {
-    if (document.getElementById('color_max').value === 'red') {
-      var colorScale1 = d3.scaleSequential(t => d3.interpolateRdBu(1 - t))
-              .domain([0, 1]);
-    }
-    else if (document.getElementById('color_max').value === 'white') {
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateBlues(1 - t))
-              .domain([0,1]);
-    }
-        else if (document.getElementById('color_max').value === 'purple') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[0],"white",d3.schemeCategory10[4]]))
-              .domain([0,1]);
-    }
-    else if (document.getElementById('color_max').value === 'green') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[0],"white",d3.schemeCategory10[2]]))
-              .domain([0,1]);
-    }
-  }
-  else if (document.getElementById('color').value === 'green') {
-    if (document.getElementById('color_max').value === 'red') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[3]]))
-              .domain([0,1]);
-    }
-    else if (document.getElementById('color_max').value === 'white') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateGreens(1 - t))
-              .domain([0,1]);
-
-    }
-        else if (document.getElementById('color_max').value === 'purple') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[4]]))
-              .domain([0,1]);
-
-    }
-    else if (document.getElementById('color_max').value === 'blue') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[0]]))
-              .domain([0,1]);
-    }
-  }
-  else if (document.getElementById('color').value === 'red') {
-    if (document.getElementById('color_max').value === 'green') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[2]]))
-              .domain([0,1]);
-    }
-    else if (document.getElementById('color_max').value === 'white') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateReds(1 - t))
-              .domain([0,1]);
-    }
-        else if (document.getElementById('color_max').value === 'purple') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[4]]))
-              .domain([0,1]);
-    }
-    else if (document.getElementById('color_max').value === 'blue') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[0]]))
-              .domain([0,1]);
-    }
-  }
-  else if (document.getElementById('color').value === 'purple') {
-    if (document.getElementById('color_max').value === 'green') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[2]]))
-              .domain([0,1]);
-    }
-    else if (document.getElementById('color_max').value === 'white') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolatePurples(1 - t))
-              .domain([0,1]);
-    }
-        else if (document.getElementById('color_max').value === 'red') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[3]]))
-              .domain([0,1]);
-    }
-    else if (document.getElementById('color_max').value === 'blue') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[0]]))
-              .domain([0,1]);
-    }
-  }
-
-
-
-
-continuous("#u61", colorScale1);
+      success: function as(raw_data) {
+        setValue(raw_data);
         init_dt = get_point();
         point = get_point();
         g.selectAll("path").remove();
@@ -1706,7 +1479,7 @@ continuous("#u61", colorScale1);
           return "#e5b367";
       })
         .attr("stroke-width", "1px")
-        .attr("fill", function(d){ return colorScale1(d.cv); })
+        .attr("fill", function(d){ return d.color; })
                 .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
         .call(_drag)
           .on('mouseover', mouseOver);
@@ -1726,8 +1499,10 @@ continuous("#u61", colorScale1);
           .attr("alignment-baseline", "central")
           .style("font-size", 10)
           .style("fill", "black");
-
-
+        // alert(1);
+      }
+      })
+      ;
       }
 
     </script>

@@ -10,6 +10,9 @@ from datetime import datetime, timezone
 from som.models import dataframe
 from bson.objectid import ObjectId
 import json
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone as tz
+from django.utils.timezone import make_aware
 # Create your views here.
 
 
@@ -18,7 +21,7 @@ import json
 class UpdateUser(APIView):
 
     def post(self, request):
-        print(request.POST)
+        # print(request.POST)
         for key in request.POST:
             keydict = eval(key)
             uid = keydict["user_id"]
@@ -64,7 +67,7 @@ class UpdatePasswd(APIView):
 def get_user(email):
     try:
         user = User.objects.get(email=email)
-        print(user.username)
+        # print(user.username)
         return user.username
     except User.DoesNotExist:
         return None
@@ -74,15 +77,15 @@ def check_error_register(username, email, password):
     if username != '' and username is not None:
         try:
             user = User.objects.get(username=username)
-            return {"code": "111", "msg": "username existed"}
+            return {"code": "111", "msg": "username existed, please try with another username"}
         except User.DoesNotExist:
             pass
     else:
-        return {"code": "222", "msg": "username error or username existed"}
+        return {"code": "222", "msg": "username can not be None"}
     if email != '' and email is not None:
         try:
             user = User.objects.get(email=email)
-            return {"code": "333", "msg": "email existed"}
+            return {"code": "333", "msg": "email existed, please try with another email"}
         except User.DoesNotExist:
             pass
     else:
@@ -90,7 +93,7 @@ def check_error_register(username, email, password):
     if password != '' and password is not None and len(password) >= 8:
         pass
     else:
-        return {"code": "555", "msg": "password error"}
+        return {"code": "555", "msg": "password should be at least 8 char"}
     return {"code": "200", "msg": "all correct"}
 
 
@@ -106,9 +109,9 @@ def login_view(request):
             #print('yes')
             login(request, user)
 
-            return redirect('/som/')
+            return redirect('/publish/list')
         else:
-            content = {"code":"164" ,"msg": "username or password incorrect"}
+            content = {"code":"164" ,"msg": "username or password incorrect, please retry"}
             return render(request, 'login.html', content)
 
 
@@ -124,14 +127,16 @@ def register_view(request):
             user = User.objects.create_user(username, email, password)
             user.save()
             user_info = UserInfo(user=user,DOB=datetime.now())
+            # print(make_aware(datetime.now()).tzinfo)
+            # user_info = UserInfo(user=user, DOB=tz.now())
             user_info.save()
             login(request, user)
-            return redirect('/som/')
+            return redirect('/publish/list/')
         else:
             return render(request, 'register.html', verify)
 
 
-
+@login_required(login_url='/user/login/')
 def profile_view(request):
     if request.user.is_authenticated:
         uid = request.user.id
@@ -142,11 +147,12 @@ def profile_view(request):
     if request.method == "GET":
         data = dataframe.objects.filter(uid=uid).order_by('-time')[:5]
         # for a in data:
-            # print(a._id,a.file_name,a.author,a.description)
+        #     print(a._id,a.file_name,a.author,a.description)
         content = {"UID": uid, "username": request.user.username, "mail_address": request.user.email, "phone_number": current_user.phone_number , "DOB":current_user.DOB.strftime('%Y-%m-%d'), "data":data, "page":"0"}
         return render(request, 'profile.html', content)
     if request.method == "POST":
         if 'did' in request.POST:
+            # print(request.POST)
             data_id = ObjectId(str(request.POST['did']))
             current_object = dataframe.objects.get(_id=data_id)
             file_name = current_object.file_name
@@ -158,7 +164,9 @@ def profile_view(request):
             map = json.dumps(dict(current_object.map))
             x = current_object.x
             y = current_object.y
-            content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y }
+            min_color = current_object.min_color
+            max_color = current_object.max_color
+            content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y, "min_color":min_color,"max_color":max_color }
             return render(request, 'view.html', content)
         elif 'page_n' in request.POST:
             page = int(request.POST["page_n"])
@@ -184,4 +192,4 @@ def profile_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'login.html')
+    return redirect('/user/login/')

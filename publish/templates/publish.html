@@ -1,46 +1,28 @@
 {% load static %}
 {% load template %}
-<html>
+<html id="html">
   <head>
     <title>publish</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link href="{% static 'css/axure_rp_page.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/pstyle.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/pstyles.css' %}" type="text/css" rel="stylesheet"/>
     <script src="{% static 'js/scripts/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/axQuery.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/globals.js' %}"></script>
-    <script src="{% static 'js/scripts/axutils.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/annotation.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/axQuery.std.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/doc.js' %}"></script>
-    <script src="{% static 'js/scripts/messagecenter.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/events.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/recording.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/action.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/expr.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/geometry.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/flyout.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/model.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/repeater.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/sto.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/utils.temp.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/variables.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/drag.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/move.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/visibility.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/style.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/adaptive.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/tree.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/init.temp.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/legacy.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/viewer.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/math.js' %}"></script>
-    <script src="{% static 'js/scripts/axure/jquery.nicescroll.min.js' %}"></script>
-    <script src="{% static 'js/document.js' %}"></script>
-    <script src="{% static 'js/data.js' %}"></script>
+<!--    <script src="{% static 'js/document.js' %}"></script>-->
+<!--    <script src="{% static 'js/data.js' %}"></script>-->
+<script>
+  window.onload=function (){
+    var width = $(window).width();
+    var height = $(window).height();
+    var scaleX = width/1920;
+    var scaleY = height/940;
+    document.getElementById('html').style.transform = "scale("+scaleX+","+scaleY+")";
+    document.getElementById('html').style.transformOrigin ='0 top';
+  }
 
+</script>
   </head>
   <body>
     <div id="base" class="">
@@ -91,7 +73,9 @@
 
       <!-- Unnamed (Shape) -->
       <div id="p5" class="ax_default icon">
+        <a href="{% url 'publish:list' %}">
         <img id="p5_img" class="img " src="/media/image/p5.svg"/>
+          </a>
         <div id="p5_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
@@ -154,8 +138,8 @@
         <div id="p48" class="ax_default box_1" style="top:calc(90px*{{ forloop.counter0 }})">
           <img id="p48_img" class="img " src="/media/image/p48.png"/>
           <div id="p48_text" class="text ">
-          <input name="fname"  id="view_button" type="submit" form="{{ forloop.counter0 }}" hidden/>
-                <label for="view_button">view</label>
+          <input name="fname"  id="view_button+{{ forloop.counter0 }}" type="submit" form="{{ forloop.counter0 }}" hidden/>
+                <label for="view_button+{{ forloop.counter0 }}">view</label>
         </div>
         </div>
         {% endfor %}
@@ -206,6 +190,6 @@
 </script>
 
     </div>
-    <script src="{% static 'js/scripts/axure/ios.js' %}"></script>
+
   </body>
 </html>

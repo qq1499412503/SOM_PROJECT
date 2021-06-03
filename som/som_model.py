@@ -14,7 +14,7 @@ from bokeh.io import curdoc, show, output_notebook
 from bokeh.transform import factor_mark, factor_cmap
 from bokeh.models import ColumnDataSource, HoverTool
 from bokeh.plotting import figure, output_file
-
+from .ecsom import *
 #
 #
 # for centroid in som.get_weights():
@@ -47,8 +47,8 @@ class Som:
         self.x = None
         self.y = None
         self.input_len = None
-        self.sigma = 0.3
-        self.lr = 0.5
+        self.sigma = 1.5
+        self.lr = 0.05
         self.neighborhood_function = 'gaussian'
         self.topology = 'rectangular'
         self.activation_distance = 'euclidean'
@@ -66,11 +66,11 @@ class Som:
 
     def model(self):
         if self.random_seed is not None:
-            self.model_som = MiniSom(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma, learning_rate=self.lr,
+            self.model_som = Mm(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma, learning_rate=self.lr,
                                      neighborhood_function=self.neighborhood_function,topology=self.topology,
                                      activation_distance=self.activation_distance,random_seed=self.random_seed)
         else:
-            self.model_som = MiniSom(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma,
+            self.model_som = Mm(x=self.x, y=self.y, input_len=self.input_len, sigma=self.sigma,
                                      learning_rate=self.lr,
                                      neighborhood_function=self.neighborhood_function, topology=self.topology,
                                      activation_distance=self.activation_distance)
@@ -79,50 +79,148 @@ class Som:
     def fit(self, epoch):
         self.model_som.train(self.data, epoch)
 
+    # def process_map(self):
+    #     map={}
+    #     nodes = []
+    #     weight = []
+    #     color_val = []
+    #     xx, yy = self.model_som.get_euclidean_coordinates()
+    #     umatrix = self.model_som.distance_map()
+    #     # print(umatrix.shape)
+    #     weights = self.model_som.get_weights()
+    #     for j in range(weights.shape[1]):
+    #         sub_nodes = []
+    #         sub_weight = []
+    #         sub_cv = []
+    #         for i in range(weights.shape[0]):
+    #             color = matplotlib.colors.rgb2hex(cm.Blues(umatrix[i, j]))
+    #             color_value = umatrix[i, j]
+    #             sub_nodes.append(color)
+    #             sub_cv.append(color_value)
+    #             weight_raw = weights[i,j].tolist()
+    #             weight_process = ""
+    #             for w in weight_raw:
+    #                 weight_process = weight_process + str(w) + ', '
+    #             weight_process = "(" + weight_process[:-2] + ")"
+    #             sub_weight.append(weight_process)
+    #         nodes.append(sub_nodes)
+    #         weight.append(sub_weight)
+    #         color_val.append(sub_cv)
+    #     map['nodes'] = nodes
+    #     map['weights'] = weight
+    #     map['color_value'] = color_val
+    #     # print(map)
+    #     d_count = 0
+    #     x_winner = [' ' for a in range(self.x)]
+    #     main_winner = [x_winner for b in range(self.y)]
+    #     if self.label is not None:
+    #         for each_data in self.data:
+    #             winner = self.model_som.winner(each_data)
+    #             # print(winner)
+    #             # print(str(self.label[d_count]))
+    #             # print('-----------------')
+    #             sub_str = main_winner[winner[0]][winner[1]] + str(self.label[d_count])
+    #
+    #             sub_list = main_winner[winner[0]][:]
+    #             sub_list[winner[1]] = sub_str
+    #             # print(sub_list)
+    #             main_winner[winner[0]] = sub_list
+    #             main_winner[winner[0]][winner[1]] += ' '
+    #             d_count += 1
+    #         map['label'] = main_winner
+    #         # print(main_winner)
+    #     return map
+
+    # def get_max(self, arrays):
+    #     value = 0
+    #     for j in range(arrays.shape[1]):
+    #         for i in range(arrays.shape[0]):
+    #             if arrays[i, j] > value:
+    #                 value = arrays[i, j]
+    #                 print(value,i,j)
+    #     return value
+    #
+    #
+    # def get_min(self, arrays):
+    #     value = 1
+    #     for j in range(arrays.shape[1]):
+    #         for i in range(arrays.shape[0]):
+    #             if arrays[i, j] < value:
+    #                 value = arrays[i, j]
+    #     return value
+
     def process_map(self):
         map={}
         nodes = []
         weight = []
+        color_val = []
         xx, yy = self.model_som.get_euclidean_coordinates()
-        umatrix = self.model_som.distance_map()
+        umatrix = self.model_som.avg_distance(self.model_som.distance_map())
+        # print(umatrix.shape)
         weights = self.model_som.get_weights()
-        for j in range(weights.shape[1]):
+        # norm = matplotlib.colors.Normalize(vmin=0, vmax=1)
+        # cmap = cm.Blues
+        # m = cm.ScalarMappable(norm=norm, cmap=cmap)
+        for j in range(weights.shape[1]*2):
             sub_nodes = []
             sub_weight = []
-            for i in range(weights.shape[0]):
+            sub_cv = []
+            for i in range(weights.shape[0]*2):
+                # color = matplotlib.colors.rgb2hex(cmap(norm(umatrix[i, j])))
                 color = matplotlib.colors.rgb2hex(cm.Blues(umatrix[i, j]))
+                color_value = umatrix[i, j]
+                # print(color_value,i,j)
+                if i % 2 == 0 and j % 2 == 0:
+                    # sub_nodes.append('#B8B8B8')
+                    # sub_cv.append(0)
+                    ii = int(i/2)
+                    jj = int(j/2)
+                    # print(j)
+                    weight_raw = weights[ii,jj].tolist()
+                    weight_process = ""
+                    for w in weight_raw:
+                        weight_process = weight_process + str(w) + ', '
+                    weight_process = "(" + weight_process[:-2] + ")"
+                    sub_weight.append(weight_process)
+                else:
+                    sub_weight.append(' ')
                 sub_nodes.append(color)
-                weight_raw = weights[i,j].tolist()
-                weight_process = ""
-                for w in weight_raw:
-                    weight_process = weight_process + str(w) + ' '
-                sub_weight.append(weight_process)
+                sub_cv.append(color_value)
+
             nodes.append(sub_nodes)
             weight.append(sub_weight)
+            color_val.append(sub_cv)
+
         map['nodes'] = nodes
         map['weights'] = weight
-        # print(map)
+        map['color_value'] = color_val
+        # print(np.max(umatrix))
+        # print(umatrix)
         d_count = 0
-        x_winner = [' ' for a in range(self.x)]
-        main_winner = [x_winner for b in range(self.y)]
+        x_winner = [' ' for a in range(self.y*2)]
+        main_winner = [x_winner for b in range(self.x*2)]
         if self.label is not None:
             for each_data in self.data:
                 winner = self.model_som.winner(each_data)
                 # print(winner)
                 # print(str(self.label[d_count]))
                 # print('-----------------')
-                sub_str = main_winner[winner[0]][winner[1]] + str(self.label[d_count])
+                sub_str = main_winner[winner[0]*2][winner[1]*2] + str(self.label[d_count])
 
-                sub_list = main_winner[winner[0]][:]
-                sub_list[winner[1]] = sub_str
+                sub_list = main_winner[winner[0]*2][:]
+                sub_list[winner[1]*2] = sub_str
                 # print(sub_list)
-                main_winner[winner[0]] = sub_list
-                main_winner[winner[0]][winner[1]] += ' '
+                main_winner[winner[0]*2] = sub_list
+                main_winner[winner[0]*2][winner[1]*2] += ' '
                 d_count += 1
-            map['label'] = main_winner
+        main_winner = np.array(main_winner)
+        for a in range(self.x * 2):
+            for b in range(self.y * 2):
+                if a % 2 == 0 and b % 2 == 0:
+                    if main_winner[a][b] == ' ':
+                        main_winner[a][b] = '*'
+                        # print(b)
+            map['label'] = main_winner.tolist()
             # print(main_winner)
         return map
-
-
-
 

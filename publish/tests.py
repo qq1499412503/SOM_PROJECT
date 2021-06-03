@@ -14,14 +14,22 @@ class Publish_Test(TestCase):
 
     def setUp(self):
         self.client = Client()
+        username = "testt"
+        email = "test1@email.com"
+        password = "test1234"
+        users = User.objects.create_user(username, email, password)
+        users.save()
+        logged_in = self.client.login(username=username, password=password)
+
+        # print(logged_in)
 
     def test_publish_get(self):
         #insert one data
-        username = "test1"
-        email = "test1@email.com"
-        password = "test1234"
-        User.objects.create_user(username, email, password)
-        user = User.objects.get(username="test1")
+        # username = "test1"
+        # email = "test1@email.com"
+        # password = "test1234"
+        # User.objects.create_user(username, email, password)
+        user = User.objects.get(username="testt")
         uid = user.id
 
         dataframe.objects.create(file_name="som_1")
@@ -31,12 +39,13 @@ class Publish_Test(TestCase):
         vis_name = "som_project1"
         description = "this is a test"
         dic = {"user_id": uid, "data_id": data_id, "author": author,
-               "vis_name": vis_name, "description": description}
+               "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
         qdic = QueryDict.dict({str(dic): ""})
         response2 = self.client.post('/som/save_and_publish', qdic)
 
         data = dataframe.objects.filter(publish=True).order_by('-time')[:5]
         response = self.client.get('/publish/list/')
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'publish.html')
         self.assertEqual(list(data), list(response.context['data']))
@@ -54,11 +63,11 @@ class Publish_Test(TestCase):
 
     def test_publish_post_pagen(self):
         page = 0
-        username = "test1"
-        email = "test1@email.com"
-        password = "test1234"
-        User.objects.create_user(username, email, password)
-        user = User.objects.get(username="test1")
+        # username = "test1"
+        # email = "test1@email.com"
+        # password = "test1234"
+        # User.objects.create_user(username, email, password)
+        user = User.objects.get(username="testt")
         uid = user.id
         test_list = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"]
         for i in range(len(test_list)):
@@ -68,7 +77,7 @@ class Publish_Test(TestCase):
             dataframe.objects.create(file_name="som_1"+test_list[i])
             data_id = ObjectId(dataframe.objects.get(file_name="som_1"+test_list[i])._id)
             dic = {"user_id": uid, "data_id": data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
             response2 = self.client.post('/som/save_and_publish', qdic)
 
@@ -85,11 +94,11 @@ class Publish_Test(TestCase):
 
     def test_publish_post_pagel(self):
         page = 1
-        username = "test1"
-        email = "test1@email.com"
-        password = "test1234"
-        User.objects.create_user(username, email, password)
-        user = User.objects.get(username="test1")
+        # username = "test1"
+        # email = "test1@email.com"
+        # password = "test1234"
+        # User.objects.create_user(username, email, password)
+        user = User.objects.get(username="testt")
         uid = user.id
         test_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
                      "19", "20","21"]
@@ -100,7 +109,7 @@ class Publish_Test(TestCase):
             dataframe.objects.create(file_name="som_1" + test_list[i])
             data_id = ObjectId(dataframe.objects.get(file_name="som_1" + test_list[i])._id)
             dic = {"user_id": uid, "data_id": data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
             response2 = self.client.post('/som/save_and_publish', qdic)
 
@@ -116,11 +125,11 @@ class Publish_Test(TestCase):
 
     def test_pagen_data_equal_to_zero(self):
         page = 4
-        username = "test1"
-        email = "test1@email.com"
-        password = "test1234"
-        User.objects.create_user(username, email, password)
-        user = User.objects.get(username="test1")
+        # username = "test1"
+        # email = "test1@email.com"
+        # password = "test1234"
+        # User.objects.create_user(username, email, password)
+        user = User.objects.get(username="testt")
         uid = user.id
         test_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
                      "19", "20","21"]
@@ -131,7 +140,7 @@ class Publish_Test(TestCase):
             dataframe.objects.create(file_name="som_1" + test_list[i])
             data_id = ObjectId(dataframe.objects.get(file_name="som_1" + test_list[i])._id)
             dic = {"user_id": uid, "data_id": data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
             response2 = self.client.post('/som/save_and_publish', qdic)
 

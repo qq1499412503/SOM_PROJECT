@@ -4,9 +4,10 @@ from user.models import UserInfo
 from som.models import dataframe
 from bson.objectid import ObjectId
 import json
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+@login_required(login_url='/user/login/')
 def publish_view(request):
     if request.method == "GET":
         data = dataframe.objects.filter(publish=True).order_by('-time')[:5]
@@ -27,7 +28,9 @@ def publish_view(request):
             map = json.dumps(dict(current_object.map))
             x = current_object.x
             y = current_object.y
-            content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y }
+            min_color = current_object.min_color
+            max_color = current_object.max_color
+            content = {'did':data_id, 'name':file_name, 'Author':author, 'Date':time, 'Description':description, 'Publish':publish, 'map':map, 'Data_file':data_name, 'x':x,'y':y,"min_color":min_color,"max_color":max_color }
             return render(request, 'view.html', content)
         elif 'page_n' in request.POST:
             page = int(request.POST["page_n"])
@@ -60,4 +63,4 @@ def publish_view(request):
 #         dataframes = dataframe.objects.get(pk=request.did)
 #     if request.method == "GET":
 #         content = {"uid":uid,"name":current_user.username, "polt":dataframes.map}
-#         return render(request, 'view.html',content)
+#         return render(request, 'view.html.bak',content)

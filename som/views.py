@@ -10,6 +10,9 @@ from bson.objectid import ObjectId
 from .models import dataframe
 import time
 import json
+from matplotlib import cm, colorbar
+import matplotlib
+from django.contrib.auth.decorators import login_required
 
 class QueryUserInfo(APIView):
 
@@ -55,7 +58,7 @@ class QueryUserInfo(APIView):
             try:
                 iteration = int(keydict["iteration"])
             except:
-                iteration = 100
+                iteration = 1000
             neighbour = str(keydict["neighbour"])
             models.neighborhood_function = neighbour
             topology = str(keydict["topology"])
@@ -80,7 +83,7 @@ class QueryUserInfo(APIView):
     def dispatch(self, *args, **kwargs):
         return super(QueryUserInfo, self).dispatch(*args, **kwargs)
 
-
+@login_required(login_url='/user/login/')
 def som_model(request):
     if request.method == "GET":
         content = {'name': 'file not uploaded', "attribute": "no attribute detected", "size": "empty_size"}
@@ -125,11 +128,15 @@ class SaveMap(APIView):
             author = str(keydict["author"])
             vis_name = str(keydict["vis_name"])
             description = str(keydict["description"])
+            min_color = str(keydict["min_color"])
+            max_color = str(keydict["max_color"])
             current_object = dataframe.objects.get(_id=data_id)
             current_object.uid = uid
             current_object.author = author
             current_object.description = description
             current_object.file_name = vis_name
+            current_object.min_color = min_color
+            current_object.max_color = max_color
             current_object.save()
             results = {"code":"200","msg":"successful"}
         return JsonResponse(results, safe=False)
@@ -143,17 +150,23 @@ class SaveAndPublish(APIView):
     def post(self, request):
         for key in request.POST:
             keydict = eval(key)
+            # print(keydict)
             uid = str(keydict["user_id"])
             data_id = ObjectId(str(keydict["data_id"]))
             author = str(keydict["author"])
             vis_name = str(keydict["vis_name"])
             description = str(keydict["description"])
+            # print(keydict)
+            min_color = str(keydict["min_color"])
+            max_color = str(keydict["max_color"])
             current_object = dataframe.objects.get(_id=data_id)
             current_object.uid = uid
             current_object.author = author
             current_object.description = description
             current_object.file_name = vis_name
             current_object.publish = True
+            current_object.min_color = min_color
+            current_object.max_color = max_color
             current_object.save()
             results = {"code":"200","msg":"successful"}
         return JsonResponse(results, safe=False)
@@ -161,3 +174,43 @@ class SaveAndPublish(APIView):
     #@csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(SaveAndPublish, self).dispatch(*args, **kwargs)
+
+class ChangeColor(APIView):
+
+    def post(self, request):
+        for key in request.POST:
+            keydict = eval(key)
+            # print(request.POST['color'])
+            # print(len(keydict['nodes'][0]))
+            color = []
+            for i in range(len(keydict['nodes'])):
+                sub_color = []
+                for j in range(len(keydict['nodes'][0])):
+                    if i % 2 == 0 and j % 2 == 0:
+                        sub_color.append('#B8B8B8')
+                    else:
+                        if keydict['color'] == 'blue':
+                            nc = cm.Blues(keydict['color_value'][i][j])
+                        elif keydict['color'] == 'red':
+                            nc = cm.Reds(keydict['color_value'][i][j])
+                        elif keydict['color'] == 'green':
+                            nc = cm.Greens(keydict['color_value'][i][j])
+                        elif keydict['color'] == 'blue to red':
+                            if keydict['color_value'][i][j] >= 0.5:
+                                new_val = (keydict['color_value'][i][j]-0.5)/0.5
+                                nc = cm.Reds(new_val)
+                            else:
+                                new_val = (0.5-keydict['color_value'][i][j])/0.5
+                                nc = cm.Blues(new_val)
+
+                        new_color = matplotlib.colors.rgb2hex(nc)
+                        sub_color.append(new_color)
+
+                color.append(sub_color)
+            keydict['nodes'] = color
+
+        return JsonResponse(keydict, safe=False)
+
+    # @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(ChangeColor, self).dispatch(*args, **kwargs)

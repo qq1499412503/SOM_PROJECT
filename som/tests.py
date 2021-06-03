@@ -18,10 +18,16 @@ import io
 
 class SomTestCase(TestCase):
     def setUp(self):
-       self.client = Client()
+        self.client = Client()
+        username = "testt"
+        email = "test1@email.com"
+        password = "test1234"
+        users = User.objects.create_user(username, email, password)
+        users.save()
+        logged_in = self.client.login(username=username, password=password)
 
     def test_pages_test_case(self):
-        url = '/som/'
+        url = '/som/model'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'visualization0.1.html')
@@ -30,6 +36,12 @@ class ApiTestCase(TestCase):
     def setUp(self):
         self.client = Client(enforce_csrf_checks=True)
         self.code = 'api'
+        username = "testt"
+        email = "test1@email.com"
+        password = "test1234"
+        users = User.objects.create_user(username, email, password)
+        users.save()
+        logged_in = self.client.login(username=username, password=password)
 
     def test_userqueryinfo(self):
         url = reverse('som:som_model')
@@ -82,7 +94,7 @@ class ApiTestCase(TestCase):
             vis_name = "som_project1"
             description = "this is a test"
             dic = {"user_id": uid,"data_id":data_id, "author": author,
-                   "vis_name": vis_name, "description": description}
+                   "vis_name": vis_name, "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
 
             response = self.client.post(url, qdic)
@@ -124,7 +136,7 @@ class ApiTestCase(TestCase):
             description = "this is a test"
             dic = {"user_id": uid, "data_id": data_id,
                    "author": author, "vis_name": vis_name,
-                   "description": description}
+                   "description": description,"min_color":"white","max_color":"blue"}
             qdic = QueryDict.dict({str(dic): ""})
 
             response = self.client.post(url, qdic)
@@ -186,6 +198,12 @@ class Views_som_model_test(TestCase):
 
     def setUp(self):
         self.client = Client()
+        username = "testt"
+        email = "test1@email.com"
+        password = "test1234"
+        users = User.objects.create_user(username, email, password)
+        users.save()
+        logged_in = self.client.login(username=username, password=password)
         self.url = reverse('som:som_model')
 
     def test_views_som_model_get(self):

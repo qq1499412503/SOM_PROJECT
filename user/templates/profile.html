@@ -1,6 +1,6 @@
 {% load static %}
 {% load template %}
-<html>
+<html id="html">
   <head>
     <title>profile</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -40,7 +40,17 @@
     <script src="{% static 'js/scripts/axure/jquery.nicescroll.min.js' %}"></script>
     <script src="{% static 'js/prdocument.js' %}"></script>
     <script src="{% static 'js/prdata.js' %}"></script>
+<script>
+  window.onload=function (){
+    var width = $(window).width();
+    var height = $(window).height();
+    var scaleX = width/1920;
+    var scaleY = height/940;
+    document.getElementById('html').style.transform = "scale("+scaleX+","+scaleY+")";
+    document.getElementById('html').style.transformOrigin ='0 top';
+  }
 
+</script>
 
   </head>
   <body>
@@ -64,7 +74,9 @@
 
       <!-- Unnamed (Shape) -->
       <div id="u2" class="ax_default icon">
+        <a href="/user/profile/">
         <img id="u2_img" class="img " src="/media/image/pr2.svg"/>
+        </a>
         <div id="u2_text" class="text " style="display:none; visibility: hidden">
           <p></p>
         </div>
@@ -306,7 +318,7 @@
                     <!-- FullName-Edit (Text Field) -->
                     <div id="u34" class="ax_default text_field" data-label="FullName-Edit">
                       <div id="u34_div" class=""></div>
-                      <input id="u34_input" type="text" value="{{ username }}" class="u34_input"/>
+                      <input id="u34_input" type="text" value="{{ username }}" class="u34_input" maxlength="10"/>
                     </div>
 
                     <!-- Job Title Label (Rectangle) -->
@@ -569,15 +581,15 @@
 
               <form id="{{ forloop.counter0 }}" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
-                <input id="did" name="did" type="text" value="{{ each_data|private:'_id' }}" hidden/>
+                <input id="did+{{ forloop.counter0 }}" name="did" type="text" value="{{ each_data|private:'_id' }}" hidden/>
               </form>
 
                 <!-- Unnamed (Table Cell) -->
                 <div id="u70" class="ax_default table_cell" style="top:calc(70px*{{ forloop.counter0 }})">
                   <img id="u70_img" class="img " src="/media/image/pr70.png" style="top:0px"/>
                   <div id="u70_text" class="text ">
-                    <input name="fname"  id="view_button" type="submit" form="{{ forloop.counter0 }}" hidden/>
-                    <label for="view_button">{{ each_data.file_name }}</label>
+                    <input name="fname"  id="view_button+{{ forloop.counter0 }}" type="submit" form="{{ forloop.counter0 }}" hidden/>
+                    <label for="view_button+{{ forloop.counter0 }}" style="color: #0000FF">{{ each_data.file_name }}</label>
                   </div>
                 </div>
 
@@ -617,20 +629,20 @@
                   </div>
                 </div>
                 {% endfor %}
-                <div id="u75" class="ax_default link_button" style="visibility: hidden">
+                <div id="u75" class="ax_default link_button" style="visibility: hidden" onclick="document.getElementById('Last').click();">
                 <div id="u75_div" class=""></div>
                 <div id="u75_text" class="text ">
         <p><input type="submit" id="Last" form="pages_last" hidden/>
-          <label for="Last">Previous Page</label></p>
+          <label>Previous Page</label></p>
                 </div>
               </div>
 
               <!-- Unnamed (Rectangle) -->
-              <div id="u76" class="ax_default link_button">
+              <div id="u76" class="ax_default link_button"  onclick="document.getElementById('Next').click();">
                 <div id="u76_div" class=""></div>
                 <div id="u76_text" class="text ">
         <p><input type="submit" id="Next" form="pages_next" hidden/>
-          <label for="Next">Next Page</label></p>
+          <label>Next Page</label></p>
                 </div>
               </div>
 
