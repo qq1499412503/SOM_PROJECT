@@ -1,25 +1,28 @@
+---
+description: Use this guide to learn the basics.
+---
+
 # User Manual
 
-## Getting Super Powers
+## Quick start with Login
 
-Becoming a super hero is a fairly straight forward process:
+Login in your account. If you don not have account, please switch to the Register page:
 
-```
-$ give me super-powers
-```
+![Login webiste](.gitbook/assets/system-documentation-1-.png)
 
-{% hint style="info" %}
- Super-powers are granted randomly so please submit an issue if you're not happy with yours.
-{% endhint %}
+Register a new account in this page.
 
-Once you're strong enough, save the world:
+![Register website](.gitbook/assets/system-documentation.png)
 
-{% code title="hello.sh" %}
-```bash
-# Ain't no code for that yet, sorry
-echo 'You got to trust me on this, I saved the world'
-```
-{% endcode %}
+After you successfully login your account, you will see the publish website. It display the general information of Som-map project published by all users.
+
+![Publish website](.gitbook/assets/system-documentation-2-.png)
+
+
+
+![Map maker website\(before trainning\)](.gitbook/assets/system-documentation-3-.png)
+
+
 
 
 
