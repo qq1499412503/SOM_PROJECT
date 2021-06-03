@@ -3,6 +3,6 @@ services:
 before_install:
   - docker-compose build
 script:
-  - docker-compose run django cd /home/SOM_PROJECT
+#   - docker-compose run django cd /home/SOM_PROJECT
   - docker-compose run django ls
-  - docker-compose run django python manage.py test
+  - docker-compose run django python /home/SOM_PROJECT/manage.py test
