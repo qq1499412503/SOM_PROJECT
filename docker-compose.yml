@@ -1,0 +1,13 @@
+version: "3.1"
+
+
+
+services:
+  app:
+    build: ./som
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./SOM_PROJECT      
+    command: python manage.py runserver localhost:8080
+      
