@@ -2,7 +2,7 @@
 description: Developer guidance of self organizing map database system
 ---
 
-# Developer Doc
+# Installation and Setup
 
 ## Getting Start:
 
