@@ -20,17 +20,35 @@ After you successfully login your account, you will see the publish website. It 
 
 ![](.gitbook/assets/system-documentation-4-.png)
 
-### Publish list
+### Publish List
 
 ### 
 
 ![](.gitbook/assets/system-documentation-5-.png)
 
-### Map maker 
+### Map Maker 
 
 ![Map maker page\(before traning\)](.gitbook/assets/system-documentation-8-.png)
 
 
 
-![Map maker page\(after training\)](.gitbook/assets/system-documentation-7-.png)
+![](.gitbook/assets/system-documentation-9-.png)
+
+
+
+### User profile
+
+![](.gitbook/assets/system-documentation-10-.png)
+
+### 
+
+![](.gitbook/assets/system-documentation-12-.png)
+
+### View your saved project
+
+![](.gitbook/assets/system-documentation-13-.png)
+
+### View the map
+
+![](.gitbook/assets/system-documentation-14-.png)
 
