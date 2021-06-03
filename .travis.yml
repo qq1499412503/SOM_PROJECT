@@ -1,16 +1,13 @@
-language: python # language
-python: # python version
+language: python
+python:
   - "3.8"
-services: # DB we use nosql
-  - mongodb
-env: # environment
-  -DJANGO=2.2 DB=mongodb
-install: # package
-  - pip install -r requirements.txt
-before_script: # => 6
-#   - sleep 15
-#   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-script: # => 7
-  - python manage.py makemigrations
-  - python manage.py migrate
-  - python manage.py test
+
+services: 
+  - docker
+before_install:
+  - docker-compose up -d
+script:
+#   - docker-compose run django cd /SOM_PROJECT && ls
+#   - docker-compose run django ls
+#   - docker-compose run django bash -c "service mongodb start && python ./SOM_PROJECT/manage.py makemigrations && python ./SOM_PROJECT/manage.py migrate && python ./SOM_PROJECT/manage.py test -k"
+- docker-compose run django bash -c "service mongodb start && cd SOM_PROJECT && python manage.py makemigrations && python manage.py migrate && python manage.py test -k"
