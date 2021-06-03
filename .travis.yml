@@ -4,5 +4,4 @@ before_install:
   - docker build -t som:v1 .
   - docker run -d -p 127.0.0.1:80:4567 som:v1 /bin/sh -c "cd /SOM_PROJECT;"
 script:
-  - python --version
-  - python manage.py test
+  - docker run -d -p 127.0.0.1:80:4567 som:v1 /bin/sh -c "python manage.py test;"
