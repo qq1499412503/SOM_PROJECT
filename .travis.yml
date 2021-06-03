@@ -2,5 +2,6 @@ services:
   - docker
 before_install:
   - docker build -t som:v1 .
-  - docker run -d -p 20:22 -p 8080:8080 -p 80:80 som:v1 /usr/sbin/sshd -D
-  - ssh root@Som123
+  - docker run -d -p 127.0.0.1:80:4567 som:v1 /bin/sh -c "cd /SOM_PROJECT;"
+script:
+  - python manage.py test
