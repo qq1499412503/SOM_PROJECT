@@ -11,4 +11,6 @@ before_script: # => 6
 #   - sleep 15
 #   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 script: # => 7
+  - python manage.py makemigrations
+  - python manage.py migrate
   - python manage.py test
