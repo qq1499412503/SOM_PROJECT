@@ -1,4 +1,6 @@
 # Table of contents
 
-* [Developer Doc](README.md)
+* [Installation and Setup](README.md)
+* [Description Document](description-document.md)
+* [User Manual](user-manual.md)
 

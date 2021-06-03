@@ -1,7 +1,13 @@
+language: python
+python:
+  - "3.8"
+
 services: 
   - docker
 before_install:
-  - docker build -t som:v1 .
-  - docker run -d -p 127.0.0.1:80:4567 som:v1 /bin/sh -c "cd /SOM_PROJECT;"
+  - docker-compose up -d
 script:
-  - python3 manage.py test
+#   - docker-compose run django cd /SOM_PROJECT && ls
+#   - docker-compose run django ls
+#   - docker-compose run django bash -c "service mongodb start && python ./SOM_PROJECT/manage.py makemigrations && python ./SOM_PROJECT/manage.py migrate && python ./SOM_PROJECT/manage.py test -k"
+- docker-compose run django bash -c "service mongodb start && cd SOM_PROJECT && python manage.py makemigrations && python manage.py migrate && python manage.py test -k"
