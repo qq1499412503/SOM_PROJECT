@@ -17,7 +17,7 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_6
 ENV PATH /opt/conda/bin:$PATH
 # init package
 RUN conda install python=3.8
-
+RUN alias python=python3.8
 RUN conda install -y -c anaconda django
 RUN pip install djongo MiniSom
 RUN conda install -y -c conda-forge djangorestframework
