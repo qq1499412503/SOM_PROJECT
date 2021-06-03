@@ -91,3 +91,9 @@ Click on project name on publish or user profile website, you can get access to 
 | **Results publish** | **Allow users to save and publish visualization results after training** |
 | **Forum** | **Allow users to view other user’s projects\(visualization results\)** |
 
+
+
+## User Story
+
+![](.gitbook/assets/image.png)
+
