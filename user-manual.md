@@ -4,25 +4,21 @@
 
 ### Product overview
 
-Following graphs describe the overview of the product by pages.
+The following graphs describe the overview of the product by page.
 
-The explanation in the following graphs by **black color** describes the functions that can be interacted with you.
+_The explanation in the following graphs by black color describes the functions that can be interacted with you._
 
-The explanation in the following graphs by **red color** describes the elements that can not be interacted with you.
-
-#### 
+_The explanation in the following graphs by red color describes the elements that can not be interacted with you._
 
 #### Login your account
 
-Login in your account. If you do not have an account, please switch to the Register page.
+Login to your account. If you do not have an account, please switch to the Register page.
 
 ![Login website](.gitbook/assets/system-documentation-15-.png)
 
-![](https://gblobscdn.gitbook.com/assets%2F-Mad02VgHwHJ4nmYn0Gv%2F-MbHOIWTI9Rqhq_Qpm2y%2F-MbHWu5SDkojgJjgfG4b%2FSystem%20documentation%20%285%29.png?alt=media&token=3340bd44-b27a-4630-9d83-776519e13499)
-
 #### Register your account
 
-Please register before you login.
+Please register before you Login.
 
 ![Register website](.gitbook/assets/system-documentation.png)
 
@@ -34,11 +30,11 @@ Interaction with Navigation bar can switch to other pages.
 
 #### Publish List
 
-After you login in the system, you will see the publish. You can view you and other user's published project here.
+After you login into the system, you will see the publish. You can view you and other user's published project here.
 
 ![Publish website](.gitbook/assets/system-documentation-5-.png)
 
-#### Map Maker 
+#### New Project
 
 Click on "New project" on any web page with a navigation bar, you can get access to this map maker page.
 
@@ -52,7 +48,7 @@ Click on "New project" on any web page with a navigation bar, you can get access
 
 #### User profile
 
-Click on "people" icon in the upper left corner of any web page with a navigation bar,  you can get access to this user profile page. You can edit the personal information or change your account password here. 
+Click on the "people" icon in the upper left corner of any web page with a navigation bar,  you can get access to this user profile page. You can edit the personal information or change your account password here. 
 
 ![User profile website](.gitbook/assets/system-documentation-10-.png)
 
@@ -62,7 +58,7 @@ After clicking the **edit** in the Personal information table
 
 
 
-### View your saved project
+#### Saved Project History
 
 After clicking **Your project,** you can view your previous saved project results.
 
@@ -70,11 +66,19 @@ After clicking **Your project,** you can view your previous saved project result
 
 #### View the map
 
-Click on project name on publish or user profile website, you can get access to this page.
+Click on the project name on publish or user profile website, you can get access to this page.
 
 ![](.gitbook/assets/system-documentation-14-.png)
 
-## User case
+### Product Navigation
+
+![](.gitbook/assets/image.png)
+
+### User Story
+
+![](.gitbook/assets/image%20%281%29.png)
+
+### System Process
 
 ![User case map](.gitbook/assets/som_use_case_diagram_vpd_1.png)
 
@@ -85,15 +89,11 @@ Click on project name on publish or user profile website, you can get access to 
 | **User login** | **Allow user to enter the system for activities** |
 | **User logout** | **Allow users to exit the system activity** |
 | **User profile** | **Allows users to view or edit personal information** |
-| **Password change** | **Allow users to change new password for the account** |
-| **Self-organizing map train** | **Allow users to upload local files to train self- organizing maps** |
+| **Password change** | **Allow users to change the new password for the account** |
+| **Self-organizing map train** | **Allow users to upload local files to train self-organizing maps** |
 | **Results save** | **Allow users to save visualization results after training** |
 | **Results publish** | **Allow users to save and publish visualization results after training** |
 | **Forum** | **Allow users to view other user’s projects\(visualization results\)** |
 
 
-
-## User Story
-
-![](.gitbook/assets/image.png)
 
