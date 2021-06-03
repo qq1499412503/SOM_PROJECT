@@ -8,6 +8,6 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./SOM_PROJECT      
+      - .:/SOM_PROJECT      
     command: python manage.py runserver localhost:8080
       
