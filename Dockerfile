@@ -29,6 +29,6 @@ COPY . /SOM_PROJECT/
 
 # untested --test when upload
 
-RUN service mongodb start && tail -F /var/log/mongodb/mongodb.log
+# RUN service mongodb start && tail -F /var/log/mongodb/mongodb.log
 
-
+RUN systemctl enable mongodb.service
