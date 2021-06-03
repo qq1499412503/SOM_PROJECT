@@ -6,8 +6,6 @@ services:
   django:
     build: .
     ports:
-      - "8000:8000"
-    volumes:
-      - .:/SOM_PROJECT      
+      - "8000:8000"    
     command: python manage.py runserver localhost:8080
       
