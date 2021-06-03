@@ -16,6 +16,8 @@ RUN echo 'root:Som123' | chpasswd
 RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.sh && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
 ENV PATH /opt/conda/bin:$PATH
 # init package
+RUN conda install python=3.8
+
 RUN conda install -y -c anaconda django
 RUN pip install djongo MiniSom
 RUN conda install -y -c conda-forge djangorestframework
