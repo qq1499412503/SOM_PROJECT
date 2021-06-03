@@ -1,8 +1,8 @@
 services: 
   - docker
 before_install:
-  - pip install docker-compose
-  - docker-compose up   -d
-  - docker ps
+#   - pip install docker-compose
+#   - docker-compose up   -d
+#   - docker ps
 script:
   - docker-compose run django python manage.py test
