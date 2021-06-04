@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^user/', include('user.urls', namespace='user')),
     url(r'^publish/', include('publish.urls', namespace='publish')),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT})
+    # url(r'^jasmine-test-suite/', include('django_jasmine.urls'))
 
 ]

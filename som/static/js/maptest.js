@@ -1,227 +1,9 @@
-{% load static %}
-<html id="html" style="overflow: hidden;">
-  <head>
-    <title>view template</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<!--    <link href="{% static 'css/vaxure_rp_page.css' %}" type="text/css" rel="stylesheet"/>-->
-    <link href="{% static 'css/vstyle.css' %}" type="text/css" rel="stylesheet"/>
-    <link href="{% static 'css/vstyles.css' %}" type="text/css" rel="stylesheet"/>
-    <script src="{% static 'js/scripts/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'js/document.js' %}"></script>
-    <script src="{% static 'js/data.js' %}"></script>
-    <script>
-  window.onload=function (){
-    var width = $(window).width();
-    var height = $(window).height();
-    var scaleX = width/1920;
-    var scaleY = height/940;
-    document.getElementById('html').style.transform = "scale("+scaleX+","+scaleY+")";
-    document.getElementById('html').style.transformOrigin ='0 top';
-  }
-
-</script>
-    <style>
-  div.tooltip {
-    position: absolute;
-    text-align: center;
-    width: 60px;
-    height: 28px;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
-}
-
-</style>
-  </head>
-  <body>
-    <div id="base" class="">
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="v0" class="ax_default box_1">
-        <img id="v0_img" class="img " src="/media/image/v0.svg"/>
-        <div id="v0_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="v1" class="ax_default box_1">
-        <img id="v1_img" class="img " src="/media/image/v1.svg"/>
-        <div id="v1_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="v2" class="ax_default icon">
-
-        <a href="/user/profile">
-        <img id="v2_img" class="img " src="/media/image/v2.svg"/>
-          </a>
-        <div id="v2_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="v3" class="ax_default heading_3">
-        <div id="v3_div" class=""></div>
-        <div id="v3_text" class="text ">
-          <p><span>Welcome, {{ user.get_username }},&nbsp;&nbsp;</span><a href="{% url 'som:som_model' %}">New Project,</a>&nbsp;&nbsp;<a href="{% url 'user:logout' %}">logout</a></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="v4" class="ax_default heading_2">
-        <div id="v4_div" class=""></div>
-        <div id="v4_text" class="text ">
-          <p><span>SOM map </span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Shape) -->
-      <div id="v5" class="ax_default icon">
-        <a href="{% url 'publish:list' %}">
-        <img id="v5_img" class="img " src="/media/image/v5.svg"/>
-          </a>
-        <div id="v5_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Rectangle) -->
-      <div id="v6" class="ax_default heading_1">
-        <div id="v6_div" class=""></div>
-        <div id="v6_text" class="text ">
-          <p><span>VISUALIZATION FORUM </span></p>
-        </div>
-      </div>
-
-      <!-- Unnamed (Table) -->
-      <div id="v7" class="ax_default">
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v8" class="ax_default table_cell">
-          <img id="v8_img" class="img " src="/media/image/v8.png"/>
-          <div id="v8_text" class="text ">
-            <p><span>Project name</span></p>
-          </div>
-        </div>
-        <!-- Unnamed (Table Cell) -->
-        <div id="v9" class="ax_default table_cell">
-          <img id="v9_img" class="img " src="/media/image/v9.png"/>
-          <div id="v9_text" class="text " style="visibility: visible">
-            {{ name }}
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v10" class="ax_default table_cell">
-          <img id="v10_img" class="img " src="/media/image/v10.png"/>
-          <div id="v10_text" class="text ">
-            <p><span>Author</span></p>
-          </div>
-        </div>
-        <!-- Unnamed (Table Cell) -->
-        <div id="v11" class="ax_default table_cell">
-          <img id="v11_img" class="img " src="/media/image/v11.png"/>
-          <div id="v11_text" class="text " style="visibility: visible">
-            {{ Author }}
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v12" class="ax_default table_cell">
-          <img id="v12_img" class="img " src="/media/image/v12.png"/>
-          <div id="v12_text" class="text ">
-            <p><span>Publish data</span></p>
-          </div>
-        </div>
-        <!-- Unnamed (Table Cell) -->
-        <div id="v13" class="ax_default table_cell">
-          <img id="v13_img" class="img " src="/media/image/v13.png"/>
-          <div id="v13_text" class="text " style="visibility: visible">
-            {{ Date }}
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v14" class="ax_default table_cell">
-          <img id="v14_img" class="img " src="/media/image/v14.png"/>
-          <div id="v14_text" class="text ">
-            <p><span>Description</span></p>
-          </div>
-        </div>
-        <!-- Unnamed (Table Cell) -->
-        <div id="v15" class="ax_default table_cell">
-          <img id="v15_img" class="img " src="/media/image/v15.png"/>
-          <div id="v15_text" class="text " style="visibility: visible">
-			  {{ Description }}
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v16" class="ax_default table_cell">
-          <img id="v16_img" class="img " src="/media/image/v16.png"/>
-          <div id="v16_text" class="text ">
-            <p><span>Data file</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v17" class="ax_default table_cell">
-          <img id="v17_img" class="img " src="/media/image/v17.png"/>
-          <div id="v17_text" class="text " style="visibility: visible">
-            {{ Data_file }}
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v19" class="ax_default table_cell">
-          <img id="v19_img" class="img " src="/media/image/v19.png"/>
-          <div id="v19_text" class="text ">
-            <p><span>Publish</span></p>
-          </div>
-        </div>
-
-        <!-- Unnamed (Table Cell) -->
-        <div id="v20" class="ax_default table_cell">
-          <img id="v20_img" class="img " src="/media/image/v20.png"/>
-          <div id="v20_text" class="text " style="visibility: visible">
-            {{ Publish }}
 
 
-          </div>
-        </div>
-      </div>
-
-      <!-- Unnamed (Image) -->
-      <div id="v21" class="ax_default image">
-<!--        <img id="v21_img" class="img "/>-->
-        <div id="v21_text" class="text " style="display:none; visibility: hidden">
-          <p></p>
-        </div>
-      </div>
-
-      <div id="v211" style="left: 1700px;top:200px;width:60px;height:650px;position: absolute;"></div>
-
-
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
-          <script src="https://d3js.org/d3-color.v2.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v2.min.js"></script>
-    <script type="text/javascript">
       var data;
       function setValue(val){
-          data=JSON.parse(val);
-
+          data=val;
       }
-
       function getValue(){
           return data;
       }
@@ -230,204 +12,43 @@
           data = null;
       }
 
-function col(){
-
-          return parseInt('{{ x }}');
-
-
-}
-
-function row(){
-
-          return parseInt('{{ y }}');
-
+function col(tag){
+        if (parseInt(tag.value) > 0){
+          return parseInt(tag.value);
+        }else{
+          return 30;
+        }
 
 }
 
-var svg = d3.select("#v21").append("svg")
-                .attr("width", document.querySelector('#v21').offsetWidth)
-                .attr("height", document.querySelector('#v21').offsetHeight),
-    margin = {top: 20, right: 170, bottom: 20, left: 40},
+function row(tag){
+        if (parseInt(tag.value) > 0){
+          return parseInt(tag.value);
+        }else{
+          return 20;
+        }
+
+}
+
+var svg = d3.select("#m14").append("svg")
+                .attr("width", document.querySelector('#m14').offsetWidth)
+                .attr("height", document.querySelector('#m14').offsetHeight),
+    margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom;
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
+    // l = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
+    a = d3.select("body").append("div").classed('tooltip', true).style("visibility", "hidden");
+
     var MapColumns = col(),
         MapRows = row();
 
     var hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
                 height/((MapRows + 1/3) * 1.5)]);
-    width1 = MapColumns*hexRadius*Math.sqrt(3);
-    height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
-var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")" + "scale("+750/width1+","+645/height1+")"),
-    // l = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
-    a = d3.select("body").append("div").classed('tooltip', true).style("visibility", "hidden");
-
-
+    width = MapColumns*hexRadius*Math.sqrt(3);
+    height = MapRows*1.5*hexRadius+0.5*hexRadius;
     var hexbin = d3.hexbin()
-        .radius(hexRadius);
-
- setValue('{{ map|safe }}');
-
-       MapColumns = col()*2;
-      MapRows = row()*2;
-      hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
-      height/((MapRows + 1/3) * 1.5)]);
-      width1 = MapColumns*hexRadius*Math.sqrt(3);
-      height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
-      // h = hexRadius  * 1.5;
-      h = (height1/(MapRows/2))/2;
-      //   h = height/((MapRows + 1/3) * 1.5);
- if ("{{ min_color }}" === 'white'){
-      if ("{{ max_color }}" === 'blue'){
-        var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
-        .domain([0, 1]);
-      }else if("{{ max_color }}" === 'red'){
-        var colorScale1 = d3.scaleSequential(d3.interpolateReds)
-        .domain([0, 1]);
-      }else if("{{ max_color }}" === 'green'){
-        var colorScale1 = d3.scaleSequential(d3.interpolateGreens)
-        .domain([0, 1]);
-      }else if("{{ max_color }}" === 'purple'){
-        var colorScale1 = d3.scaleSequential(d3.interpolatePurples)
-        .domain([0, 1]);
-      }
-  }
-  else if ("{{ min_color }}" === 'blue') {
-    if ("{{ max_color }}" === 'red') {
-      var colorScale1 = d3.scaleSequential(t => d3.interpolateRdBu(1 - t))
-              .domain([0, 1]);
-    }
-    else if ("{{ max_color }}" === 'white') {
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateBlues(1 - t))
-              .domain([0,1]);
-    }
-        else if ("{{ max_color }}" === 'purple') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[0],"white",d3.schemeCategory10[4]]))
-              .domain([0,1]);
-    }
-    else if ("{{ max_color }}" === 'green') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[0],"white",d3.schemeCategory10[2]]))
-              .domain([0,1]);
-    }
-  }
-  else if ("{{ min_color }}" === 'green') {
-    if ("{{ max_color }}" === 'red') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[3]]))
-              .domain([0,1]);
-    }
-    else if ("{{ max_color }}" === 'white') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateGreens(1 - t))
-              .domain([0,1]);
-
-    }
-        else if ("{{ max_color }}" === 'purple') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[4]]))
-              .domain([0,1]);
-
-    }
-    else if ("{{ max_color }}" === 'blue') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[2],"white",d3.schemeCategory10[0]]))
-              .domain([0,1]);
-    }
-  }
-  else if ("{{ min_color }}" === 'red') {
-    if ("{{ max_color }}" === 'green') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[2]]))
-              .domain([0,1]);
-    }
-    else if ("{{ max_color }}" === 'white') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolateReds(1 - t))
-              .domain([0,1]);
-    }
-        else if ("{{ max_color }}" === 'purple') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[4]]))
-              .domain([0,1]);
-    }
-    else if ("{{ max_color }}" === 'blue') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[3],"white",d3.schemeCategory10[0]]))
-              .domain([0,1]);
-    }
-  }
-  else if ("{{ min_color }}" === 'purple') {
-    if ("{{ max_color }}" === 'green') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[2]]))
-              .domain([0,1]);
-    }
-    else if ("{{ max_color }}" === 'white') {
-
-      var colorScale1 = d3.scaleSequential().interpolator(t => d3.interpolatePurples(1 - t))
-              .domain([0,1]);
-    }
-        else if ("{{ max_color }}" === 'red') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[3]]))
-              .domain([0,1]);
-    }
-    else if ("{{ max_color }}" === 'blue') {
-      var colorScale1 = d3.scaleSequential().interpolator(d3.piecewise(d3.interpolateRgb,[d3.schemeCategory10[4],"white",d3.schemeCategory10[0]]))
-              .domain([0,1]);
-    }
-  }
-
-
-
-
-    var _drag = d3.drag()
-      .on("drag",moveMap);
-
-      a.classed('tooltip', true);
-      init_dt = get_point();
-      // var point = get_point();
-      var point = get_point();
-      w = (width/((MapColumns + 0.5) * Math.sqrt(3)))/2;
-        // w = width1/MapColumns
-      g.append("clipPath")
-      .attr("id", "clip")
-      .append("rect")
-      .attr("width", width1)
-      .attr("height", height1);
-
-      g.append("g")
-      .attr("class", "hexagon")
-      .attr("clip-path", "url(#clip)")
-      .selectAll(".hexagon")
-      .data(point)
-      .enter().append("path")
-      .attr("d", function (d) {
-		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
-	})
-         .attr("stroke", function (d,i) {
-		return "#e5b367";
-	})
-      .attr("stroke-width", "1px")
-      .attr("fill", function(d){ return colorScale1(d.cv); })
-              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
-      .call(_drag)
-        .on('mouseover', mouseOver);
-        // .on('mouseout', mouseOut)
-        // .on('mousemove', mouseMove);
-
-      g.append("g")
-      .attr("class", "hexagon")
-      .attr("clip-path", "url(#clip)")
-      .selectAll("labels")
-      .data(point)
-      .enter()
-      .append("text")
-              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
-        .attr("x", function(d){return d.x})
-        .attr("y", function(d){return d.y})
-        .text(function(d){ return d.label; })
-        .attr("text-anchor", "middle")
-        .attr("alignment-baseline", "central")
-        .style("font-size", 10)
-        .style("fill", "black");
-
-continuous("#v211", colorScale1);
+        .radius(hexRadius)
 
 
 
@@ -441,7 +62,7 @@ function get_point(){
             var y = hexRadius * i * 1.5
             var color =  getValue()['nodes'][i][j]
             var weights = getValue()['weights'][i][j]
-            var label = getValue()['label'][j][i]
+            var label = getValue()['label'][i][j]
             var color_value = getValue()['color_value'][i][j]
             // points.push([x,y,color])
           points.push({"x": x,"y": y,"color": color,"weights":weights,"label":label,"cv":color_value})
@@ -695,7 +316,9 @@ while (x-initx>=w) {
       return "#e5b367";
     })
             .attr("stroke-width", "1px")
-            .attr("fill", function(d){ return colorScale1(d.cv); })
+            .attr("fill", function (d) {
+              return d.color;
+            })
 
             .exit()
             .remove();
@@ -712,7 +335,7 @@ while (x-initx>=w) {
 		return "#e5b367";
 	})
       .attr("stroke-width", "1px")
-      .attr("fill", function(d){ return colorScale1(d.cv); })
+      .attr("fill", function(d){ return d.color; })
               .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
       .call(_drag);
         // .on('mouseover', mouseOver)
@@ -751,7 +374,9 @@ while (x-initx>=w) {
       return "#e5b367";
     })
             .attr("stroke-width", "1px")
-            .attr("fill", function(d){ return colorScale1(d.cv); })
+            .attr("fill", function (d) {
+              return d.color;
+            })
 
             .exit()
             .remove();
@@ -768,7 +393,7 @@ while (x-initx>=w) {
 		return "#e5b367";
 	})
       .attr("stroke-width", "1px")
-      .attr("fill", function(d){ return colorScale1(d.cv); })
+      .attr("fill", function(d){ return d.color; })
               .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
       .call(_drag);
         // .on('mouseover', mouseOver)
@@ -808,7 +433,9 @@ while (x-initx>=w) {
       return "#e5b367";
     })
             .attr("stroke-width", "1px")
-            .attr("fill", function(d){ return colorScale1(d.cv); })
+            .attr("fill", function (d) {
+              return d.color;
+            })
 
             .exit()
             .remove();
@@ -825,7 +452,7 @@ while (x-initx>=w) {
 		return "#e5b367";
 	})
       .attr("stroke-width", "1px")
-      .attr("fill", function(d){ return colorScale1(d.cv); })
+      .attr("fill", function(d){ return d.color; })
               .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
       .call(_drag);
         // .on('mouseover', mouseOver)
@@ -864,7 +491,9 @@ while (x-initx>=w) {
       return "#e5b367";
     })
             .attr("stroke-width", "1px")
-            .attr("fill", function(d){ return colorScale1(d.cv); })
+            .attr("fill", function (d) {
+              return d.color;
+            })
 
             .exit()
             .remove();
@@ -881,7 +510,7 @@ while (x-initx>=w) {
 		return "#e5b367";
 	})
       .attr("stroke-width", "1px")
-      .attr("fill", function(d){ return colorScale1(d.cv); })
+      .attr("fill", function(d){ return d.color; })
               .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
       .call(_drag);
         // .on('mouseover', mouseOver)
@@ -947,7 +576,7 @@ function mouseOut(d, i) {
 function continuous(selector_id, colorscale) {
   d3.select('canvas').remove();
   d3.select(selector_id).select('svg').remove();
-  var legendheight = 650,
+  var legendheight = 588,
       legendwidth = 50,
       margin = {top: 10, right: 25, bottom: 10, left: 2};
 
@@ -1011,28 +640,217 @@ function continuous(selector_id, colorscale) {
     .call(legendaxis);
 
   d3.select('defs').remove();
+  return true;
 };
 
 
 
+      function query(data_id,x,y,len,sigmas,lr,iteration,neighbour,topology,activation,random,tag_color,tag_font,tag_map,tag_legend){
+
+      $.ajax({
+      type: "post",
+      url: "/som/user_query_info",
+      dataType: "json",
+      data: JSON.stringify({user_id: "UID",data_id:data_id,
+        x:x,
+        y:y,
+        len:len,
+        sigmas:sigmas,
+        lr:lr,
+        iteration:iteration,
+        neighbour:neighbour,
+        topology:topology,
+        activation:activation,
+        random:random
+      }),
+      beforeSend: function(){
+
+              // $('#m14_img').css('visibility','visible');
+              // $('#u60').css('visibility','hidden');
+              // $('#u61').css('visibility','hidden');
+              // $('#u62').css('visibility','hidden');
+              tag_color.value = 'blue'
+              tag_font.value = 10
+          },
+      complete: function(){
+              // $('#m14_img').css('visibility','hidden');
+              // $('#u60').css('visibility','visible');
+              // $('#u61').css('visibility','visible');
+              // $('#u62').css('visibility','visible');
+          },
+      success: function as(raw_data) {
+
+      setValue(raw_data);
+      svg.remove();
+      svg = d3.select(tag_map).append("svg")
+      .attr("width", document.querySelector('#m14').offsetWidth)
+      .attr("height", document.querySelector('#m14').offsetHeight);
+      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      // l = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      a = d3.select("body").append("div").classed('tooltip', true).style("visibility", "hidden");
 
 
 
 
 
 
-    </script>
 
 
 
-      <!-- Unnamed (Shape) -->
-      <div id="v22" class="ax_default primary_button">
-        <img id="v22_img" class="img " src="/media/image/v22.svg"/>
-        <div id="v22_text" class="text ">
-          <p><span><a href="javascript:history.back()">Back</a></span></p>
-        </div>
-      </div>
-    </div>
 
-  </body>
-</html>
+      MapColumns = col()*2;
+      MapRows = row()*2;
+      hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
+      height/((MapRows + 1/3) * 1.5)]);
+      width1 = MapColumns*hexRadius*Math.sqrt(3);
+      height1 = MapRows*1.5*hexRadius+0.5*hexRadius;
+      // h = hexRadius  * 1.5;
+      h = (height1/(MapRows/2))/2;
+      //   h = height/((MapRows + 1/3) * 1.5);
+var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
+  .domain([0, 1]);
+
+continuous(tag_legend, colorScale1);
+
+
+
+
+
+
+
+      a.classed('tooltip', true);
+      init_dt = get_point();
+      // var point = get_point();
+      var point = get_point();
+      w = (width/((MapColumns + 0.5) * Math.sqrt(3)))/2;
+        // w = width1/MapColumns
+      g.append("clipPath")
+      .attr("id", "clip")
+      .append("rect")
+      .attr("width", width1)
+      .attr("height", height1);
+
+      g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll(".hexagon")
+      .data(point)
+      .enter().append("path")
+      .attr("d", function (d) {
+		return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+	})
+         .attr("stroke", function (d,i) {
+		return "#e5b367";
+	})
+      .attr("stroke-width", "1px")
+      .attr("fill", function(d){ return d.color; })
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+      .call(_drag)
+        .on('mouseover', mouseOver);
+        // .on('mouseout', mouseOut)
+        // .on('mousemove', mouseMove);
+
+      g.append("g")
+      .attr("class", "hexagon")
+      .attr("clip-path", "url(#clip)")
+      .selectAll("labels")
+      .data(point)
+      .enter()
+      .append("text")
+              .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .attr("x", function(d){return d.x})
+        .attr("y", function(d){return d.y})
+        .text(function(d){ return d.label; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 10)
+        .style("fill", "black");
+
+
+
+      },
+      error: function() {
+            alert("Failure to access, please refresh the page");
+            }
+      })
+      ;
+      }
+
+      function change_font(tag){
+      g.selectAll("text").style("font-size", tag.value);
+
+      }
+
+function change_color(tag,tag2){
+
+      data['color'] = tag.value
+
+
+      if (tag.value === 'blue'){
+        var colorScale1 = d3.scaleSequential(d3.interpolateBlues)
+        .domain([0, 1]);
+      }else if(tag.value === 'red'){
+        var colorScale1 = d3.scaleSequential(d3.interpolateReds)
+        .domain([0, 1]);
+      }else if(tag.value === 'green'){
+        var colorScale1 = d3.scaleSequential(d3.interpolateGreens)
+        .domain([0, 1]);
+      }else if(tag.value === 'blue to red'){
+        var colorScale1 = d3.scaleSequential(t => d3.interpolateRdBu(1-t))
+        .domain([0, 1]);
+      }
+
+
+continuous(tag2, colorScale1);
+
+
+      $.ajax({
+      type: "post",
+      url: "/som/ChangeColor",
+      dataType: "json",
+      data: JSON.stringify(getValue()),
+
+      success: function as(raw_data) {
+        setValue(raw_data);
+        init_dt = get_point();
+        point = get_point();
+        g.selectAll("path").remove();
+        g.selectAll("text").remove();
+        g.append("g")
+        .attr("class", "hexagon")
+        .attr("clip-path", "url(#clip)")
+        .selectAll(".hexagon")
+        .data(point)
+        .enter().append("path")
+        .attr("d", function (d) {
+          return "M" + d.x + "," + d.y + hexbin.radius(hexRadius).hexagon();
+      })
+           .attr("stroke", function (d,i) {
+          return "#e5b367";
+      })
+        .attr("stroke-width", "1px")
+        .attr("fill", function(d){ return d.color; })
+                .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+        .call(_drag)
+          .on('mouseover', mouseOver);
+
+        g.append("g")
+        .attr("class", "hexagon")
+        .attr("clip-path", "url(#clip)")
+        .selectAll("labels")
+        .data(point)
+        .enter()
+        .append("text")
+                .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
+          .attr("x", function(d){return d.x})
+          .attr("y", function(d){return d.y})
+          .text(function(d){ return d.label; })
+          .attr("text-anchor", "middle")
+          .attr("alignment-baseline", "central")
+          .style("font-size", 10)
+          .style("fill", "black");
+        // alert(1);
+      }
+      })
+      ;
+      }
