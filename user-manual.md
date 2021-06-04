@@ -6,7 +6,7 @@ description: User guidance for understanding the product.
 
 ## Product overview
 
-Our product is a database system that interacted with website surface. It can train the SOM self-Organizing map. It has user profile system. It can publish the user's map in forum. 
+Our product is a database system that interacted with website surface. It can train the SOM self-Organizing map. It has user profile system. It has forum that can publish the user's map. 
 
 ## Product Navigation
 
