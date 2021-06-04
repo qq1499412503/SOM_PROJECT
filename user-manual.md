@@ -6,6 +6,8 @@
 
 ![Product map](.gitbook/assets/eaba2eb7067a75eb0bc823cd1aebb60.png)
 
+The product navigation include pages and each page indicates its function under the page. The function include simple navigation by following steps.
+
 ### Product overview
 
 The following graphs describe the overview of the product by page.
