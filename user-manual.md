@@ -12,11 +12,7 @@ The product navigation include pages and each page indicates its function under 
 
 The following graphs describe the overview of the product by page.
 
-_The explanation in the following graphs by black color describes the functions that can be interacted with you._
-
-_The explanation in the following graphs by red color describes the elements that can not be interacted with you._
-
-
+_The explanation in the following graphs by black color describes the functions that can be interacted with you.The explanation in the following graphs by red color describes the elements that can not be interacted with you._
 
 #### Login your account
 
