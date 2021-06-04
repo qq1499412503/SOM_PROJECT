@@ -78,10 +78,6 @@ Click on the project name on publish or user profile website, you can get access
 
 ![](.gitbook/assets/image%20%281%29.png)
 
-### System Process
-
-![User case map](.gitbook/assets/som_use_case_diagram_vpd_1.png)
-
 ## Function module
 
 | Website name | Function |
