@@ -2,6 +2,10 @@
 
 ## User Manual
 
+### Product Navigation
+
+![Product map](.gitbook/assets/eaba2eb7067a75eb0bc823cd1aebb60.png)
+
 ### Product overview
 
 The following graphs describe the overview of the product by page.
@@ -9,6 +13,8 @@ The following graphs describe the overview of the product by page.
 _The explanation in the following graphs by black color describes the functions that can be interacted with you._
 
 _The explanation in the following graphs by red color describes the elements that can not be interacted with you._
+
+
 
 #### Login your account
 
@@ -69,10 +75,6 @@ After clicking **Your project,** you can view your previous saved project result
 Click on the project name on publish or user profile website, you can get access to this page.
 
 ![](.gitbook/assets/system-documentation-14-.png)
-
-### Product Navigation
-
-![](.gitbook/assets/image.png)
 
 ### User Story
 
