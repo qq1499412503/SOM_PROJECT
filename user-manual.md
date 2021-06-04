@@ -6,7 +6,7 @@ description: User guidance for understanding the product.
 
 ## Product overview
 
-
+Our product is a database system that interacted with website surface. It can train the SOM self-Organizing map. It has user profile system. It can publish the user's map in forum. 
 
 ## Product Navigation
 
@@ -16,7 +16,7 @@ The product navigation include pages and each page indicates its function under 
 
 ## User manual
 
-The following graphs describe the overview of the product by page.
+The following graphs describe the how to use this product.
 
 _The explanation in the following graphs by black color describes the functions that can be interacted with you.The explanation in the following graphs by red color describes the elements that can not be interacted with you._
 
@@ -40,7 +40,7 @@ Interaction with Navigation bar can switch to other pages.
 
 ### Publish List
 
-After you login into the system, you will see the publish. You can view you and other user's published project here.
+After you login into the system, you will see the publish list. You can view your and other user's published project here.
 
 ![Publish website](.gitbook/assets/system-documentation-5-.png)
 
