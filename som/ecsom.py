@@ -159,19 +159,78 @@ class Mm(MiniSom):
                       um[new_x + i, self._weights.shape[1] * 2 - 1] = fast_norm(w_2 - w_1)
 
       return um / um.max()
+  #
+  # def avg_distance(self,data):
+  #     for y in range(self._weights.shape[0]*2):
+  #         for x in range(self._weights.shape[1]*2):
+  #             if x % 2 == 0 and y % 2 == 0:
+  #                 if y-1>0:
+  #                     if x-1>0:
+  #                         data[y,x]=(data[y,x+1]+data[y,x-1]+data[y+1,x-1]+data[y+1,x]+data[y-1,x]+data[y-1,x-1])/6
+  #                     else:
+  #                         data[y, x] = (data[y, x + 1] + data[y, self._weights.shape[1]] + data[y + 1, self._weights.shape[1]] + data[y + 1, x] + data[y - 1, x] + data[y - 1, self._weights.shape[1]]) / 6
+  #                 else:
+  #                     if x-1>0:
+  #                         data[y,x]=(data[y,x+1]+data[y,x-1]+data[y+1,x-1]+data[y+1,x]+data[self._weights.shape[0],x]+data[self._weights.shape[0],x-1])/6
+  #                     else:
+  #                         data[y, x] = (data[y, x + 1] + data[y, self._weights.shape[1]] + data[y + 1, self._weights.shape[1]] + data[y + 1, x] + data[self._weights.shape[0], x] + data[self._weights.shape[0], self._weights.shape[1]]) / 6
+  #     return data
 
-  def avg_distance(self,data):
-      for y in range(self._weights.shape[0]*2):
-          for x in range(self._weights.shape[1]*2):
+  def avg_distance(self, data):
+      od = True
+      cx = 0
+      for x in range(self._weights.shape[0] * 2):
+          for y in range(self._weights.shape[1] * 2):
+              od1 = [[x, y - 1], [x, y + 1], [x - 1, y - 1], [x - 1, y], [x + 1, y - 1], [x + 1, y]]
+              od2 = [[x, y - 1], [x, y + 1], [x - 1, y], [x - 1, y + 1], [x + 1, y], [x + 1, y + 1]]
               if x % 2 == 0 and y % 2 == 0:
-                  if y-1>0:
-                      if x-1>0:
-                          data[y,x]=(data[y,x+1]+data[y,x-1]+data[y+1,x-1]+data[y+1,x]+data[y-1,x]+data[y-1,x-1])/6
+                  if cx != x:
+                      cx = x
+                      if od:
+                          od = False
                       else:
-                          data[y, x] = (data[y, x + 1] + data[y, self._weights.shape[1]] + data[y + 1, self._weights.shape[1]] + data[y + 1, x] + data[y - 1, x] + data[y - 1, self._weights.shape[1]]) / 6
+                          od = True
+                  if od:
+                      current = od1
+                      currentx = [[x, y - 1], [x, y + 1], [self._weights.shape[0] * 2 - 1, y - 1],
+                                  [self._weights.shape[0] * 2 - 1, y], [x + 1, y - 1], [x + 1, y]]
+                      currenty = [[x, self._weights.shape[1] * 2 - 1], [x, y + 1],
+                                  [x - 1, self._weights.shape[1] * 2 - 1], [x - 1, y],
+                                  [x + 1, self._weights.shape[1] * 2 - 1], [x + 1, y]]
+                      currentxy = [[x, self._weights.shape[1] * 2 - 1], [x, y + 1],
+                                   [self._weights.shape[0] * 2 - 1, self._weights.shape[1] * 2 - 1],
+                                   [self._weights.shape[0] * 2 - 1, y], [x + 1, self._weights.shape[1] * 2 - 1],
+                                   [x + 1, y]]
+
                   else:
-                      if x-1>0:
-                          data[y,x]=(data[y,x+1]+data[y,x-1]+data[y+1,x-1]+data[y+1,x]+data[self._weights.shape[0],x]+data[self._weights.shape[0],x-1])/6
+                      current = od2
+                      currentx = [[x, y - 1], [x, y + 1], [self._weights.shape[0] * 2 - 1, y],
+                                  [self._weights.shape[0] * 2 - 1, y + 1], [x + 1, y], [x + 1, y + 1]]
+                      currenty = [[x, self._weights.shape[1] * 2 - 1], [x, y + 1], [x - 1, y], [x - 1, y + 1],
+                                  [x + 1, y], [x + 1, y + 1]]
+                      currentxy = [[x, self._weights.shape[1] * 2 - 1], [x, y + 1], [self._weights.shape[0] * 2 - 1, y],
+                                   [self._weights.shape[0] * 2 - 1, y + 1], [x + 1, y], [x + 1, y + 1]]
+
+                  if x - 1 >= 0:
+                      if y - 1 >= 0:
+                          data[x, y] = (data[current[0][0], current[0][1]] + data[current[1][0], current[1][1]] + data[
+                              current[2][0], current[2][1]] + data[current[3][0], current[3][1]] + data[
+                                            current[4][0], current[4][1]] + data[current[5][0], current[5][1]]) / 6
                       else:
-                          data[y, x] = (data[y, x + 1] + data[y, self._weights.shape[1]] + data[y + 1, self._weights.shape[1]] + data[y + 1, x] + data[self._weights.shape[0], x] + data[self._weights.shape[0], self._weights.shape[1]]) / 6
+
+                          data[x, y] = (data[currenty[0][0], currenty[0][1]] + data[currenty[1][0], currenty[1][1]] +
+                                        data[currenty[2][0], currenty[2][1]] + data[currenty[3][0], currenty[3][1]] +
+                                        data[currenty[4][0], currenty[4][1]] + data[currenty[5][0], currenty[5][1]]) / 6
+
+                  else:
+                      if y - 1 > 0:
+                          data[x, y] = (data[currentx[0][0], currentx[0][1]] + data[currentx[1][0], currentx[1][1]] +
+                                        data[currentx[2][0], currentx[2][1]] + data[currentx[3][0], currentx[3][1]] +
+                                        data[currentx[4][0], currentx[4][1]] + data[currentx[5][0], currentx[5][1]]) / 6
+                      else:
+                          data[x, y] = (data[currentxy[0][0], currentxy[0][1]] + data[
+                              currentxy[1][0], currentxy[1][1]] + data[currentxy[2][0], currentxy[2][1]] + data[
+                                            currentxy[3][0], currentxy[3][1]] + data[currentxy[4][0], currentxy[4][1]] +
+                                        data[currentxy[5][0], currentxy[5][1]]) / 6
+
       return data

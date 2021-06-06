@@ -286,8 +286,8 @@ class TestSom(TestCase):
         som._weights = np.array([[[1.,  0.], [0., 1.]], [[1., 0.], [0., 1.]]])
         distance_maps =  som.distance_map()
         u_matrix = som.avg_distance(distance_maps)
-        print(u_matrix)
-        arrays= np.array([[1.67 , 1. , 0.67 , 1.],[0. , 1. , 0. , 1.],[1.67 , 1. , 0.67 , 1.],[0. , 1. , 0. , 1.]])
+        # print(u_matrix)
+        arrays= np.array([[4/6 , 1. , 4/6 , 1.],[0. , 1. , 0. , 1.],[4/6 , 1. , 4/6 , 1.],[0. , 1. , 0. , 1.]])
         assert_array_equal(u_matrix, arrays)
 
 
