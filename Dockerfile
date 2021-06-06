@@ -1,34 +1,22 @@
 FROM ubuntu
 # init system
-RUN apt-get update && apt-get -y upgrade && apt-get install -y nano openssh-server mongodb nginx
-# RUN apt-get install -y git
+RUN apt-get update && apt-get -y upgrade && apt-get install -y nano openssh-server mongodb nginx gcc libpcre3 libpcre3-dev && systemctl enable nginx && systemctl enable mongodb && apt-get install -y build-essential python3 && apt-get install -y python3-dev python3-pip
 
-#config sshd
-RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-RUN sed -i "/UsePAM yes/cUsePAM no" /etc/ssh/sshd_config
-RUN mkdir /run/sshd
+RUN pip3 install Django==2.2.5 sqlparse==0.2.4 djangorestframework uwsgi djongo MiniSom numpy pandas matplotlib bokeh && apt-get install -y uwsgi-plugin-python3
 
-#init root user with passwd Som123
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo 'root:Som123' | chpasswd
+#config sshd
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && sed -i "/UsePAM yes/cUsePAM no" /etc/ssh/sshd_config && mkdir /run/sshd && echo 'root:Som123' | chpasswd && mkdir /SOM_PROJECT
 
-#init package management tool
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.sh && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
-ENV PATH /opt/conda/bin:$PATH
-# init package
-# RUN conda install python=3.8
-# RUN alias python=python3.8
-RUN conda install -y -c anaconda django
-RUN pip install djongo MiniSom
-RUN conda install -y -c conda-forge djangorestframework
 
-# git clone the project
-# RUN https://qq1499412503:c5b225f3d0b50ab610eca2f4a6bc6812ca459f09@github.com/qq1499412503/SOM_PROJECT.git
-RUN mkdir /SOM_PROJECT
+
+
 COPY . /SOM_PROJECT/
 
-# untested --test when upload
 
-# RUN service mongodb start && tail -F /var/log/mongodb/mongodb.log
+RUN service mongodb start && python3 /SOM_PROJECT/manage.py makemigrations && python3 /SOM_PROJECT/manage.py migrate && python3 /SOM_PROJECT/manage.py collectstatic --noinput && echo "daemon off;" >> /etc/nginx/nginx.conf
 
-RUN systemctl enable mongodb.service
+
+
+CMD ["/bin/bash","SOM_PROJECT/config.sh","start"]
