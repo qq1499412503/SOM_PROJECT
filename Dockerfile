@@ -1,6 +1,6 @@
 FROM ubuntu
 # init system
-RUN apt-get update && apt-get -y upgrade && apt-get install -y nano openssh-server mongodb
+RUN apt-get update && apt-get -y upgrade && apt-get install -y nano openssh-server mongodb nginx
 # RUN apt-get install -y git
 
 #config sshd

@@ -93,13 +93,18 @@ def som_model(request):
         if form.is_valid():
             saved_data = form.save()
             f_name = str(request.FILES['data'])
-            data_info = print_attribute(saved_data.data)
-            content = {"name": f_name, "attribute": data_info[0], "size": data_info[1], "data_id": str(saved_data._id)}
+            try:
+                data_info = print_attribute(saved_data.data)
+                up_msg = ""
+            except:
+                data_info = ["0","0"]
+                up_msg = "Not supporting given data file"
+            content = {"name": f_name, "attribute": data_info[0], "size": data_info[1], "data_id": str(saved_data._id), "upload_msg": up_msg}
             # request.session["data_id"] = str(saved_data._id)
 
             return render(request, 'visualization0.1.html', content)
         else:
-            return render(request, 'visualization0.1.html', {"upload_msg": "not valid file"})
+            return render(request, 'visualization0.1.html', {"upload_msg": "Not valid file"})
     else:
         form = UploadFileForm()
     return render(request, 'upload.html', {'form': form})
