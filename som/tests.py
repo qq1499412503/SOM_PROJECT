@@ -14,6 +14,11 @@ from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import io
+from minisom import MiniSom
+from .ecsom import *
+from numpy.linalg import norm
+from numpy.testing import assert_almost_equal, assert_array_almost_equal
+from numpy.testing import assert_array_equal
 
 
 class SomTestCase(TestCase):
@@ -258,11 +263,32 @@ class TT_test(TestCase):
         self.assertTemplateUsed(response, 'test.html')
 
 
+class TestSom(TestCase):
+    def setUp(self):
+        self.som = Mm(5, 5, 1)
+        for i in range(5):
+            for j in range(5):
+                # checking weights normalization
+                assert_almost_equal(1.0, norm(self.som._weights[i, j]))
+        self.som._weights = np.zeros((5, 5, 1))  # fake weights
+        self.som._weights[2, 3] = 5.0
+        self.som._weights[1, 1] = 2.0
 
+    def test_u_matrix(self):
+        som = Mm(2, 2, 2, topology='hexagonal', random_seed=1)
+        som._weights = np.array([[[1.,  0.], [0., 1.]], [[1., 0.], [0., 1.]]])
+        # print(som.distance_map())
+        arrays= np.array([[0. , 1. , 0. , 1.],[0. , 1. , 0. , 1.],[0. , 1. , 0. , 1.],[0. , 1. , 0. , 1.]])
+        assert_array_equal(som.distance_map(), arrays)
 
-
-
-
+    def test_u_matrix_with_avg_node(self):
+        som = Mm(2, 2, 2, topology='hexagonal', random_seed=1)
+        som._weights = np.array([[[1.,  0.], [0., 1.]], [[1., 0.], [0., 1.]]])
+        distance_maps =  som.distance_map()
+        u_matrix = som.avg_distance(distance_maps)
+        print(u_matrix)
+        arrays= np.array([[1.67 , 1. , 0.67 , 1.],[0. , 1. , 0. , 1.],[1.67 , 1. , 0.67 , 1.],[0. , 1. , 0. , 1.]])
+        assert_array_equal(u_matrix, arrays)
 
 
 
