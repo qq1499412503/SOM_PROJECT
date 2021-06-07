@@ -183,7 +183,15 @@
       </script>
 
       <script>
-      function save_map(){
+	function save_map(){
+	if(document.getElementById('vis_name').value===''){
+	alert("please enter project name before save");
+	}else{
+	save_maps();	
+	}
+		
+	}
+      function save_maps(){
 
       $.ajax({
       type: "post",
@@ -215,7 +223,16 @@
       </script>
 
       <script>
-      function save_and_publish(){
+	      
+function save_and_publish(){
+	if(document.getElementById('vis_name').value===''){
+	alert("please enter project name before save");
+	}else{
+	save_and_publishs();	
+	}
+		
+	}
+      function save_and_publishs(){
 
       $.ajax({
       type: "post",
