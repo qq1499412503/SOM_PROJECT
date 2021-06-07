@@ -1,0 +1,19 @@
+{
+    "name": "map test Suite",
+    "js_files": [
+        "js/ajax.js",
+      "js/maintest.js",
+         "js/page.js",
+      "js/d3jsinterpolate.js",
+      "js/d3jsv2.js",
+      "js/d3js4.js",
+      "js/d3jshexbin.js",
+      "js/benschmidt.js",
+      "js/googleapis.js",
+      "js/profiletest.js",
+      "js/maptest.js",
+      "js/scaled3.js"
+    ],
+    "media_files": [
+    ]
+}
