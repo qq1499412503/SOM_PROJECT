@@ -18,10 +18,10 @@ Following Docker doc for initializing docker environment:
 
 ### **Step 2: Prepare Docker File and Project**
 
-Git Clone the Project:
+Git Clone the Project**\(or jump for fast install by pulling image only in step 3\)**:
 
 ```
-$ git clone https://github.com/qq1499412503/SOM.git
+$ git clone https://github.com/qq1499412503/SOM_PROJECT.git
 ```
 
 ###  **Step 3: Building Docker Image**
@@ -32,12 +32,20 @@ Once Project prepared, starting building the image:
 sudo docker build -t som:v1 .
 ```
 
+### **or**
+
+pull image from docker hub for fast install:
+
+```bash
+sudo docker pull bobbyyang/som_project:v2
+```
+
 ### **Step 4: Run Docker container**
 
 After Image built, run the following command to start the docker container:
 
 ```bash
-sudo docker run -d -p 20:22 8080:8080 80:80 som:v1 /usr/sbin/sshd -D
+sudo docker run -it 80:8080 som:v1
 ```
 
 {% hint style="info" %}
