@@ -48,11 +48,11 @@ After you login into the system, you will see the publish list. You can view you
 
 Click on "New project" on any web page with a navigation bar, you can get access to this map maker page.
 
-![Map maker page\(Before traning\)](.gitbook/assets/system-documentation-8-.png)
+![Map maker page\(Before training\)](.gitbook/assets/system-documentation%20%281%29.png)
+
+![Map maker page\(After training\)](.gitbook/assets/system-documentation-4-%20%281%29.png)
 
 
-
-![Map maker page\(After traning\)](.gitbook/assets/system-documentation-9-.png)
 
 
 
@@ -60,7 +60,7 @@ Click on "New project" on any web page with a navigation bar, you can get access
 
 Click on the "people" icon in the upper left corner of any web page with a navigation bar,  you can get access to this user profile page. You can edit the personal information or change your account password here. 
 
-![User profile website](.gitbook/assets/system-documentation-10-.png)
+![User profile website](.gitbook/assets/system-documentation-11-.png)
 
 After clicking the **edit** in the Personal information table
 

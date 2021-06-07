@@ -29,15 +29,15 @@ $ git clone https://github.com/qq1499412503/SOM_PROJECT.git
 Once Project prepared, starting building the image:
 
 ```
-sudo docker build -t bobbyyang/som_project:v2 .
+sudo docker build -t bobbyyang/som_project .
 ```
 
-### **or**
+**or**
 
 pull image from docker hub for fast install:
 
 ```bash
-sudo docker pull bobbyyang/som_project:v2
+sudo docker pull bobbyyang/som_project
 ```
 
 ### **Step 4: Run Docker container**
@@ -45,7 +45,7 @@ sudo docker pull bobbyyang/som_project:v2
 After Image built, run the following command to start the docker container:
 
 ```bash
-sudo docker run -it -p 80:8080 bobbyyang/som_project:v2
+sudo docker run -it -p 80:8080 bobbyyang/som_project
 ```
 
 {% hint style="info" %}
