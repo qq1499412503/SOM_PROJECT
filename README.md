@@ -32,7 +32,7 @@ Once Project prepared, starting building the image:
 sudo docker build -t bobbyyang/som_project .
 ```
 
-### **or**
+**or**
 
 pull image from docker hub for fast install:
 
