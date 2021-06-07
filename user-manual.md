@@ -48,11 +48,11 @@ After you login into the system, you will see the publish list. You can view you
 
 Click on "New project" on any web page with a navigation bar, you can get access to this map maker page.
 
-![Map maker page\(Before traning\)](.gitbook/assets/system-documentation-8-.png)
+![Map maker page\(Before training\)](.gitbook/assets/system-documentation%20%281%29.png)
+
+![Map maker page\(After training\)](.gitbook/assets/system-documentation-4-%20%281%29.png)
 
 
-
-![Map maker page\(After traning\)](.gitbook/assets/system-documentation-9-.png)
 
 
 
