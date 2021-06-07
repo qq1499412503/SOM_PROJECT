@@ -60,7 +60,7 @@ Click on "New project" on any web page with a navigation bar, you can get access
 
 Click on the "people" icon in the upper left corner of any web page with a navigation bar,  you can get access to this user profile page. You can edit the personal information or change your account password here. 
 
-![User profile website](.gitbook/assets/system-documentation-10-.png)
+![User profile website](.gitbook/assets/system-documentation-11-.png)
 
 After clicking the **edit** in the Personal information table
 
