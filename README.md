@@ -29,7 +29,7 @@ $ git clone https://github.com/qq1499412503/SOM_PROJECT.git
 Once Project prepared, starting building the image:
 
 ```
-sudo docker build -t som:v1 .
+sudo docker build -t bobbyyang/som_project:v2 .
 ```
 
 ### **or**
@@ -45,7 +45,7 @@ sudo docker pull bobbyyang/som_project:v2
 After Image built, run the following command to start the docker container:
 
 ```bash
-sudo docker run -it 80:8080 som:v1
+sudo docker run -it 80:8080 bobbyyang/som_project:v2
 ```
 
 {% hint style="info" %}
