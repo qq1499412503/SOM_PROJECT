@@ -45,7 +45,7 @@ sudo docker pull bobbyyang/som_project:v2
 After Image built, run the following command to start the docker container:
 
 ```bash
-sudo docker run -it 80:8080 bobbyyang/som_project:v2
+sudo docker run -it -p 80:8080 bobbyyang/som_project:v2
 ```
 
 {% hint style="info" %}
