@@ -444,7 +444,7 @@ function save_and_publish(){
         <div id="m34" class="ax_default table_cell">
           <img id="m34_img" class="img " src="/media/image/u34.png"/>
           <div id="m34_text" class="text " style="visibility: visible">
-            <input type="text" id="x" name="x" type="number" min="1" max="30" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="enter number of x here (int)">
+            <input type="number" id="x" name="x" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="enter number of x here (int)">
           </div>
         </div>
 
@@ -460,7 +460,7 @@ function save_and_publish(){
         <div id="m36" class="ax_default table_cell">
           <img id="m36_img" class="img " src="/media/image/u36.png"/>
           <div id="m36_text" class="text " style="visibility: visible">
-            <input type="text" id="y" name="y" type="number" min="1" max="30" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="enter number of y here (int)">
+            <input type="number" id="y" name="y" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="enter number of y here (int)">
           </div>
         </div>
 
@@ -492,7 +492,7 @@ function save_and_publish(){
         <div id="m40" class="ax_default table_cell">
           <img id="m40_img" class="img " src="/media/image/u36.png"/>
           <div id="m40_text" class="text " style="visibility: visible">
-            <input type="text" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1.5 (double)">
+            <input type="number" id="sigmas" name="sigmas" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1.5 (double)">
           </div>
         </div>
 
@@ -508,7 +508,7 @@ function save_and_publish(){
         <div id="m42" class="ax_default table_cell">
           <img id="m42_img" class="img " src="/media/image/u36.png"/>
           <div id="m42_text" class="text " style="visibility: visible">
-            <input type="text" id="LR" name="LR" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.05 (double)">
+            <input type="number" id="LR" name="LR" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 0.05 (double)">
           </div>
         </div>
 
@@ -524,7 +524,7 @@ function save_and_publish(){
         <div id="m44" class="ax_default table_cell">
           <img id="m44_img" class="img " src="/media/image/u36.png"/>
           <div id="m44_text" class="text " style="visibility: visible">
-            <input type="text" id="Iteration" name="Iteration" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1000 (int)">
+            <input type="number" id="Iteration" name="Iteration" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: 1000 (int)">
           </div>
         </div>
 
@@ -606,7 +606,7 @@ function save_and_publish(){
         <div id="m52" class="ax_default table_cell">
           <img id="m52_img" class="img " src="/media/image/u52.png"/>
           <div id="m52_text" class="text " style="visibility: visible">
-            <input type="text" id="random_seed" name="random_seed" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: None (double)">
+            <input type="number" id="random_seed" name="random_seed" style="width: 100%;height:100%;background-color:#D7E2CF;border:0;text-align: center;" placeholder="default value: None (double)">
           </div>
         </div>
       </div>
@@ -798,7 +798,7 @@ function save_and_publish(){
 <script src="https://d3js.org/d3-scale-chromatic.v2.min.js"></script>
     <script type="text/javascript">
 
-
+var trans;
 var colorScale1;
       var data = null;
       function setValue(val){
@@ -999,12 +999,12 @@ function update(data){
          .attr("stroke", function (d,i) {
 		return "#e5b367";
 	})
-      .attr("stroke-width", "1px")
+      .attr("stroke-width", "1px").attr("transform", trans)
       .attr("fill", function(d){ return colorScale1(d.cv); })
               // .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
-              .attr("transform","translate("+0+","+0+")")
+              // .attr("transform","translate("+0+","+0+")")
       .call(_drag)
-        .on('mouseover', mouseOver);
+        .on('mouseover', mouseOver).call(_zoom);
 
           g.append("g")
       .attr("class", "hexagon")
@@ -1012,8 +1012,8 @@ function update(data){
       .selectAll("labels")
       .data(data)
       .enter()
-      .append("text")
-                  .attr("transform","translate("+0+","+0+")")
+      .append("text").attr("transform", trans)
+                  // .attr("transform","translate("+0+","+0+")")
               // .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
         .attr("x", function(d){return d.x})
         .attr("y", function(d){return d.y})
@@ -1074,16 +1074,19 @@ if (dy<0){
 
 
     function updateChart() {
-      // var newX = d3.event.transform.rescaleX(x);
-      // var newY = d3.event.transform.rescaleY(y);
-      // // var currentZoomScale = d3.event.transform.k;
-      // xAxis.call(d3.axisBottom(newX));
-      // yAxis.call(d3.axisLeft(newY));
-      g.selectAll("path")
-      .on('dblclick.zoom', false)
-      .attr("d", function (d) {
-		return "M" + d.x + "," + (height-d.y) + hexbin.radius(hexRadius).hexagon();
-	});
+  trans = d3.event.transform;
+  g.selectAll("path").attr("transform", trans);
+  g.selectAll("text").attr("transform", trans);
+    //   // var newX = d3.event.transform.rescaleX(x);
+    //   // var newY = d3.event.transform.rescaleY(y);
+    //   var currentZoomScale = d3.event.transform.k;
+    //   // xAxis.call(d3.axisBottom(newX));
+    //   // yAxis.call(d3.axisLeft(newY));
+    //   g.selectAll("path")
+    //   .on('dblclick.zoom', false)
+    //   .attr("d", function (d) {
+	// 	return "M" + d.x + "," + d.y + currentZoomScale*hexbin.radius(hexRadius).hexagon();
+	// });
     }
 
     function mouseOver(d, i) {
@@ -1295,7 +1298,8 @@ continuous("#u61", colorScale1);
               // .attr("transform","translate("+(width1)/24+","+(height1)/24+")")
               .attr("transform","translate("+0+","+0+")")
       .call(_drag)
-        .on('mouseover', mouseOver);
+        .on('mouseover', mouseOver)
+      .call(_zoom);
         // .on('mouseout', mouseOut)
         // .on('mousemove', mouseMove);
 
